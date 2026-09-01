@@ -6,7 +6,8 @@
 <meta name="theme-color" content="#000000">
 <title>Cat vs. Civilization</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+  @import url('https://fontlibrary.org//face/pixel-operator');
   :root {
     --bg: #000;
     --text: #f7f7f7;
@@ -33,7 +34,7 @@
     min-height: 100dvh;
     background: var(--bg);
     color: var(--text);
-    font-family: "Silkscreen", "Courier New", Courier, ui-monospace, monospace;
+    font-family: "PixelOperatorRegular", "Courier New", Courier, ui-monospace, monospace;
     line-height: 1.45;
     image-rendering: pixelated;
     overflow-x: hidden;
@@ -77,7 +78,7 @@
 
   h1 {
     margin: 0;
-    font-family: "Press Start 2P", "Silkscreen", monospace;
+    font-family: "Press Start 2P", "PixelOperatorRegular", monospace;
     font-size: clamp(2.4rem, 7vw, 5.8rem);
     line-height: 1;
     letter-spacing: .03em;
@@ -108,7 +109,7 @@
 
   .civilization {
     margin-top: .35rem;
-    font-family: "Press Start 2P", "Silkscreen", monospace;
+    font-family: "Press Start 2P", "PixelOperatorRegular", monospace;
     font-size: clamp(1.35rem, 4.7vw, 3.7rem);
     line-height: 1.15;
     letter-spacing: .02em;
@@ -121,7 +122,7 @@
   .tagline {
     margin: 1.2rem auto 0;
     color: var(--purple);
-    font-family: "Silkscreen", monospace;
+    font-family: "PixelOperatorRegular", monospace;
     font-weight: 700;
     letter-spacing: .055em;
     text-transform: uppercase;
@@ -447,7 +448,7 @@
   .small-button,
   dialog h2,
   .toggle {
-    font-family: "Press Start 2P", "Silkscreen", monospace;
+    font-family: "Press Start 2P", "PixelOperatorRegular", monospace;
   }
 
   .panel h2,
@@ -472,7 +473,7 @@
   dialog p,
   dialog small,
   .option-row {
-    font-family: "Silkscreen", "Courier New", monospace;
+    font-family: "PixelOperatorRegular", "Courier New", monospace;
   }
 
   .encounters li {
@@ -480,11 +481,63 @@
   }
 
   .footer-copy {
-    font-family: "Silkscreen", "Courier New", monospace;
+    font-family: "PixelOperatorRegular", "Courier New", monospace;
   }
 
   @supports (-webkit-font-smoothing: none) {
     body { -webkit-font-smoothing: none; }
+  }
+
+
+  /* Small RPG/interface text */
+  body,
+  .tagline,
+  .encounters li,
+  .save-copy,
+  .tip p,
+  .launch-message,
+  dialog p,
+  dialog small,
+  .option-row,
+  .footer-copy {
+    font-family: "PixelOperatorRegular", "Courier New", monospace;
+    font-weight: 400;
+  }
+
+  .encounters li {
+    font-size: clamp(1rem, 1.9vw, 1.15rem);
+    letter-spacing: .055em;
+    line-height: 1.5;
+  }
+
+  .save-copy,
+  .tip p,
+  .launch-message,
+  dialog p {
+    font-size: 1.05rem;
+    letter-spacing: .035em;
+  }
+
+  .footer-copy {
+    font-size: .88rem;
+    letter-spacing: .09em;
+  }
+
+  .panel h2 {
+    font-size: .72rem;
+    letter-spacing: .10em;
+  }
+
+  @media (max-width: 620px) {
+    .encounters li {
+      font-size: 1rem;
+    }
+    .save-copy,
+    .tip p,
+    .launch-message,
+    dialog p {
+      font-size: 1rem;
+    }
   }
 
   @media (max-width: 860px) {
