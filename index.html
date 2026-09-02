@@ -20,6 +20,7 @@
     --border: #f4f4f4;
     --panel: #090909;
     --focus: #ffd35a;
+    --green: #75dd88;
     --maxw: 1180px;
   }
 
@@ -183,6 +184,47 @@
     color: var(--orange);
   }
 
+  .encounter-sub {
+    margin: -4px 0 12px;
+    color: #9a8ba8;
+    font-size: .92rem;
+    letter-spacing: .035em;
+  }
+
+  .encounter-link {
+    position: relative;
+    padding-right: 1.5rem;
+  }
+
+  .encounter-link .status-mark {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: var(--green, #75dd88);
+    font-weight: 700;
+  }
+
+  .encounters li.survived {
+    color: #d8d2dd;
+  }
+
+  .encounters li.survived .encounter-link:hover,
+  .encounters li.survived .encounter-link:focus-visible {
+    color: var(--orange);
+  }
+
+  .encounters li.current {
+    padding-left: .28rem;
+  }
+
+  .encounters li.current::before {
+    content: none;
+  }
+
+  .tip p {
+    min-height: 3.1em;
+  }
+
   .hero {
     min-width: 0;
     text-align: center;
@@ -264,6 +306,13 @@
   .dialog-close:focus-visible {
     outline: 4px solid var(--focus);
     outline-offset: 4px;
+  }
+
+  .start-hint {
+    margin: 12px auto 0;
+    color: #95869f;
+    font-size: .92rem;
+    letter-spacing: .035em;
   }
 
   .side-stack {
@@ -615,7 +664,14 @@
 
     .hero,
     .encounter-panel,
-    .side-stack {
+    .start-hint {
+    margin: 12px auto 0;
+    color: #95869f;
+    font-size: .92rem;
+    letter-spacing: .035em;
+  }
+
+  .side-stack {
       grid-column: 1;
     }
 
@@ -683,18 +739,19 @@
 
   <section class="game-grid" aria-label="Game menu">
     <aside class="panel encounter-panel" aria-labelledby="encounters-heading">
-      <h2 id="encounters-heading">Encounters</h2>
-      <ol class="encounters">
-        <li class="current"><a class="encounter-link" href="encounter-01.html">01&nbsp; THE GRADE DROP</a></li>
-        <li><a class="encounter-link" href="encounter-02.html">02&nbsp; MISSING</a></li>
-        <li><a class="encounter-link" href="encounter-03.html">03&nbsp; EVERYONE ELSE</a></li>
-        <li><a class="encounter-link" href="encounter-04.html">04&nbsp; THE PERFECT DRAFT</a></li>
-        <li><a class="encounter-link" href="encounter-05.html">05&nbsp; WHAT IF?</a></li>
-        <li><a class="encounter-link" href="encounter-06.html">06&nbsp; THE RULEBOOK</a></li>
-        <li><a class="encounter-link" href="encounter-07.html">07&nbsp; GOOD ENOUGH</a></li>
-        <li><a class="encounter-link" href="encounter-08.html">08&nbsp; THE WAVE</a></li>
-        <li><a class="encounter-link" href="encounter-09.html">09&nbsp; MORE THAN ONE STAT</a></li>
-        <li class="secret"><a class="encounter-link" href="encounter-secret.html">??&nbsp; SECRET ENCOUNTER</a></li>
+      <h2 id="encounters-heading">Choose a Battle</h2>
+      <p class="encounter-sub">Any order is fine.</p>
+      <ol class="encounters" id="encounterList">
+        <li data-save-key="cvc-encounter-01"><a class="encounter-link" href="encounter-01.html">01&nbsp; THE GRADE DROP</a></li>
+        <li data-save-key="cvc-encounter-02"><a class="encounter-link" href="encounter-02.html">02&nbsp; MISSING</a></li>
+        <li data-save-key="cvc-encounter-03"><a class="encounter-link" href="encounter-03.html">03&nbsp; EVERYONE ELSE</a></li>
+        <li data-save-key="cvc-encounter-04"><a class="encounter-link" href="encounter-04.html">04&nbsp; THE PERFECT DRAFT</a></li>
+        <li data-save-key="cvc-encounter-05"><a class="encounter-link" href="encounter-05.html">05&nbsp; WHAT IF?</a></li>
+        <li data-save-key="cvc-encounter-06"><a class="encounter-link" href="encounter-06.html">06&nbsp; THE RULEBOOK</a></li>
+        <li data-save-key="cvc-encounter-07"><a class="encounter-link" href="encounter-07.html">07&nbsp; GOOD ENOUGH</a></li>
+        <li data-save-key="cvc-encounter-08"><a class="encounter-link" href="encounter-08.html">08&nbsp; THE WAVE</a></li>
+        <li data-save-key="cvc-encounter-09"><a class="encounter-link" href="encounter-09.html">09&nbsp; MORE THAN ONE STAT</a></li>
+        <li class="secret" data-save-key="cvc-secret"><a class="encounter-link" href="encounter-secret.html">??&nbsp; SECRET ENCOUNTER</a></li>
       </ol>
     </aside>
 
@@ -711,9 +768,7 @@
       <a id="startButton" class="start-button start-link" href="encounter-01.html" aria-describedby="start-note">
         ♥ START ♥
       </a>
-      <p id="start-note" style="position:absolute;left:-9999px;">
-        Starts Encounter 01, The Grade Drop.
-      </p>
+      <p id="start-note" class="start-hint">Starts with Encounter 01 · or choose any battle.</p>
     </section>
 
     <div class="side-stack">
@@ -724,7 +779,7 @@
 
       <aside class="panel tip" aria-labelledby="tip-heading">
         <h2 id="tip-heading">★ Tip</h2>
-        <p>If things feel hard, you do not have to solve everything at once.</p>
+        <p id="tipText">You do not have to press every command. Watch what CAT NEEDS.</p>
       </aside>
     </div>
   </section>
@@ -750,7 +805,8 @@
       <button class="dialog-close" type="button" data-close="aboutDialog" aria-label="Close About dialog">×</button>
     </div>
     <p>Middle school has begun. Things have gotten complicated. Cat will handle it.</p>
-    <p>Each encounter is a tiny battle about recovering, checking the facts, choosing a next move, and continuing—even when everything is not perfect.</p>
+    <p>There is no perfect way to play. Some choices help. Some choices make things louder. Cat can recover and choose again.</p>
+    <p><strong>CHECK</strong> finds information. <strong>ACT</strong> makes a move. <strong>REBOOT CAT</strong> creates room to choose. <strong>CONTINUE</strong> means Cat knows enough for now.</p>
     <p>No scores. No streaks. No leaderboard. Civilization has enough problems already.</p>
   </div>
 </dialog>
@@ -772,13 +828,6 @@
       <button id="motionToggle" class="toggle" type="button" aria-pressed="false">OFF</button>
     </div>
 
-    <div class="option-row">
-      <div>
-        <strong>Sound</strong><br>
-        <small>Reserved for original retro sound effects later.</small>
-      </div>
-      <button id="soundToggle" class="toggle" type="button" aria-pressed="false">OFF</button>
-    </div>
   </div>
 </dialog>
 
@@ -789,11 +838,30 @@
   const aboutDialog = document.getElementById('aboutDialog');
   const optionsDialog = document.getElementById('optionsDialog');
   const motionToggle = document.getElementById('motionToggle');
-  const soundToggle = document.getElementById('soundToggle');
   const saveText = document.getElementById('saveText');
+  const startButton = document.getElementById('startButton');
+  const tipText = document.getElementById('tipText');
 
-  const motionPref = localStorage.getItem('cvc-reduce-motion') === 'true';
-  const soundPref = localStorage.getItem('cvc-sound') === 'true';
+  const encounterNames = {
+    'cvc-encounter-01': 'THE GRADE DROP',
+    'cvc-encounter-02': 'MISSING',
+    'cvc-encounter-03': 'EVERYONE ELSE',
+    'cvc-encounter-04': 'THE PERFECT DRAFT',
+    'cvc-encounter-05': 'WHAT IF?',
+    'cvc-encounter-06': 'THE RULEBOOK',
+    'cvc-encounter-07': 'GOOD ENOUGH',
+    'cvc-encounter-08': 'THE WAVE',
+    'cvc-encounter-09': 'MORE THAN ONE STAT',
+    'cvc-secret': 'SECRET ENCOUNTER'
+  };
+
+  const tips = [
+    'You do not have to press every command. Watch what CAT NEEDS.',
+    'CHECK finds information. ACT makes a move.',
+    'REBOOT CAT is for making room to choose—not for becoming perfectly calm.',
+    'CONTINUE means “enough for now,” not “everything is solved.”',
+    'Some choices help. Some choices make things louder. You can choose again.'
+  ];
 
   function setToggle(button, state) {
     button.setAttribute('aria-pressed', String(state));
@@ -806,13 +874,8 @@
     localStorage.setItem('cvc-reduce-motion', String(state));
   }
 
-  function applySound(state) {
-    setToggle(soundToggle, state);
-    localStorage.setItem('cvc-sound', String(state));
-  }
-
+  const motionPref = localStorage.getItem('cvc-reduce-motion') === 'true';
   applyMotion(motionPref);
-  applySound(soundPref);
 
   aboutButton.addEventListener('click', () => aboutDialog.showModal());
   optionsButton.addEventListener('click', () => optionsDialog.showModal());
@@ -839,14 +902,45 @@
     applyMotion(motionToggle.getAttribute('aria-pressed') !== 'true');
   });
 
-  soundToggle.addEventListener('click', () => {
-    applySound(soundToggle.getAttribute('aria-pressed') !== 'true');
+  let survivedCount = 0;
+  document.querySelectorAll('[data-save-key]').forEach(item => {
+    const key = item.dataset.saveKey;
+    const value = localStorage.getItem(key);
+    const isComplete = value === 'complete' || value === 'completed' || value === 'true';
+    if (!isComplete) return;
+
+    survivedCount += 1;
+    item.classList.add('survived');
+    const link = item.querySelector('.encounter-link');
+    if (link && !link.querySelector('.status-mark')) {
+      const mark = document.createElement('span');
+      mark.className = 'status-mark';
+      mark.textContent = '✓';
+      mark.setAttribute('aria-label', 'Survived');
+      link.appendChild(mark);
+    }
   });
+
+  if (survivedCount > 0) {
+    startButton.innerHTML = '♥ PLAY ♥';
+    document.getElementById('start-note').textContent = 'Starts with Encounter 01 · or choose any battle.';
+  }
 
   const lastSave = localStorage.getItem('cvc-last-save');
   if (lastSave) {
-    saveText.innerHTML = lastSave + '.<br>Civilization remembers.';
+    let friendly = lastSave;
+    const match = lastSave.match(/Encounter\s+(0?[1-9])\s+complete/i);
+    if (match) {
+      const key = `cvc-encounter-${String(Number(match[1])).padStart(2, '0')}`;
+      friendly = encounterNames[key] || lastSave;
+    } else if (/secret/i.test(lastSave)) {
+      friendly = 'SECRET ENCOUNTER';
+    }
+    saveText.innerHTML = `${friendly}.<br>Civilization remembers.`;
   }
+
+  const tipIndex = Math.floor(Math.random() * tips.length);
+  tipText.textContent = tips[tipIndex];
 })();
 </script>
 </body>
