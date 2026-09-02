@@ -140,7 +140,7 @@ body.reduce-motion .crash-flash,body.reduce-motion .flood-flash,body.reduce-moti
 
   let x=.5,y=.72,overload=3,activeAttack=false,bulletTimers=[],attackGeneration=0;
   let jobRead=false,draftChecked=false,spiral=false,submitted=false,selfClosed=false,polishLoops=0,rebootComplete=false;
-  let currentInspect=null,queueSeed=0,optionalDone=0,selfRequirements=[];
+  let currentInspect=null,queueSeed=0,optionalDone=0,selfRequirements=[],waitScanTimer=null,waitScanActive=false;
 
   const optionalCatalog=[
     {id:'source3',text:'Add a third source',help:'Could add depth. The directions require two.',genuine:true},
@@ -261,14 +261,20 @@ body.reduce-motion .crash-flash,body.reduce-motion .flood-flash,body.reduce-moti
     }
   }
 
+  function renderInspectItem(item,forAction=false){
+    currentInspect=item;
+    inspectCard.innerHTML='<div class="inspect-title">'+escapeHtml(item.text)+'</div><div class="inspect-row"><span class="inspect-key">WOULD IT HELP?</span><span>'+(item.genuine?'Probably, at least a little.':'Not much evidence of useful change.')+'</span></div><div class="inspect-row"><span class="inspect-key">REQUIRED?</span><span>NO — not in the original job.</span></div><div class="inspect-row"><span class="inspect-key">JOB WITHOUT IT?</span><span>COMPLETE.</span></div>';
+    const items=[];
+    if(forAction){items.push({label:'DO THIS OPTIONAL IMPROVEMENT ON PURPOSE',run:()=>{const chosen=currentInspect;inspectOverlay.classList.remove('show');doIntentional(chosen);}});}
+    items.push({label:'LEAVE IT OPTIONAL',run:()=>{const chosen=currentInspect;inspectOverlay.classList.remove('show');setSprite('cat-ready.png');setMessage([chosen.text+' remains possible.','Possible is not the same status as required.']);recomputeReady();setTimeout(()=>attack(1),1700);}});
+    items.push({label:'CHOOSE A DIFFERENT OPTIONAL IMPROVEMENT',run:()=>openInspect(forAction)});
+    showButtons(inspectActions,items);
+  }
   function openInspect(forAction=false){
     const choices=queue.filter(q=>q.state==='open');if(!choices.length){setMessage(['No visible optional item is currently open.','The renewable queue is attempting to rest.']);return;}
-    currentInspect=choices[0];
-    inspectCard.innerHTML='<div class="inspect-title">'+escapeHtml(currentInspect.text)+'</div><div class="inspect-row"><span class="inspect-key">WOULD IT HELP?</span><span>'+(currentInspect.genuine?'Probably, at least a little.':'Not much evidence of useful change.')+'</span></div><div class="inspect-row"><span class="inspect-key">REQUIRED?</span><span>NO — not in the original job.</span></div><div class="inspect-row"><span class="inspect-key">JOB WITHOUT IT?</span><span>COMPLETE.</span></div>';
-    inspectActions.innerHTML='';
-    const items=[];
-    if(forAction){items.push({label:'DO THIS OPTIONAL IMPROVEMENT ON PURPOSE',run:()=>{inspectOverlay.classList.remove('show');doIntentional(currentInspect);}});}
-    items.push({label:'LEAVE IT OPTIONAL',run:()=>{inspectOverlay.classList.remove('show');setSprite('cat-ready.png');setMessage([currentInspect.text+' remains possible.','Possible is not the same status as required.']);recomputeReady();setTimeout(()=>attack(1),1700);}});
+    currentInspect=null;
+    inspectCard.innerHTML='<div class="inspect-title">CHOOSE AN OPTIONAL IMPROVEMENT</div><div class="inspect-row"><span class="inspect-key">WHY CHOOSE?</span><span>The queue contains several real possibilities. Cat decides which one to inspect'+(forAction?' or do':'')+'.</span></div>';
+    const items=choices.map(item=>({label:escapeHtml(item.text),desc:escapeHtml(item.help),run:()=>renderInspectItem(item,forAction)}));
     showButtons(inspectActions,items);inspectOverlay.classList.add('show');
   }
 
@@ -297,8 +303,8 @@ body.reduce-motion .crash-flash,body.reduce-motion .flood-flash,body.reduce-moti
     queue.forEach(q=>{if(q.state==='required')q.state='open';});selfRequirements=[];selfClosed=false;setOverload(overload-1,false);setSprite('cat-ready.png');setMessage(['ORIGINAL REQUIREMENTS RESTORED.','The extra work may still be worthwhile. It is no longer legally mandatory.','GATE OPEN.']);recomputeReady();setTimeout(()=>attack(1),1800);
   }
   function waitForNone(){
-    if(activeAttack)clearBullets();setSprite('cat-urge.png');polishLoops+=2;choiceOverlay.classList.remove('show');
-    const scans=[7,8,11];let i=0;const step=()=>{if(i>=scans.length){setOverload(10);return;}setMessage(['SCANNING FOR POSSIBLE IMPROVEMENTS...','RESULTS: '+scans[i]+' FOUND.','Cat removes one. The scanner continues.']);queueStatus.textContent='STATUS: '+scans[i]+' POSSIBILITIES DETECTED';i++;setTimeout(step,900);};step();
+    if(activeAttack)clearBullets();if(waitScanTimer)clearTimeout(waitScanTimer);waitScanActive=true;setSprite('cat-urge.png');polishLoops+=2;choiceOverlay.classList.remove('show');
+    const scans=[7,8,11];let i=0;const step=()=>{if(!waitScanActive||submitted)return;if(i>=scans.length){waitScanActive=false;waitScanTimer=null;setOverload(10);return;}setMessage(['SCANNING FOR POSSIBLE IMPROVEMENTS...','RESULTS: '+scans[i]+' FOUND.','Cat removes one. The scanner continues.']);queueStatus.textContent='STATUS: '+scans[i]+' POSSIBILITIES DETECTED';i++;waitScanTimer=setTimeout(step,900);};step();
   }
 
   function openAct(){
@@ -331,7 +337,7 @@ body.reduce-motion .crash-flash,body.reduce-motion .flood-flash,body.reduce-moti
 
   function doContinue(){
     if(!gateOpen()){setMessage([selfClosed?'The original gate was open, but Cat added a new requirement.':'Not yet.','CHECK the actual job and draft. CONTINUE opens when the original requirements are met.']);return;}
-    clearBullets();submitted=true;setSprite('cat-ready.png');setOverload(Math.max(2,overload-1),false);recomputeReady();
+    waitScanActive=false;if(waitScanTimer){clearTimeout(waitScanTimer);waitScanTimer=null;}clearBullets();submitted=true;setSprite('cat-ready.png');setOverload(Math.max(2,overload-1),false);recomputeReady();
     setMessage(['Cat crosses the SUBMIT GATE.','Several possible improvements remain behind.','Some of them would genuinely improve the work.','They are allowed to remain possible instead of becoming today\'s requirements.']);
     [checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 07 complete');localStorage.setItem('cvc-encounter-07','complete');endScreen.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'center'});
   }
