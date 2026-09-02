@@ -22,13 +22,16 @@ button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focu
 .arena-col{display:flex;flex-direction:column;gap:14px}.hud{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:1rem;letter-spacing:.05em}.meter{height:18px;border:3px solid #fff;background:#111}.meter-fill{height:100%;width:20%;background:var(--purple);transition:width .2s linear}.fact-file{border:3px solid #fff;background:#030303;padding:10px 12px;min-height:72px}.fact-file strong{font-family:"Press Start 2P";font-size:.52rem;color:var(--yellow)}.fact-file ul{margin:.45rem 0 0;padding-left:1.2rem;line-height:1.35;font-size:.94rem}.fact-file li+li{margin-top:.28rem}
 .arena{position:relative;height:300px;border:4px solid #fff;background:#000;overflow:hidden;touch-action:none}.heart{position:absolute;width:22px;height:22px;left:50%;top:72%;transform:translate(-50%,-50%) rotate(45deg);background:var(--orange);box-shadow:0 0 0 2px #000}.heart::before,.heart::after{content:"";position:absolute;width:22px;height:22px;background:var(--orange);border-radius:50%}.heart::before{left:-11px}.heart::after{top:-11px}.bullet{position:absolute;white-space:nowrap;font-family:"Press Start 2P";font-size:.58rem;color:#fff;pointer-events:none;line-height:1.25}.bullet.soft{color:var(--yellow)}.bullet.hot{color:var(--red)}.bullet.calm{color:var(--blue)}
 .message{border:3px solid #fff;padding:14px 16px;min-height:94px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}.touch-help{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2px}.touchpad-shell{display:grid;place-items:center;padding:6px 0 2px}.touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;padding:10px;border:2px dashed #444;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.touchpad button{width:76px;height:76px;border:3px solid #fff;background:#080808;color:#fff;font-family:"Press Start 2P";font-size:1.15rem;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}.touchpad button:active{background:#191919;border-color:var(--orange);color:var(--orange)}.touchpad .up{grid-column:2;grid-row:1}.touchpad .left{grid-column:1;grid-row:2}.touchpad .right{grid-column:3;grid-row:2}.touchpad .down{grid-column:2;grid-row:3}
+
+.need-bar{margin:0 20px 12px;border:3px solid var(--yellow);background:#090805;padding:11px 13px;display:grid;gap:5px;box-shadow:4px 4px 0 #2b260d}.need-label{font-family:"Press Start 2P";font-size:.58rem;line-height:1.45;color:var(--yellow)}.need-text{font-size:1.04rem;line-height:1.35}.need-bar.ready{border-color:var(--green);box-shadow:4px 4px 0 #14301a}.need-bar.ready .need-label{color:var(--green)}.need-bar.capacity{border-color:var(--blue);box-shadow:4px 4px 0 #10263a}.need-bar.capacity .need-label{color:var(--blue)}
+.review-log,.stop-rule{margin-top:8px;border:2px solid #555;padding:7px 8px;font-size:.9rem;line-height:1.25}.review-log{color:var(--blue)}.stop-rule{color:var(--yellow)}.stop-rule.active{border-color:var(--green);color:var(--green)}.stop-rule.paused{border-color:var(--orange);color:var(--orange)}.cmd.cue{box-shadow:0 0 0 3px currentColor inset,0 0 12px currentColor}
 .controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px 20px}.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}.cmd:hover:not(:disabled){outline:4px solid currentColor;outline-offset:2px}.cmd:disabled{opacity:.32;cursor:not-allowed}
 .choice-overlay,.reboot-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;padding:18px;z-index:50}.choice-overlay.show,.reboot-overlay.show{display:grid}.choice-box,.reboot-box{width:min(720px,100%);max-height:min(86vh,780px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}.choice-box h2,.reboot-box h2{font-family:"Press Start 2P";font-size:1rem;line-height:1.5;color:var(--purple);margin:0 0 12px}.choice-intro{margin:0 0 14px;line-height:1.45;color:#ddd}.choice-list,.reboot-actions{display:grid;gap:10px}.choice-list button,.reboot-actions button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover,.reboot-actions button:hover{border-color:var(--orange);color:var(--orange)}.choice-list button:disabled{opacity:.4;cursor:not-allowed}.choice-list button.visited::after{content:"  ✓";color:var(--green)}.close-row{display:flex;justify-content:flex-end;margin-top:14px}.close-btn{border:2px solid #777;background:#000;color:#ddd;padding:9px 12px;cursor:pointer}
 .reboot-stage{border:3px solid #fff;padding:16px;min-height:180px;display:grid;align-content:center;gap:12px;text-align:center}.reboot-stage .big{font-family:"Press Start 2P";font-size:clamp(.9rem,3vw,1.25rem);line-height:1.5;color:var(--blue)}.reboot-stage p{margin:0;font-size:1.08rem;line-height:1.45}.timer{font-family:"Press Start 2P";font-size:2rem;color:var(--white)}
 .loop-banner{position:absolute;inset:0;display:none;place-items:center;background:rgba(30,0,35,.9);z-index:20;text-align:center;padding:20px}.loop-banner.show{display:grid}.loop-banner div{font-family:"Press Start 2P";font-size:clamp(1rem,4vw,1.8rem);line-height:1.65;color:var(--purple);text-shadow:3px 3px 0 #000}.frame.loop-shake{animation:screenShake .11s steps(2,end) 6}.frame.loop-flash{box-shadow:0 0 0 8px var(--purple),8px 8px 0 #202020}@keyframes screenShake{0%{transform:translate(0)}25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,2px)}100%{transform:translate(0)}}
 .end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:720px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}.sr-status{position:absolute;left:-9999px}
 @media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:310px}.enemy-title{font-size:clamp(1.45rem,8.5vw,2.55rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.cat-wrap{min-height:180px}.cat-sprite{max-height:180px}.draft-card{width:min(100%,520px)}}
-@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.fact-file{font-size:.9rem}}
+@media(max-width:430px){.need-bar{margin:0 12px 10px}.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.fact-file{font-size:.9rem}}
 @media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -52,24 +55,30 @@ button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focu
           <div class="criterion" id="critComplete"><span class="mark">?</span> No required section missing</div>
           <div class="criterion pending" id="critReview"><span class="mark">○</span> One purposeful final review</div>
           <div class="uncertainty" id="uncertainty">ZERO TYPOS? UNKNOWN · BEST POSSIBLE WORDING? UNKNOWN · PERFECT? NOT A REQUIREMENT</div>
+          <div class="review-log" id="reviewLog">FINAL PASS: NOT YET RUN</div>
+          <div class="stop-rule" id="stopRuleChip">STOPPING RULE: NOT SET</div>
           <div class="loop-readout" id="loopReadout">EXTRA EDITS: 0</div>
         </div>
         <div class="cat-wrap"><img class="cat-sprite" id="catSprite" src="./cat-worried.png" onerror="this.onerror=null;this.src='./cat.png'" alt="Orange pixel-art cat"></div>
       </section>
       <section class="arena-col" aria-label="Battle area">
         <div class="hud"><span>OVERLOAD</span><div class="meter" aria-label="Overload meter"><div id="meterFill" class="meter-fill"></div></div><span id="meterText">2/10</span></div>
-        <div class="fact-file" id="factFile"><strong>CHECK FILE</strong><ul id="factList"><li>No facts checked yet. CHECK asks: what do we actually know about this draft?</li></ul></div>
+        <div class="fact-file" id="factFile"><strong>CHECK FILE</strong><ul id="factList"><li>Requirements have not been compared with the draft yet.</li></ul></div>
         <div class="arena" id="arena" tabindex="0" aria-label="Dodge perfectionistic thoughts with arrow keys, WASD, or touch controls"><div class="heart" id="heart" aria-hidden="true"></div></div>
-        <div class="message" id="message" aria-live="polite">* The draft may need one useful review.<br>* It may also be finished.<br>* Perfection would prefer that these remain indistinguishable.</div>
+        <div class="message" id="message" aria-live="polite">* THE PERFECT DRAFT can always propose another edit.<br>* Cat does not yet know whether any required work remains.</div>
         <div class="touch-help">ARROWS / WASD / TOUCH — controller area is protected from page zoom.</div>
         <div class="touchpad-shell"><div class="touchpad" id="touchpad" aria-label="Touch movement controls"><button class="up" data-dir="up" aria-label="Move up">▲</button><button class="left" data-dir="left" aria-label="Move left">◀</button><button class="right" data-dir="right" aria-label="Move right">▶</button><button class="down" data-dir="down" aria-label="Move down">▼</button></div></div>
       </section>
     </div>
+    <div class="need-bar" id="needBar" aria-live="polite">
+      <div class="need-label" id="needLabel">CAT NEEDS: INFORMATION</div>
+      <div class="need-text" id="needText">Does this draft meet the actual assignment?</div>
+    </div>
     <div class="controls" aria-label="Battle commands">
-      <button class="cmd" data-cmd="check">CHECK</button><button class="cmd" data-cmd="act" disabled>ACT</button><button class="cmd" data-cmd="reboot">REBOOT</button><button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
+      <button class="cmd" data-cmd="check">CHECK</button><button class="cmd" data-cmd="act" disabled>ACT</button><button class="cmd" data-cmd="reboot">REBOOT CAT</button><button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
     </div>
     <div class="loop-banner" id="loopBanner" aria-live="assertive"><div id="loopBannerText">EDITING LOOP<br>100% CPU</div></div>
-    <section class="end-screen" id="endScreen" aria-live="polite"><h2>CIVILIZATION SURVIVED.</h2><p>The draft was submitted without becoming perfect.</p><p>Cat used a stopping rule instead of waiting for certainty.</p><p>There may still be a typo somewhere. Civilization has accepted this risk.</p><p><strong>ENCOUNTER COMPLETE.</strong></p><a href="index.html">RETURN TO MAP</a></section>
+    <section class="end-screen" id="endScreen" aria-live="polite"><h2>CIVILIZATION SURVIVED.</h2><p>The draft met the actual requirements, received one purposeful final pass, and was submitted.</p><p>Cat used an ending condition instead of waiting for the feeling of certainty.</p><p>There may still be a typo somewhere. Civilization has accepted this risk.</p><p><strong>ENCOUNTER COMPLETE.</strong></p><a href="index.html">RETURN TO MAP</a></section>
   </section>
 </main>
 <div class="choice-overlay" id="choiceOverlay" role="dialog" aria-modal="true" aria-labelledby="choiceTitle"><div class="choice-box"><h2 id="choiceTitle">CHECK</h2><p class="choice-intro" id="choiceIntro"></p><div class="choice-list" id="choiceList"></div><div class="close-row"><button class="close-btn" id="choiceClose">CLOSE</button></div></div></div>
@@ -83,86 +92,147 @@ button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focu
   const rebootOverlay=$('#rebootOverlay'),rebootStage=$('#rebootStage'),rebootActions=$('#rebootActions'),endScreen=$('#endScreen'),srStatus=$('#srStatus');
   const checkBtn=$('[data-cmd="check"]'),actBtn=$('[data-cmd="act"]'),rebootBtn=$('[data-cmd="reboot"]'),continueBtn=$('[data-cmd="continue"]');
   const factList=$('#factList'),fileName=$('#fileName'),draftStatus=$('#draftStatus'),loopReadout=$('#loopReadout'),loopBanner=$('#loopBanner'),loopBannerText=$('#loopBannerText');
+  const needBar=$('#needBar'),needLabel=$('#needLabel'),needText=$('#needText'),reviewLog=$('#reviewLog'),stopRuleChip=$('#stopRuleChip'),enemyTitle=$('#enemyTitle'),enemySub=$('#enemySub');
   const criteria={prompt:$('#critPrompt'),evidence:$('#critEvidence'),complete:$('#critComplete'),review:$('#critReview')};
 
-  let x=.5,y=.72,overload=2,activeAttack=false,bulletTimers=[],checked=new Set(),facts=new Map(),reviewed=false,submitted=false,postSubmitDone=false,extraEdits=0,spiral=false,rebootComplete=false,stoppingRule=false;
-  const thoughts=["ONE MORE CHECK","READ IT AGAIN","WHAT IF THERE'S A TYPO?","THIS SENTENCE COULD BE BETTER","YOU MISSED SOMETHING","DON'T SUBMIT YET","MAKE IT SOUND SMARTER","JUST ONE MORE CHANGE","WHAT IF THIS ISN'T YOUR BEST?","FINAL_FINAL"];
+  let x=.5,y=.72,overload=2,activeAttack=false,bulletTimers=[],attackGeneration=0;
+  let promptKnown=false,draftCompared=false,reviewPurposeKnown=false,uncertaintyKnown=false;
+  let reviewed=false,submitted=false,postSubmitDone=false,extraEdits=0,spiral=false,rebootComplete=false;
+  let stoppingRule=false,ruleActive=false;
+  const checked=new Set(),facts=new Map();
+
+  const baseThoughts=["ONE MORE CHECK","READ IT AGAIN","WHAT IF THERE'S A TYPO?","THIS SENTENCE COULD BE BETTER","YOU MISSED SOMETHING","DON'T SUBMIT YET","MAKE IT SOUND SMARTER","JUST ONE MORE CHANGE","WHAT IF THIS ISN'T YOUR BEST?","FINAL_FINAL"];
   const postThoughts=["DID IT UPLOAD?","OPEN IT ONE MORE TIME","WHAT IF THERE'S A TYPO?","CHECK THE FILE","YOU COULD STILL FIX IT","WHAT IF YOU MISSED A WORD?","JUST ONE MORE LOOK","WHAT IF IT'S NOT YOUR BEST?"];
 
   function setSprite(name){cat.src='./'+name;cat.onerror=()=>{cat.onerror=null;cat.src='./cat.png';};}
   function setMessage(lines){const clean=lines.filter(Boolean);message.innerHTML=clean.map(t=>'&ast; '+t).join('<br>');srStatus.textContent=clean.join(' ');}
-  function setOverload(n,allowSpiral=true){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';if(allowSpiral && overload>=10 && !submitted && !spiral)enterSpiral();}
+  function setNeed(label,text,mode=''){
+    needLabel.textContent=label;needText.textContent=text;needBar.classList.remove('ready','capacity');if(mode)needBar.classList.add(mode);
+    rebootBtn.classList.remove('cue');continueBtn.classList.remove('cue');actBtn.classList.remove('cue');checkBtn.classList.remove('cue');
+    if(mode==='capacity')rebootBtn.classList.add('cue');
+    if(mode==='ready')continueBtn.classList.add('cue');
+  }
+  function enoughChecked(){return promptKnown&&draftCompared;}
+  function updateNeed(){
+    if(submitted&&postSubmitDone){setNeed('CAT HAS DONE THE AVAILABLE PART','The draft is still submitted. Cat can continue.','ready');return;}
+    if(submitted){setNeed('CAT NEEDS: HANDS OFF','The file is submitted. The remaining challenge is not reopening it.');return;}
+    if(spiral){setNeed('CAT NEEDS: ROOM TO CHOOSE','The draft information is still here. Decision-making systems are overloaded.','capacity');return;}
+    if(overload>=8){setNeed('CAT MAY NEED: ROOM TO CHOOSE','The draft information is available, but the urge to keep editing is getting loud.','capacity');return;}
+    if(!promptKnown){setNeed('CAT NEEDS: INFORMATION','What does this assignment actually require?');return;}
+    if(!draftCompared){setNeed('CAT STILL NEEDS: INFORMATION','Does this draft actually meet those requirements?');return;}
+    if(!stoppingRule){setNeed('CAT NEEDS: A STOPPING PLAN','What will count as the last useful review before Cat submits?');actBtn.classList.add('cue');return;}
+    if(!ruleActive){setNeed('CAT NEEDS: THE ENDING CONDITION BACK','Cat already chose a stopping rule. A new edit moved the line again.');actBtn.classList.add('cue');return;}
+    if(!reviewed){setNeed('CAT NEEDS: ONE PURPOSEFUL PASS','Do the review the stopping rule called for, then stop.');actBtn.classList.add('cue');return;}
+    setNeed('CAT NEEDS: COMMITMENT','The stopping conditions are met. Submit — or move the goalpost again.');actBtn.classList.add('cue');
+  }
+  function setOverload(n,allowSpiral=true){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';if(allowSpiral&&overload>=10&&!submitted&&!spiral)enterSpiral();updateNeed();}
+
   function placeHeart(){const r=arena.getBoundingClientRect();heart.style.left=Math.max(18,Math.min(r.width-18,x*r.width))+'px';heart.style.top=Math.max(18,Math.min(r.height-18,y*r.height))+'px';}
-  function move(dx,dy){if(choiceOverlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
+  function move(dx,dy){if(spiral||choiceOverlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
   addEventListener('resize',placeHeart);placeHeart();
   const keys={ArrowUp:[0,-.055],w:[0,-.055],W:[0,-.055],ArrowDown:[0,.055],s:[0,.055],S:[0,.055],ArrowLeft:[-.055,0],a:[-.055,0],A:[-.055,0],ArrowRight:[.055,0],d:[.055,0],D:[.055,0]};
   document.addEventListener('keydown',e=>{if(keys[e.key]&&!choiceOverlay.classList.contains('show')&&!rebootOverlay.classList.contains('show')){e.preventDefault();move(...keys[e.key]);}});
-  const touchpad=$('#touchpad');touchpad.addEventListener('touchstart',e=>e.preventDefault(),{passive:false});touchpad.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});touchpad.addEventListener('dblclick',e=>e.preventDefault());
-  const dirs={up:[0,-.06],down:[0,.06],left:[-.06,0],right:[.06,0]};
-  $$('[data-dir]').forEach(btn=>{let repeat;const start=e=>{e.preventDefault();move(...dirs[btn.dataset.dir]);clearInterval(repeat);repeat=setInterval(()=>move(...dirs[btn.dataset.dir]),95);};const stop=()=>{clearInterval(repeat);repeat=null;};btn.addEventListener('pointerdown',start);btn.addEventListener('pointerup',stop);btn.addEventListener('pointercancel',stop);btn.addEventListener('pointerleave',stop);});
+  const touchpad=$('#touchpad');['touchstart','touchmove'].forEach(type=>touchpad.addEventListener(type,e=>e.preventDefault(),{passive:false}));touchpad.addEventListener('dblclick',e=>e.preventDefault());
+  const dirs={up:[0,-.07],down:[0,.07],left:[-.07,0],right:[.07,0]};
+  $$('[data-dir]').forEach(btn=>{let repeat=null,delay=null;const stop=()=>{clearTimeout(delay);clearInterval(repeat);delay=repeat=null;};btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);delay=setTimeout(()=>{repeat=setInterval(()=>move(...dirs[btn.dataset.dir]),95);},260);});['pointerup','pointercancel','pointerleave','lostpointercapture'].forEach(ev=>btn.addEventListener(ev,stop));});
 
-  function clearBullets(){activeAttack=false;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
+  function clearBullets(){activeAttack=false;attackGeneration++;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
   function hitCheck(b){const br=b.getBoundingClientRect(),hr=heart.getBoundingClientRect();return !(br.right<hr.left||br.left>hr.right||br.bottom<hr.top||br.top>hr.bottom);}
-  function bulletDuration(text,level=1,post=false){let d=4700+Math.min(2600,text.length*75);if(checked.size>=2)d+=650;if(post)d+=350;d-=Math.min(1200,(level-1)*300);return Math.max(4000,d);}
-  function spawnBullet(text,level=1,post=false){const b=document.createElement('div');b.className='bullet '+(post?'hot':checked.size>=2?'soft':'');b.textContent=text;const fromLeft=Math.random()>.5,top=20+Math.random()*(arena.clientHeight-50);b.style.top=top+'px';b.style.left=fromLeft?'-330px':(arena.clientWidth+20)+'px';arena.appendChild(b);const duration=bulletDuration(text,level,post),start=performance.now();
-    function anim(now){if(!b.isConnected)return;const p=Math.min(1,(now-start)/duration),sx=fromLeft?-330:arena.clientWidth+20,ex=fromLeft?arena.clientWidth+20:-330;b.style.left=(sx+(ex-sx)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1,!submitted);setMessage(post?["Cat got hit by a post-submit urge.","The file remains submitted."]:["Cat got hit by ONE MORE IMPROVEMENT.","Possible improvement is an infinite renewable resource."]);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}
+  function currentThoughts(){
+    let pool=[...baseThoughts];
+    if(draftCompared)pool=pool.filter(t=>t!=="YOU MISSED SOMETHING");
+    if(stoppingRule)pool.push("BUT ONE MORE CHANGE WOULD BE QUICK","WHAT IF THE RULE IS TOO SOON?");
+    if(reviewed)pool.push("READ IT ONE LAST LAST TIME","WHAT IF THE TYPO IS AFTER THE PART YOU CHECKED?");
+    return pool;
+  }
+  function bulletDuration(text,level=1,post=false){let d=4900+Math.min(3000,text.length*88);if(enoughChecked())d+=650;if(stoppingRule)d+=250;if(post)d+=350;d-=Math.min(1300,(level-1)*300);d-=Math.min(900,extraEdits*75);return Math.max(4000,d);}
+  function spawnBullet(text,level=1,post=false){
+    const generation=attackGeneration,b=document.createElement('div');b.className='bullet '+(post?'hot':enoughChecked()?'soft':'');b.textContent=text;
+    const fromLeft=Math.random()>.5,top=20+Math.random()*(arena.clientHeight-50),off=Math.max(240,text.length*9+95);b.style.top=top+'px';b.style.left=fromLeft?-off+'px':arena.clientWidth+20+'px';arena.appendChild(b);const duration=bulletDuration(text,level,post),start=performance.now();
+    function anim(now){if(!b.isConnected||generation!==attackGeneration)return;const p=Math.min(1,(now-start)/duration),sx=fromLeft?-off:arena.clientWidth+20,ex=fromLeft?arena.clientWidth+20:-off;b.style.left=(sx+(ex-sx)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1,!submitted);setMessage(post?["Cat got hit by a post-submit urge.","The file remains submitted."]:["Cat got hit by ONE MORE IMPROVEMENT.","A possible improvement is still not automatically a requirement."]);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}
     requestAnimationFrame(anim);
   }
-  function attack(level=1,pool=thoughts,post=false){if(activeAttack)return;activeAttack=true;setMessage(post?["POST-SUBMIT THOUGHTS INCOMING.","Submitting did not remove uncertainty.","The experiment is to leave the submitted draft submitted."]:["THE PERFECT DRAFT has generated more suggestions.","Dodge what you can. Suggestions are not commands."]);const count=post?7:Math.min(8,4+level);const spacing=checked.size>=2?1050:900;for(let i=0;i<count;i++)bulletTimers.push(setTimeout(()=>spawnBullet(pool[Math.floor(Math.random()*pool.length)],level,post),i*spacing));bulletTimers.push(setTimeout(()=>{activeAttack=false;if(post){postSubmitDone=true;continueBtn.disabled=false;setSprite('cat-ready.png');setMessage(["The urge to reopen the draft moved through.","The assignment is still submitted.","CONTINUE is available."]);}},count*spacing+7600));}
+  function attack(level=1,pool=null,post=false,countOverride=null){if(activeAttack||spiral)return;activeAttack=true;const usePool=pool||currentThoughts();setMessage(post?["POST-SUBMIT THOUGHTS INCOMING.","Submitting did not remove uncertainty.","The experiment is to leave the submitted draft submitted."]:["THE PERFECT DRAFT has generated more suggestions.","Dodge what you can. Suggestions are not commands."]);const count=countOverride??(post?7:Math.min(8,4+level));const spacing=enoughChecked()?1120:970;for(let i=0;i<count;i++)bulletTimers.push(setTimeout(()=>spawnBullet(usePool[Math.floor(Math.random()*usePool.length)],level,post),i*spacing));bulletTimers.push(setTimeout(()=>{activeAttack=false;if(post){postSubmitDone=true;setSprite('cat-ready.png');recomputeReady();setMessage(["The urge to reopen the draft moved through.","The assignment is still submitted.","Cat has done the available part."]);updateNeed();}},count*spacing+7800));}
 
-  function renderFacts(){factList.innerHTML='';if(!facts.size){factList.innerHTML='<li>No facts checked yet. CHECK asks: what do we actually know about this draft?</li>';return;}facts.forEach(v=>{const li=document.createElement('li');li.textContent=v;factList.appendChild(li);});}
+  function renderFacts(){factList.innerHTML='';if(!facts.size){factList.innerHTML='<li>Requirements have not been compared with the draft yet.</li>';return;}facts.forEach(v=>{const li=document.createElement('li');li.textContent=v;factList.appendChild(li);});}
   function markCriterion(key){criteria[key].classList.add('ok');criteria[key].classList.remove('pending');criteria[key].querySelector('.mark').textContent='✓';}
-  function enoughChecked(){return checked.size>=2;}
-  function recomputeReady(){actBtn.disabled=!enoughChecked()||spiral||submitted;continueBtn.disabled=!(submitted&&postSubmitDone);checkBtn.disabled=submitted;}
-  function addFact(key,text,criterionKeys=[]){checked.add(key);facts.set(key,text);criterionKeys.forEach(markCriterion);renderFacts();setOverload(overload-1,false);recomputeReady();}
+  function unmarkReview(){criteria.review.classList.remove('ok');criteria.review.classList.add('pending');criteria.review.querySelector('.mark').textContent='○';}
+  function recomputeReady(){checkBtn.disabled=spiral||submitted;actBtn.disabled=!enoughChecked()||spiral||submitted;continueBtn.disabled=!(submitted&&postSubmitDone);updateNeed();}
+  function addFact(key,text){checked.add(key);facts.set(key,text);renderFacts();setOverload(overload-1,false);recomputeReady();}
   function showChoices(title,intro,choices){choiceTitle.textContent=title;choiceIntro.textContent=intro;choiceList.innerHTML='';choices.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c.label;b.disabled=!!c.disabled;if(c.visited)b.classList.add('visited');b.addEventListener('click',()=>{choiceOverlay.classList.remove('show');c.run();});choiceList.appendChild(b);});choiceOverlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button:not(:disabled)')?.focus(),30);}
   choiceClose.addEventListener('click',()=>choiceOverlay.classList.remove('show'));
+  choiceOverlay.addEventListener('click',e=>{if(e.target===choiceOverlay)choiceOverlay.classList.remove('show');});
 
   const checks={
-    target:{label:'WHAT DOES THE ASSIGNMENT ACTUALLY REQUIRE?',fact:'The required parts are answered and the required evidence is present.',criteria:['prompt','evidence'],run(){setSprite('cat-robot.png');setMessage(["OBSERVED: required parts answered; required evidence present.","NOT OBSERVED: a requirement for flawless wording."]);}},
-    missing:{label:'IS ANY REQUIRED PART ACTUALLY MISSING?',fact:'No required section is missing. Smaller edits may still be possible.',criteria:['complete'],run(){setSprite('cat-focused.png');setMessage(["No required section is missing.","There may still be smaller improvements.","Those are different categories."]);}},
-    review:{label:'WHAT WOULD ONE FINAL REVIEW BE FOR?',fact:'A useful final review has a specific job: verify requirements and catch obvious errors once.',criteria:[],run(){setSprite('cat-robot.png');setMessage(["Purposeful review has a purpose and an ending.","It is not a search for the feeling of certainty."]);}},
-    unknown:{label:'WHAT CAN CHECK NOT PROVE?',fact:'CHECK cannot prove there are zero typos, no better sentence exists, or what grade the draft will receive.',criteria:[],run(){setSprite('cat-worried.png');setMessage(["UNKNOWN: whether a typo exists somewhere.","UNKNOWN: whether a sentence could be improved.","UNKNOWN: exact future grade.","The assignment can still be ready."]);}}
+    prompt:{label:'OPEN THE ASSIGNMENT PROMPT',run(){promptKnown=true;addFact('prompt','PROMPT: answer every required part and include the required evidence. No requirement says “best possible wording.”');draftStatus.textContent='TARGET FOUND';setSprite('cat-robot.png');setMessage(["ASSIGNMENT TARGET FOUND:","Answer every required part.","Include the required evidence.","Perfect wording was not listed."]);updateNeed();}},
+    compare:{label:'COMPARE THE DRAFT TO THE PROMPT',disabled:()=>!promptKnown,run(){draftCompared=true;['prompt','evidence','complete'].forEach(markCriterion);addFact('compare','DRAFT: required parts answered, required evidence present, no required section missing.');draftStatus.textContent='MEETS REQUIREMENTS';setSprite('cat-focused.png');enemySub.textContent='The requirements are met. It would now like to discuss improvements forever.';setMessage(["COMPARE COMPLETE:","Every required part is present.","Required evidence is present.","No required section is missing."]);updateNeed();}},
+    review:{label:'WHAT IS ONE PURPOSEFUL FINAL PASS FOR?',run(){reviewPurposeKnown=true;addFact('review','FINAL PASS JOB: verify requirements once and catch obvious errors — then end.');setSprite('cat-robot.png');setMessage(["A final pass can have a job and an ending.","It is not a search for the feeling of certainty."]);}},
+    unknown:{label:'WHAT CAN CHECK NOT PROVE?',run(){uncertaintyKnown=true;addFact('unknown','UNKNOWN: zero typos, best possible sentence, exact future grade. Those cannot be certified by more checking.');setSprite('cat-worried.png');setMessage(["CHECK cannot certify zero typos.","CHECK cannot prove no better sentence exists.","CHECK cannot reveal the future grade."]);}}
   };
-  function openCheck(){showChoices('CHECK','CHECK means: What do we actually know? Two checked facts unlock ACT.',Object.entries(checks).map(([key,c])=>({label:c.label,visited:checked.has(key),run:()=>{addFact(key,c.fact,c.criteria);c.run();setTimeout(()=>{if(!spiral&&!submitted)attack(1);},2500);}})));}
+  function openCheck(){
+    const choices=Object.entries(checks).map(([key,c])=>({label:c.label,disabled:c.disabled?.(),visited:checked.has(key),run:()=>{c.run();setTimeout(()=>{if(!spiral&&!submitted)attack(1);},1700);}}));
+    showChoices('CHECK','What does Cat need to find out about this specific draft?',choices);
+  }
 
   function updateFileName(){if(extraEdits===0)fileName.textContent='essay_FINAL.docx';else if(extraEdits===1)fileName.textContent='essay_FINAL_2.docx';else if(extraEdits===2)fileName.textContent='essay_FINAL_FINAL.docx';else if(extraEdits===3)fileName.textContent='essay_FINAL_FINAL_REAL.docx';else fileName.textContent='essay_FINAL_FINAL_REAL_'+extraEdits+'.docx';loopReadout.textContent='EXTRA EDITS: '+extraEdits;}
-  function purposefulReview(){if(reviewed)return;reviewed=true;markCriterion('review');setSprite('cat-focused.png');setOverload(overload-1,false);setMessage(["Cat does one final pass with an actual job.","One obvious typo is fixed. Requirements are checked once.","The review ends."]);recomputeReady();}
-  function setStopRule(){stoppingRule=true;setSprite('cat-hands-off.png');setMessage(["STOPPING RULE SET:","One purposeful final pass, then submit.","THE PERFECT DRAFT has requested an appeals process. Denied."]);}
-  function loopEdit(kind){let delta=0;
-    if(kind==='tiny'){extraEdits+=1;delta=1;setMessage(["Cat changes a sentence that was already understandable.","THE PERFECT DRAFT immediately discovers another sentence."]);}
-    if(kind==='opening'){extraEdits+=2;delta=2;setMessage(["Cat rewrites the opening again.","The previous opening becomes strangely attractive in retrospect."]);}
-    if(kind==='smart'){extraEdits+=1;delta=1;setMessage(["Cat replaces a normal word with a more impressive-looking word.","Clarity has filed a complaint."]);}
-    if(kind==='restart'){extraEdits+=3;delta=3;setMessage(["Cat considers starting the whole thing over so it can feel CLEAN.","The completed draft would like to know what crime it committed."]);}
-    updateFileName();setOverload(overload+delta);if(!spiral)setTimeout(()=>attack(Math.min(4,1+Math.floor(extraEdits/2))),1500);
+  function setStopRule(){stoppingRule=true;ruleActive=true;stopRuleChip.textContent=reviewed?'STOPPING RULE: REVIEW COMPLETE → SUBMIT':'STOPPING RULE: ONE PURPOSEFUL PASS → SUBMIT';stopRuleChip.classList.add('active');stopRuleChip.classList.remove('paused');setSprite('cat-hands-off.png');setMessage(["STOPPING RULE SET:","One purposeful final pass, then submit.","The rule gives the review an ending before Cat starts it."]);recomputeReady();}
+  function returnToRule(){ruleActive=true;stopRuleChip.textContent=reviewed?'STOPPING RULE: REVIEW COMPLETE → SUBMIT':'STOPPING RULE: ONE PURPOSEFUL PASS → SUBMIT';stopRuleChip.classList.add('active');stopRuleChip.classList.remove('paused');setSprite('cat-hands-off.png');setOverload(overload-1,false);setMessage(["Cat returns to the stopping rule already chosen.","No new standard is required."]);recomputeReady();}
+  function purposefulReview(){
+    if(reviewed||!stoppingRule||!ruleActive)return;reviewed=true;markCriterion('review');reviewLog.textContent='FINAL PASS: COMPLETE — 1 OBVIOUS TYPO FIXED';stopRuleChip.textContent='STOPPING RULE: REVIEW COMPLETE → SUBMIT';setSprite('cat-focused.png');setOverload(overload-1,false);setMessage(["Cat runs the one purposeful final pass.","One obvious typo is fixed. Requirements are checked once.","The pass reaches its planned ending."]);recomputeReady();setTimeout(()=>attack(1),1400);
   }
-  function submitDraft(){if(!enoughChecked()){setMessage(["CHECK the actual target first.","This is different from checking whether perfection exists."]);return;}if(!reviewed){setMessage(["One purposeful final pass is still available.","One review can be useful. Infinity reviews are harder to schedule."]);return;}submitted=true;spiral=false;clearBullets();draftStatus.textContent='SUBMITTED';draftStatus.style.color='var(--green)';setSprite('cat-hands-off.png');checkBtn.disabled=true;actBtn.disabled=true;rebootBtn.disabled=false;continueBtn.disabled=true;setMessage(["Cat clicks SUBMIT.","The draft is not perfect.","The draft is also no longer accepting edits."]);setTimeout(()=>attack(2,postThoughts,true),1800);}
-  function openAct(){showChoices('ACT','Several actions are understandable. The question is what each one does to the loop.',[
-    {label:reviewed?'ONE PURPOSEFUL FINAL PASS — COMPLETE':'DO ONE PURPOSEFUL FINAL PASS',disabled:reviewed,run:purposefulReview},
-    {label:'SET A STOPPING RULE: ONE PASS, THEN SUBMIT',disabled:stoppingRule,run:setStopRule},
-    {label:'SUBMIT THE DRAFT',run:submitDraft},
-    {label:'FIX ONE MORE TINY THING',run:()=>loopEdit('tiny')},
-    {label:'REWRITE THE OPENING AGAIN',run:()=>loopEdit('opening')},
-    {label:'FIND A SMARTER WORD FOR A WORD THAT ALREADY WORKS',run:()=>loopEdit('smart')},
-    {label:'START OVER SO IT CAN FEEL CLEAN',run:()=>loopEdit('restart')}
-  ]);}
+  function loopEdit(kind){
+    let delta=0,label='';
+    if(kind==='tiny'){extraEdits+=1;delta=1;label='Cat changes a sentence that was already understandable.';}
+    if(kind==='opening'){extraEdits+=2;delta=2;label='Cat rewrites the opening again.';}
+    if(kind==='smart'){extraEdits+=1;delta=1;label='Cat replaces a normal word with a more impressive-looking word.';}
+    if(kind==='restart'){extraEdits+=3;delta=3;label='Cat starts rebuilding a completed draft so it can feel CLEAN.';}
+    if(stoppingRule){ruleActive=false;stopRuleChip.textContent='STOPPING RULE: PAUSED — NEW EDIT ADDED';stopRuleChip.classList.remove('active');stopRuleChip.classList.add('paused');}
+    if(reviewed){reviewed=false;unmarkReview();reviewLog.textContent='FINAL PASS: NEEDS RESET — DRAFT CHANGED AFTER PASS';}
+    updateFileName();setSprite(kind==='restart'?'cat-overwhelmed.png':'cat-urge.png');setMessage([label,"THE PERFECT DRAFT immediately discovers another possible improvement.",stoppingRule?"The stopping line moved because Cat moved it.":"The draft now has one more thing to inspect."]);setOverload(overload+delta);recomputeReady();if(!spiral)setTimeout(()=>attack(Math.min(4,1+Math.floor(extraEdits/2))),1200);
+  }
+  function submitDraft(){
+    if(!enoughChecked()){setMessage(["Cat does not know yet whether the draft meets the assignment.","CHECK the actual target first."]);return;}
+    if(!stoppingRule){setMessage(["Cat has not chosen an ending condition yet.","A stopping rule can decide when the final pass is over before certainty starts negotiating."]);return;}
+    if(!ruleActive){setMessage(["The stopping rule was set, then the line moved again.","RETURN TO THE STOPPING RULE before submitting."]);return;}
+    if(!reviewed){setMessage(["The stopping rule calls for one purposeful final pass.","Do that pass once, then the planned next step is SUBMIT."]);return;}
+    submitted=true;spiral=false;clearBullets();draftStatus.textContent='SUBMITTED';draftStatus.style.color='var(--green)';enemyTitle.innerHTML='SUBMITTED';enemySub.textContent='The draft is no longer accepting suggestions.';setSprite('cat-hands-off.png');checkBtn.disabled=true;actBtn.disabled=true;rebootBtn.disabled=false;continueBtn.disabled=true;setMessage(["Cat clicks SUBMIT.","The draft met the actual requirements and the stopping rule was completed.","The draft is not perfect. It is submitted."]);updateNeed();setTimeout(()=>attack(2,postThoughts,true),1500);
+  }
+  function openAct(){
+    let intro='Cat knows the draft meets the assignment. What will count as enough final work?';
+    if(stoppingRule&&!ruleActive)intro='Cat already chose an ending condition, then added another edit. What happens now?';
+    else if(stoppingRule&&!reviewed)intro='Cat has an ending condition. Now do the one pass it called for — or renegotiate with THE PERFECT DRAFT.';
+    else if(stoppingRule&&reviewed&&ruleActive)intro='The stopping conditions are met. What does Cat do now?';
+    showChoices('ACT',intro,[
+      {label:stoppingRule?'STOPPING RULE — ALREADY SET':'SET A STOPPING RULE: ONE PASS, THEN SUBMIT',disabled:stoppingRule,run:setStopRule},
+      {label:'RETURN TO THE STOPPING RULE',disabled:!stoppingRule||ruleActive,run:returnToRule},
+      {label:reviewed?'PURPOSEFUL FINAL PASS — COMPLETE':'DO THE ONE PURPOSEFUL FINAL PASS',disabled:reviewed||!stoppingRule||!ruleActive,run:purposefulReview},
+      {label:'SUBMIT THE DRAFT',run:submitDraft},
+      {label:'FIX ONE MORE TINY THING',run:()=>loopEdit('tiny')},
+      {label:'REWRITE THE OPENING AGAIN',run:()=>loopEdit('opening')},
+      {label:'FIND A SMARTER WORD FOR A WORD THAT ALREADY WORKS',run:()=>loopEdit('smart')},
+      {label:'START OVER SO IT CAN FEEL CLEAN',run:()=>loopEdit('restart')}
+    ]);
+  }
 
-  function enterSpiral(){clearBullets();spiral=true;setSprite('cat-overwhelmed.png');frame.classList.add('loop-shake','loop-flash');loopBanner.classList.add('show');loopBannerText.innerHTML='EDITING LOOP<br>100% CPU';setMessage(["Cat has improved the draft until strategic decision-making went offline.","The assignment did not become clearer.","REBOOT is available when Cat is ready."]);recomputeReady();setTimeout(()=>{frame.classList.remove('loop-shake');loopBannerText.innerHTML='ONE MORE CHANGE<br>FOREVER';},800);setTimeout(()=>{loopBanner.classList.remove('show');frame.classList.remove('loop-flash');rebootBtn.focus();},1650);}
+  function enterSpiral(){clearBullets();spiral=true;setSprite('cat-overwhelmed.png');frame.classList.add('loop-shake','loop-flash');loopBanner.classList.add('show');loopBannerText.innerHTML='EDITING LOOP<br>100% CPU';setMessage(["Cat has generated enough possible improvements to overload the system.","The requirements did not change.","REBOOT CAT is available when Cat is ready."]);recomputeReady();setTimeout(()=>{frame.classList.remove('loop-shake');loopBannerText.innerHTML='ONE MORE CHANGE<br>FOREVER';},800);setTimeout(()=>{loopBanner.classList.remove('show');frame.classList.remove('loop-flash');rebootBtn.focus();},1650);}
 
   function openReboot(){rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
-  function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to become calm or certain. The goal is to get enough space from the urge to choose.</p>';rebootActions.innerHTML='';[
+  function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to become calm or certain. The goal is to get enough space from the editing urge to choose.</p>';rebootActions.innerHTML='';[
     ['HANDS OFF','For eight seconds, do not edit, check, refresh, or improve anything.',startHandsOff],
-    ['MOVE THE MAMMAL','A tiny physical reset: stretch, lower shoulders, move once.',startMovement],
+    ['MOVE THE MAMMAL','A tiny physical reset: lower shoulders, stretch, move once.',startMovement],
     ['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(spiral)setSprite('cat-overwhelmed.png');}]
   ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});}
-  function startHandsOff(){setSprite('cat-hands-off.png');let n=8;rebootStage.innerHTML='<div class="big">HANDS OFF</div><p>The urge may stay. Cat is practicing not obeying it.</p><div class="timer" id="handsTimer">8</div>';rebootActions.innerHTML='<button type="button" id="handsNotNow">NOT NOW</button>';const t=setInterval(()=>{n--;const el=$('#handsTimer');if(el)el.textContent=n;if(n<=0){clearInterval(t);completeReboot(["Eight seconds passed.","No edit was made.","The draft survived without supervision."]);}},1000);$('#handsNotNow').onclick=()=>{clearInterval(t);rebootOverlay.classList.remove('show');if(spiral)setSprite('cat-overwhelmed.png');};}
-  function startMovement(){setSprite('cat-stretch.png');rebootStage.innerHTML='<div class="big">MOVE THE MAMMAL</div><p>Do these three tiny movements with Cat. Nothing athletic. Mammal maintenance only.</p>';rebootActions.innerHTML='';const steps=[['LOWER SHOULDERS','Let your shoulders drop once.'],['STRETCH','Stretch arms, paws, or back for a few seconds.'],['MOVE ONCE','Stand, shake out, or take a few steps.']];let done=0;steps.forEach(([label,desc],i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br>'+desc;b.onclick=()=>{if(b.disabled)return;b.disabled=true;b.style.borderColor='var(--green)';b.style.color='var(--green)';done++;if(done===steps.length)completeReboot(["Movement complete.","The draft did not change while Cat had a body."]);};rebootActions.appendChild(b);});const skip=document.createElement('button');skip.type='button';skip.textContent='NOT NOW';skip.onclick=()=>{rebootOverlay.classList.remove('show');if(spiral)setSprite('cat-overwhelmed.png');};rebootActions.appendChild(skip);}
+  function startHandsOff(){setSprite('cat-hands-off.png');let n=8;rebootStage.innerHTML='<div class="big">HANDS OFF</div><p>The urge may stay. Cat is practicing not obeying it.</p><div class="timer" id="handsTimer">8</div>';rebootActions.innerHTML='<button type="button" id="handsNotNow">NOT NOW</button>';const t=setInterval(()=>{n--;const el=$('#handsTimer');if(el)el.textContent=n;if(n<=0){clearInterval(t);completeReboot(["Eight seconds passed.","No edit was made.","The requirements remained exactly where they were."]);}},1000);$('#handsNotNow').onclick=()=>{clearInterval(t);rebootOverlay.classList.remove('show');if(spiral)setSprite('cat-overwhelmed.png');};}
+  function startMovement(){setSprite('cat-stretch.png');rebootStage.innerHTML='<div class="big">MOVE THE MAMMAL</div><p>Do these three tiny movements with Cat. Nothing athletic. Mammal maintenance only.</p>';rebootActions.innerHTML='';const steps=[['LOWER SHOULDERS','Let your shoulders drop once.'],['STRETCH','Stretch arms, paws, or back for a few seconds.'],['MOVE ONCE','Stand, shake out, or take a few steps.']];let done=0;steps.forEach(([label,desc])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br>'+desc;b.onclick=()=>{if(b.disabled)return;b.disabled=true;b.style.borderColor='var(--green)';b.style.color='var(--green)';done++;if(done===steps.length)completeReboot(["Movement complete.","The draft did not change while Cat had a body."]);};rebootActions.appendChild(b);});const skip=document.createElement('button');skip.type='button';skip.textContent='NOT NOW';skip.onclick=()=>{rebootOverlay.classList.remove('show');if(spiral)setSprite('cat-overwhelmed.png');};rebootActions.appendChild(skip);}
   function completeReboot(lines){rebootComplete=true;spiral=false;setOverload(Math.max(2,overload-4),false);setSprite('cat-rumpled.png');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS RETURNING</div><p>'+lines.join('<br>')+'</p><p>Cat may still want to edit. Cat has enough room to choose.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';$('#rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setSprite('cat-ready.png');setMessage(["The urge to improve may still be here.","Strategic decision-making has returned."]);recomputeReady();};}
 
-  function doContinue(){if(!(submitted&&postSubmitDone)){setMessage(["Not yet.","The experiment is to leave the submitted draft submitted while the urge passes through."]);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');setMessage(["Cat leaves the draft submitted.","There may still be a typo somewhere.","Stopping is part of doing good work."]);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 04 complete');localStorage.setItem('cvc-encounter-04','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
+  function doContinue(){if(!(submitted&&postSubmitDone)){setMessage(["Not yet.",submitted?"The file is submitted. Let the post-submit urge pass through without reopening it.":"The draft has not been submitted yet."]);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');setMessage(["Cat leaves the draft submitted.","There may still be a typo somewhere.","An ending condition worked even though certainty never arrived."]);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 04 complete');localStorage.setItem('cvc-encounter-04','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
 
-  checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});rebootBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openReboot();});continueBtn.addEventListener('click',doContinue);
-  recomputeReady();setOverload(2,false);setTimeout(()=>attack(1),3800);
+  checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});
+  actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});
+  rebootBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openReboot();});
+  continueBtn.addEventListener('click',doContinue);
+  recomputeReady();setOverload(2,false);setTimeout(()=>attack(1,["ONE MORE CHECK","WHAT IF THERE'S A TYPO?","DON'T SUBMIT YET"],false,3),2300);
 })();
 </script>
 </body>
