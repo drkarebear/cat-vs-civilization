@@ -4,269 +4,173 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="favicon3.png">
 <title>Cat vs. Civilization — Encounter 01: The Grade Drop</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fontlibrary.org//face/pixel-operator');
-
-:root{
-  --bg:#000;--white:#f8f8f8;--purple:#b56be0;--orange:#ff9f2f;--yellow:#ffd75a;
-  --blue:#67b7ff;--green:#75dd88;--red:#ff6b6b;--muted:#bca9ca;--panel:#070707;
-}
-*{box-sizing:border-box}
-html{background:#000;color-scheme:dark}
-body{margin:0;background:#000;color:var(--white);font-family:"PixelOperatorRegular","Courier New",monospace;min-height:100vh;min-height:100dvh}
-button,a{font:inherit} button{-webkit-tap-highlight-color:transparent}
-button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
-.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.7rem;z-index:1000}
-.shell{width:min(1120px,calc(100% - 22px));margin:auto;padding:22px 0 34px}
-.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:14px}
-.brand{font-family:"Press Start 2P",monospace;font-size:clamp(.68rem,2vw,.92rem);color:var(--purple);line-height:1.5}
-.home-link{border:2px solid #fff;padding:.65rem .8rem;text-decoration:none;font-family:"Press Start 2P";font-size:.58rem;color:#fff}
-.home-link:hover{border-color:var(--orange);color:var(--orange)}
-.frame{border:4px solid #fff;background:var(--panel);box-shadow:8px 8px 0 #202020;position:relative;overflow:hidden}
-.story{padding:20px 22px;min-height:150px;border-bottom:4px solid #fff;font-size:clamp(1.05rem,2.3vw,1.22rem);letter-spacing:.035em;line-height:1.55}
-.story p{margin:.25rem 0}.story .accent{color:var(--orange)}
-.battle{display:grid;grid-template-columns:1fr minmax(280px,1.2fr);gap:18px;padding:20px}
-.enemy-panel{display:grid;place-items:center;min-height:335px;text-align:center;position:relative}
-.enemy-title{font-family:"Press Start 2P";font-size:clamp(2.5rem,8vw,6rem);line-height:1;color:#fff;text-shadow:5px 5px 0 #292929}
-.enemy-sub{margin-top:16px;color:var(--muted);font-size:1.08rem;letter-spacing:.04em;line-height:1.45}
-.cat-wrap{margin-top:18px;display:grid;place-items:center;min-height:230px}
-.cat-sprite{width:min(240px,72%);max-height:230px;object-fit:contain;image-rendering:pixelated;transform-origin:50% 75%}
-.cat-sprite.breathe-in{transform:scale(1.045,1.055);transition:transform 4s linear}
-.cat-sprite.breathe-out{transform:scale(1,1);transition:transform 6s linear}
-.arena-col{display:flex;flex-direction:column;gap:14px}
-.hud{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:1rem;letter-spacing:.05em}
-.meter{height:18px;border:3px solid #fff;background:#111;position:relative}.meter-fill{height:100%;width:0;background:var(--purple);transition:width .2s linear}
-.fact-file{border:3px solid #fff;background:#030303;padding:10px 12px;min-height:68px}
-.fact-file strong{font-family:"Press Start 2P";font-size:.52rem;color:var(--yellow)}
-.fact-file ul{margin:.45rem 0 0;padding-left:1.2rem;line-height:1.35;font-size:.94rem}.fact-file li+li{margin-top:.28rem}
-.arena{position:relative;height:300px;border:4px solid #fff;background:#000;overflow:hidden;touch-action:none}
-.heart{position:absolute;width:22px;height:22px;left:50%;top:72%;transform:translate(-50%,-50%) rotate(45deg);background:var(--orange);box-shadow:0 0 0 2px #000}
-.heart::before,.heart::after{content:"";position:absolute;width:22px;height:22px;background:var(--orange);border-radius:50%}.heart::before{left:-11px}.heart::after{top:-11px}
-.bullet{position:absolute;white-space:nowrap;font-family:"Press Start 2P";font-size:.58rem;color:#fff;pointer-events:none;line-height:1.25}.bullet.soft{color:var(--yellow)}.bullet.hot{color:var(--red)}
-.message{border:3px solid #fff;padding:14px 16px;min-height:90px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}
-.touch-help{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2px}
-.touchpad-shell{display:grid;place-items:center;padding:6px 0 2px}
-.touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;padding:10px;border:2px dashed #444;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
-.touchpad button{width:76px;height:76px;border:3px solid #fff;background:#080808;color:#fff;font-family:"Press Start 2P";font-size:1.15rem;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}
-.touchpad button:active{background:#191919;border-color:var(--orange);color:var(--orange)}
-.touchpad .up{grid-column:2;grid-row:1}.touchpad .left{grid-column:1;grid-row:2}.touchpad .right{grid-column:3;grid-row:2}.touchpad .down{grid-column:2;grid-row:3}
-.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px 20px}
-.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}
-.cmd:hover:not(:disabled){outline:4px solid currentColor;outline-offset:2px}.cmd:disabled{opacity:.32;cursor:not-allowed}
-.choice-overlay,.reboot-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;padding:18px;z-index:50}.choice-overlay.show,.reboot-overlay.show{display:grid}
-.choice-box,.reboot-box{width:min(680px,100%);max-height:min(86vh,760px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}
-.choice-box h2,.reboot-box h2{font-family:"Press Start 2P";font-size:1rem;line-height:1.5;color:var(--purple);margin:0 0 12px}.choice-intro{margin:0 0 14px;line-height:1.45;color:#ddd}.choice-list{display:grid;gap:10px}
-.choice-list button,.reboot-actions button,.body-steps button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover,.reboot-actions button:hover,.body-steps button:hover{border-color:var(--orange);color:var(--orange)}
-.choice-list button.visited::after{content:"  ✓";color:var(--green)}
-.close-row{display:flex;justify-content:flex-end;margin-top:14px}.close-btn{border:2px solid #777;background:#000;color:#ddd;padding:9px 12px;cursor:pointer}
+:root{--bg:#000;--white:#f8f8f8;--purple:#b56be0;--orange:#ff9f2f;--yellow:#ffd75a;--blue:#67b7ff;--green:#75dd88;--red:#ff6b6b;--muted:#bca9ca;--panel:#070707}
+*{box-sizing:border-box}html{background:#000;color-scheme:dark}body{margin:0;background:#000;color:var(--white);font-family:"PixelOperatorRegular","Courier New",monospace;min-height:100vh;min-height:100dvh}button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.7rem;z-index:1000}
+.shell{width:min(1120px,calc(100% - 22px));margin:auto;padding:22px 0 34px}.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:14px}.brand{font-family:"Press Start 2P",monospace;font-size:clamp(.68rem,2vw,.92rem);color:var(--purple);line-height:1.5}.home-link{border:2px solid #fff;padding:.65rem .8rem;text-decoration:none;font-family:"Press Start 2P";font-size:.58rem;color:#fff}.home-link:hover{border-color:var(--orange);color:var(--orange)}
+.frame{border:4px solid #fff;background:var(--panel);box-shadow:8px 8px 0 #202020;position:relative;overflow:hidden}.story{padding:20px 22px;min-height:150px;border-bottom:4px solid #fff;font-size:clamp(1.05rem,2.3vw,1.22rem);letter-spacing:.035em;line-height:1.55}.story p{margin:.25rem 0}.story .accent{color:var(--orange)}
+.battle{display:grid;grid-template-columns:1fr minmax(280px,1.2fr);gap:18px;padding:20px}.enemy-panel{display:grid;place-items:center;align-content:center;min-height:390px;text-align:center;position:relative}.enemy-title{font-family:"Press Start 2P";font-size:clamp(2.5rem,8vw,6rem);line-height:1;color:#fff;text-shadow:5px 5px 0 #292929;transition:opacity .2s,transform .2s}.enemy-title.refreshing{animation:gradeBlink .18s steps(2,end) 3}.enemy-sub{margin-top:16px;color:var(--muted);font-size:1.08rem;letter-spacing:.04em;line-height:1.45}
+.assignment-card{width:min(430px,96%);margin:18px auto 0;border:3px solid #4b3c57;background:#050405;text-align:left;box-shadow:5px 5px 0 #1a151d}.assignment-card h3{margin:0;padding:10px 12px;border-bottom:2px solid #4b3c57;font-family:"Press Start 2P";font-size:.57rem;line-height:1.5;color:var(--yellow)}.assignment-row{display:grid;grid-template-columns:106px 1fr;gap:10px;padding:8px 12px;border-bottom:1px dotted #403744;align-items:start}.assignment-row:last-of-type{border-bottom:0}.assignment-label{color:#a999b4;font-size:.9rem}.assignment-value{font-size:.96rem;line-height:1.3;color:#777}.assignment-value.revealed{color:#fff}.assignment-value.good{color:var(--green)}.decision-panel{display:none;margin:10px 12px 12px;border:2px solid var(--green);padding:9px 10px;line-height:1.35;background:#020702}.decision-panel.show{display:block}.decision-panel strong{display:block;font-family:"Press Start 2P";font-size:.5rem;color:var(--green);margin-bottom:6px;line-height:1.5}.decision-panel.warn{border-color:var(--red);background:#0a0202}.decision-panel.warn strong{color:var(--red)}
+.cat-wrap{margin-top:16px;display:grid;place-items:center;min-height:205px}.cat-sprite{width:min(225px,70%);max-height:205px;object-fit:contain;image-rendering:pixelated;transform-origin:50% 75%}.cat-sprite.breathe-in{transform:scale(1.045,1.055);transition:transform 4s linear}.cat-sprite.breathe-out{transform:scale(1,1);transition:transform 5s linear}
+.arena-col{display:flex;flex-direction:column;gap:14px}.hud{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:1rem;letter-spacing:.05em}.meter{height:18px;border:3px solid #fff;background:#111;position:relative}.meter-fill{height:100%;width:0;background:var(--purple);transition:width .2s linear}.fact-file{border:3px solid #fff;background:#030303;padding:10px 12px;min-height:76px}.fact-file.enough{border-color:var(--green)}.fact-file strong{font-family:"Press Start 2P";font-size:.52rem;color:var(--yellow)}.fact-file.enough strong{color:var(--green)}.fact-file ul{margin:.45rem 0 0;padding-left:1.2rem;line-height:1.35;font-size:.94rem}.fact-file li+li{margin-top:.28rem}
+.arena{position:relative;height:300px;border:4px solid #fff;background:#000;overflow:hidden;touch-action:none}.heart{position:absolute;width:22px;height:22px;left:50%;top:72%;transform:translate(-50%,-50%) rotate(45deg);background:var(--orange);box-shadow:0 0 0 2px #000}.heart::before,.heart::after{content:"";position:absolute;width:22px;height:22px;background:var(--orange);border-radius:50%}.heart::before{left:-11px}.heart::after{top:-11px}.bullet{position:absolute;white-space:nowrap;font-family:"Press Start 2P";font-size:.58rem;color:#fff;pointer-events:none;line-height:1.25}.bullet.soft{color:var(--yellow)}.bullet.hot{color:var(--red)}
+.message{border:3px solid #fff;padding:14px 16px;min-height:100px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}.touch-help{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2px}.touchpad-shell{width:max-content;max-width:100%;margin:4px auto 0;padding:12px 16px 10px;border:2px dashed #3d3d3d;border-radius:6px;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;touch-action:none}.touchpad button{width:76px;height:76px;border:3px solid #fff;background:#080808;color:#fff;font-family:"Press Start 2P";font-size:1.15rem;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}.touchpad button:active{background:#191919;border-color:var(--orange);color:var(--orange)}.touchpad .up{grid-column:2;grid-row:1}.touchpad .left{grid-column:1;grid-row:2}.touchpad .right{grid-column:3;grid-row:2}.touchpad .down{grid-column:2;grid-row:3}
+.state-bar{margin:0 20px 12px;border:3px solid var(--yellow);padding:11px 13px;background:#090700;display:grid;gap:5px;transition:border-color .2s,background .2s}.state-label{font-family:"Press Start 2P";font-size:.59rem;line-height:1.5;color:var(--yellow)}.state-text{font-size:1rem;line-height:1.35}.state-bar.decision{border-color:var(--orange);background:#0a0500}.state-bar.decision .state-label{color:var(--orange)}.state-bar.room{border-color:var(--blue);background:#00070a}.state-bar.room .state-label{color:var(--blue)}.state-bar.ready{border-color:var(--green);background:#020902}.state-bar.ready .state-label{color:var(--green)}
+.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px 20px}.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer;position:relative}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}.cmd:hover:not(:disabled){outline:4px solid currentColor;outline-offset:2px}.cmd:disabled{opacity:.32;cursor:not-allowed}.cmd.ready{animation:readyPulse 1.5s steps(2,end) infinite}.cmd.suggested{box-shadow:0 0 0 3px var(--blue) inset}
+.choice-overlay,.reboot-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;padding:18px;z-index:50}.choice-overlay.show,.reboot-overlay.show{display:grid}.choice-box,.reboot-box{width:min(700px,100%);max-height:min(86vh,780px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}.choice-box h2,.reboot-box h2{font-family:"Press Start 2P";font-size:1rem;line-height:1.5;color:var(--purple);margin:0 0 12px}.choice-intro{margin:0 0 14px;line-height:1.45;color:#ddd}.choice-list{display:grid;gap:10px}.choice-list button,.reboot-actions button,.body-steps button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover,.reboot-actions button:hover,.body-steps button:hover{border-color:var(--orange);color:var(--orange)}.choice-list button.visited::after{content:"  ✓";color:var(--green)}.choice-list button small{display:block;margin-top:4px;color:#aaa;font-size:.88em}.close-row{display:flex;justify-content:flex-end;margin-top:14px}.close-btn{border:2px solid #777;background:#000;color:#ddd;padding:9px 12px;cursor:pointer}
 .reboot-stage{border:3px solid #fff;padding:16px;min-height:170px;display:grid;align-content:center;gap:12px;text-align:center}.reboot-stage .big{font-family:"Press Start 2P";font-size:clamp(.9rem,3vw,1.25rem);line-height:1.5;color:var(--blue)}.reboot-stage p{margin:0;font-size:1.08rem;line-height:1.45}.reboot-count{font-family:"Press Start 2P";font-size:2rem;color:var(--yellow);min-height:2.4rem}.reboot-actions,.body-steps{display:grid;gap:10px;margin-top:14px}.reboot-actions button{text-align:center}.body-steps{grid-template-columns:1fr 1fr}.body-steps button.done{border-color:var(--green);color:var(--green)}
-.crash-banner{position:absolute;inset:0;display:none;place-items:center;background:rgba(35,0,0,.88);z-index:20;text-align:center;padding:20px}.crash-banner.show{display:grid}.crash-banner div{font-family:"Press Start 2P";font-size:clamp(1rem,4vw,2rem);line-height:1.65;color:var(--red);text-shadow:3px 3px 0 #000}
-.frame.crash-shake{animation:screenShake .1s steps(2,end) 8}.frame.crash-flash{box-shadow:0 0 0 8px var(--red),8px 8px 0 #202020}
-@keyframes screenShake{0%{transform:translate(0)}25%{transform:translate(4px,-3px)}50%{transform:translate(-4px,3px)}75%{transform:translate(3px,3px)}100%{transform:translate(0)}}
-.end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:680px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}
-.sr-status{position:absolute;left:-9999px}
-@media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:265px}.enemy-title{font-size:clamp(3rem,17vw,5.8rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.cat-wrap{min-height:190px}.cat-sprite{max-height:190px}}
-@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.body-steps{grid-template-columns:1fr}.fact-file{font-size:.9rem}}
-@media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
+.crash-banner{position:absolute;inset:0;display:none;place-items:center;background:rgba(35,0,0,.9);z-index:20;text-align:center;padding:20px}.crash-banner.show{display:grid}.crash-banner div{font-family:"Press Start 2P";font-size:clamp(.9rem,3.8vw,1.8rem);line-height:1.65;color:var(--red);text-shadow:3px 3px 0 #000;white-space:pre-line}.frame.crash-shake{animation:screenShake .1s steps(2,end) 8}.frame.crash-flash{box-shadow:0 0 0 8px var(--red),8px 8px 0 #202020}
+.end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:680px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}.sr-status{position:absolute;left:-9999px}
+@keyframes screenShake{0%{transform:translate(0)}25%{transform:translate(4px,-3px)}50%{transform:translate(-4px,3px)}75%{transform:translate(3px,3px)}100%{transform:translate(0)}}@keyframes gradeBlink{0%,100%{opacity:1;transform:translateX(0)}50%{opacity:.45;transform:translateX(3px)}}@keyframes readyPulse{0%,100%{box-shadow:none}50%{box-shadow:0 0 0 3px currentColor inset}}
+@media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:330px}.enemy-title{font-size:clamp(3rem,17vw,5.8rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.cat-wrap{min-height:175px}.cat-sprite{max-height:175px}.assignment-card{width:min(470px,100%)}}
+@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.state-bar{margin:0 12px 10px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.58rem;min-height:64px}.touchpad-shell{padding:10px 12px 8px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.body-steps{grid-template-columns:1fr}.fact-file{font-size:.9rem}.assignment-row{grid-template-columns:92px 1fr;padding:7px 9px}.assignment-card h3{padding:9px}}
+@media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}.cmd{font-size:.52rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 <a class="skip" href="#game">Skip to game</a>
 <main class="shell" id="game">
-  <div class="topbar">
-    <div class="brand">CAT VS. CIVILIZATION<br>ENCOUNTER 01</div>
-    <a class="home-link" href="index.html">HOME</a>
-  </div>
-
+  <div class="topbar"><div class="brand">CAT VS. CIVILIZATION<br>ENCOUNTER 01</div><a class="home-link" href="index.html">HOME</a></div>
   <section class="frame" id="frame">
     <div class="story" id="story" aria-live="polite">
-      <p>* CAT checked the gradebook.</p>
-      <p>* A new grade has appeared.</p>
-      <p class="accent">* 93%.</p>
-      <p>* CAT wanted 100%.</p>
-      <p>* CAT is disappointed. CAT is also having some thoughts.</p>
+      <p>* CAT checked the gradebook.</p><p>* A new grade has appeared.</p><p class="accent">* 93%.</p><p>* CAT wanted 100%.</p><p>* CAT is disappointed. CAT is also having some thoughts.</p>
     </div>
-
     <div class="battle">
       <section class="enemy-panel" aria-label="Encounter">
         <div>
-          <div class="enemy-title">93%</div>
-          <div class="enemy-sub">It is just standing there.<br>Somehow this makes it worse.</div>
+          <div class="enemy-title" id="enemyTitle">93%</div>
+          <div class="enemy-sub" id="enemySub">It is just standing there.<br>Somehow this makes it worse.</div>
+          <div class="assignment-card" id="assignmentCard" aria-live="polite">
+            <h3>ASSIGNMENT DATA</h3>
+            <div class="assignment-row"><span class="assignment-label">FEEDBACK</span><span class="assignment-value" id="feedbackValue">LOCKED</span></div>
+            <div class="assignment-row"><span class="assignment-label">STATUS</span><span class="assignment-value" id="statusValue">LOCKED</span></div>
+            <div class="assignment-row"><span class="assignment-label">ACTION</span><span class="assignment-value" id="actionValue">UNKNOWN</span></div>
+            <div class="decision-panel" id="decisionPanel"><strong id="decisionTitle">NEXT STEP</strong><span id="decisionText"></span></div>
+          </div>
           <div class="cat-wrap"><img class="cat-sprite" id="catSprite" src="cat-disappointed.png" alt="Pixel-art Cat looking disappointed"></div>
         </div>
         <div class="crash-banner" id="crashBanner" aria-hidden="true"><div id="crashBannerText">SYSTEM FAILURE</div></div>
       </section>
-
       <section class="arena-col" aria-label="Battle area">
         <div class="hud"><span>OVERLOAD</span><div class="meter" aria-label="Overload meter"><div id="meterFill" class="meter-fill"></div></div><span id="meterText">1/10</span></div>
-        <div class="fact-file" id="factFile" aria-live="polite"><strong>FACT FILE</strong><ul id="factList"><li>Nothing checked yet.</li></ul></div>
+        <div class="fact-file" id="factFile" aria-live="polite"><strong id="factTitle">FACT FILE</strong><ul id="factList"><li>Cat has a score. Cat does not yet know what happened.</li></ul></div>
         <div class="arena" id="arena" tabindex="0" aria-label="Dodge thoughts with arrow keys, WASD, or the touch controls below"><div class="heart" id="heart" aria-hidden="true"></div></div>
-        <div class="message" id="message" aria-live="polite">* A 93% blocks the path.<br>* Before Cat does anything dramatic, CHECK what is actually known.</div>
+        <div class="message" id="message" aria-live="polite">* A 93% blocks the path.<br>* Cat has a number. Cat does not yet have an explanation.</div>
         <div class="touch-help">MOVE CAT — arrow keys / WASD / touch pad</div>
-        <div class="touchpad-shell">
+        <div class="touchpad-shell" id="touchpadShell" aria-label="Protected touch movement area">
           <div class="touchpad" id="touchpad" aria-label="Touch movement controls. Taps in the gaps do nothing.">
-            <button class="up" data-dir="up" aria-label="Move up">▲</button>
-            <button class="left" data-dir="left" aria-label="Move left">◀</button>
-            <button class="right" data-dir="right" aria-label="Move right">▶</button>
-            <button class="down" data-dir="down" aria-label="Move down">▼</button>
+            <button class="up" data-dir="up" aria-label="Move up">▲</button><button class="left" data-dir="left" aria-label="Move left">◀</button><button class="right" data-dir="right" aria-label="Move right">▶</button><button class="down" data-dir="down" aria-label="Move down">▼</button>
           </div>
         </div>
       </section>
     </div>
-
+    <div class="state-bar" id="stateBar" aria-live="polite"><div class="state-label" id="stateLabel">CAT NEEDS: INFORMATION</div><div class="state-text" id="stateText">What happened here, and is there actually anything to do?</div></div>
     <div class="controls" aria-label="Battle commands">
-      <button class="cmd" data-cmd="check">CHECK</button>
-      <button class="cmd" data-cmd="act" disabled>ACT</button>
-      <button class="cmd" data-cmd="reboot">REBOOT</button>
-      <button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
+      <button class="cmd" data-cmd="check">CHECK</button><button class="cmd" data-cmd="act" disabled>ACT</button><button class="cmd" data-cmd="reboot">REBOOT CAT</button><button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
     </div>
-
-    <section class="end-screen" id="endScreen" aria-live="polite">
-      <h2>CIVILIZATION SURVIVED.</h2>
-      <p>Cat still wishes the grade were 100%.</p>
-      <p>The disappointment did not have to disappear before Cat could choose what to do next.</p>
-      <p><strong>ENCOUNTER COMPLETE.</strong></p>
-      <a href="index.html">RETURN TO MAP</a>
-    </section>
+    <section class="end-screen" id="endScreen" aria-live="polite"><h2>CIVILIZATION SURVIVED.</h2><p>Cat still wishes the grade were 100%.</p><p>Cat knows what happened and knows what happens next.</p><p>The disappointment is allowed to come along.</p><p><strong>ENCOUNTER COMPLETE.</strong></p><a href="index.html">RETURN TO MAP</a></section>
   </section>
 </main>
-
-<div class="choice-overlay" id="choiceOverlay" role="dialog" aria-modal="true" aria-labelledby="choiceTitle">
-  <div class="choice-box">
-    <h2 id="choiceTitle">CHECK</h2>
-    <p class="choice-intro" id="choiceIntro"></p>
-    <div class="choice-list" id="choiceList"></div>
-    <div class="close-row"><button class="close-btn" id="choiceClose" type="button">CLOSE</button></div>
-  </div>
-</div>
-
-<div class="reboot-overlay" id="rebootOverlay" role="dialog" aria-modal="true" aria-labelledby="rebootTitle">
-  <div class="reboot-box">
-    <h2 id="rebootTitle">REBOOT CAT</h2>
-    <div class="reboot-stage" id="rebootStage"></div>
-    <div class="reboot-actions" id="rebootActions"></div>
-  </div>
-</div>
+<div class="choice-overlay" id="choiceOverlay" role="dialog" aria-modal="true" aria-labelledby="choiceTitle"><div class="choice-box"><h2 id="choiceTitle">CHECK</h2><p class="choice-intro" id="choiceIntro"></p><div class="choice-list" id="choiceList"></div><div class="close-row"><button class="close-btn" id="choiceClose" type="button">CLOSE</button></div></div></div>
+<div class="reboot-overlay" id="rebootOverlay" role="dialog" aria-modal="true" aria-labelledby="rebootTitle"><div class="reboot-box"><h2 id="rebootTitle">REBOOT CAT</h2><div class="reboot-stage" id="rebootStage"></div><div class="reboot-actions" id="rebootActions"></div></div></div>
 <div class="sr-status" id="srStatus" aria-live="assertive"></div>
-
 <script>
 (() => {
-  const arena=document.getElementById('arena'),heart=document.getElementById('heart'),message=document.getElementById('message');
-  const meterFill=document.getElementById('meterFill'),meterText=document.getElementById('meterText'),frame=document.getElementById('frame');
+  const arena=document.getElementById('arena'),heart=document.getElementById('heart'),message=document.getElementById('message'),frame=document.getElementById('frame');
+  const meterFill=document.getElementById('meterFill'),meterText=document.getElementById('meterText'),enemyTitle=document.getElementById('enemyTitle'),enemySub=document.getElementById('enemySub');
   const overlay=document.getElementById('choiceOverlay'),choiceTitle=document.getElementById('choiceTitle'),choiceIntro=document.getElementById('choiceIntro'),choiceList=document.getElementById('choiceList'),choiceClose=document.getElementById('choiceClose');
   const rebootOverlay=document.getElementById('rebootOverlay'),rebootStage=document.getElementById('rebootStage'),rebootActions=document.getElementById('rebootActions');
   const endScreen=document.getElementById('endScreen'),srStatus=document.getElementById('srStatus'),catSprite=document.getElementById('catSprite');
-  const factList=document.getElementById('factList'),crashBanner=document.getElementById('crashBanner'),crashBannerText=document.getElementById('crashBannerText');
+  const factFile=document.getElementById('factFile'),factTitle=document.getElementById('factTitle'),factList=document.getElementById('factList');
+  const feedbackValue=document.getElementById('feedbackValue'),statusValue=document.getElementById('statusValue'),actionValue=document.getElementById('actionValue');
+  const decisionPanel=document.getElementById('decisionPanel'),decisionTitle=document.getElementById('decisionTitle'),decisionText=document.getElementById('decisionText');
+  const stateBar=document.getElementById('stateBar'),stateLabel=document.getElementById('stateLabel'),stateText=document.getElementById('stateText');
+  const crashBanner=document.getElementById('crashBanner'),crashBannerText=document.getElementById('crashBannerText');
   const checkBtn=document.querySelector('[data-cmd="check"]'),actBtn=document.querySelector('[data-cmd="act"]'),rebootBtn=document.querySelector('[data-cmd="reboot"]'),continueBtn=document.querySelector('[data-cmd="continue"]');
-
-  const spriteAlt={
-    'cat.png':'Pixel-art Cat','cat-disappointed.png':'Cat looking disappointed','cat-robot.png':'Cat in objective reporting mode','cat-focused.png':'Cat focusing on one useful thing','cat-connect.png':'Cat reaching out for help','cat-hands-off.png':'Cat sitting on its paws to avoid checking','cat-urge.png':'Cat feeling a strong urge to act','cat-overwhelmed.png':'Cat feeling overwhelmed','cat-alarm.png':'Cat in exaggerated alarm','cat-crashed.png':'Cat dramatically crashed out','cat-booting.png':'Cat rebooting after a crash','cat-grounded.png':'Cat grounded with paws planted','cat-ready.png':'Cat ready for one next step','cat-rumpled.png':'Cat tired but functional'};
+  const spriteAlt={'cat.png':'Pixel-art Cat','cat-disappointed.png':'Cat looking disappointed','cat-robot.png':'Cat in objective reporting mode','cat-focused.png':'Cat focusing on one useful thing','cat-connect.png':'Cat reaching out for help','cat-hands-off.png':'Cat sitting on its paws to avoid checking','cat-urge.png':'Cat feeling a strong urge to act','cat-overwhelmed.png':'Cat feeling overwhelmed','cat-alarm.png':'Cat in exaggerated alarm','cat-crashed.png':'Cat dramatically crashed out','cat-booting.png':'Cat rebooting after a crash','cat-grounded.png':'Cat grounded with paws planted','cat-ready.png':'Cat ready for one next step','cat-rumpled.png':'Cat tired but functional'};
   function setSprite(name){catSprite.onerror=()=>{catSprite.onerror=null;catSprite.src='cat.png';catSprite.alt=spriteAlt['cat.png'];};catSprite.src=name;catSprite.alt=spriteAlt[name]||spriteAlt['cat.png'];}
 
   let x=.5,y=.72,overload=1,activeAttack=false,bulletTimers=[],attackGeneration=0;
-  let factsChecked=false,usefulActUsed=false,crashed=false,rebootComplete=false,repeatedGradeChecks=0,hypotheticalLoops=0;
-  const checkedFacts=new Set();
+  let usefulActUsed=false,pathForward='',crashed=false,rebootComplete=false,repeatedGradeChecks=0,hypotheticalLoops=0,continueAnnounced=false;
+  const checked={feedback:false,status:false,unknown:false};
+  const facts=[];
+  const baseThoughts=['NOT 100','WHAT DID I MISS?','CHECK AGAIN','WHAT IF MY GRADE DROPS?','I MESSED UP','THIS SHOULD\'VE BEEN EASY','I SHOULD\'VE KNOWN THAT','I NEED TO FIX THIS','WHAT IF I KEEP MESSING UP?'];
+  const evidenceEnough=()=>checked.feedback&&checked.status;
 
-  const thoughts=[
-    'NOT 100','WHAT DID I MISS?','CHECK AGAIN','WHAT IF MY GRADE DROPS?','I MESSED UP','EVERYONE ELSE DID BETTER','I SHOULD\'VE KNOWN THAT','I NEED TO FIX THIS'
-  ];
-
-  function placeHeart(){const r=arena.getBoundingClientRect();const px=Math.max(18,Math.min(r.width-18,x*r.width));const py=Math.max(18,Math.min(r.height-18,y*r.height));heart.style.left=px+'px';heart.style.top=py+'px';}
-  function move(dx,dy){if(crashed)return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
+  function placeHeart(){const r=arena.getBoundingClientRect();heart.style.left=Math.max(18,Math.min(r.width-18,x*r.width))+'px';heart.style.top=Math.max(18,Math.min(r.height-18,y*r.height))+'px';}
+  function move(dx,dy){if(crashed||overlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
   window.addEventListener('resize',placeHeart);placeHeart();
   const keys={ArrowUp:[0,-.055],w:[0,-.055],W:[0,-.055],ArrowDown:[0,.055],s:[0,.055],S:[0,.055],ArrowLeft:[-.055,0],a:[-.055,0],A:[-.055,0],ArrowRight:[.055,0],d:[.055,0],D:[.055,0]};
-  document.addEventListener('keydown',e=>{if(overlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;if(keys[e.key]){e.preventDefault();move(...keys[e.key]);}});
+  document.addEventListener('keydown',e=>{if(keys[e.key]&&!overlay.classList.contains('show')&&!rebootOverlay.classList.contains('show')){e.preventDefault();move(...keys[e.key]);}});
+  const touchpadShell=document.getElementById('touchpadShell'),touchpad=document.getElementById('touchpad');
+  ['touchstart','touchmove'].forEach(type=>touchpadShell.addEventListener(type,e=>e.preventDefault(),{passive:false}));
+  touchpadShell.addEventListener('dblclick',e=>e.preventDefault());
+  document.querySelectorAll('[data-dir]').forEach(btn=>{const dirs={up:[0,-.07],down:[0,.07],left:[-.07,0],right:[.07,0]};let repeat=null,delay=null;const stop=()=>{clearTimeout(delay);clearInterval(repeat);delay=repeat=null;};btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);delay=setTimeout(()=>{repeat=setInterval(()=>move(...dirs[btn.dataset.dir]),105);},260);});['pointerup','pointercancel','pointerleave','lostpointercapture'].forEach(ev=>btn.addEventListener(ev,stop));});
 
-  const touchpad=document.getElementById('touchpad');
-  ['touchstart','touchmove'].forEach(type=>touchpad.addEventListener(type,e=>e.preventDefault(),{passive:false}));
-  touchpad.addEventListener('dblclick',e=>e.preventDefault());
-  document.querySelectorAll('[data-dir]').forEach(btn=>{
-    const dirs={up:[0,-.07],down:[0,.07],left:[-.07,0],right:[.07,0]};let repeat=null,delay=null;
-    const stop=()=>{clearTimeout(delay);clearInterval(repeat);delay=repeat=null;};
-    btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);delay=setTimeout(()=>{repeat=setInterval(()=>move(...dirs[btn.dataset.dir]),105);},260);});
-    ['pointerup','pointercancel','pointerleave','lostpointercapture'].forEach(ev=>btn.addEventListener(ev,stop));
-  });
-
-  function setMessage(lines){message.innerHTML=lines.filter(Boolean).map(t=>'* '+t).join('<br>');srStatus.textContent=lines.filter(Boolean).join(' ');}
-  function setOverload(n){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';if(overload>=8&&!crashed)setSprite('cat-overwhelmed.png');}
-  setOverload(1);
-
-  function updateFactFile(){factList.innerHTML='';if(!checkedFacts.size){const li=document.createElement('li');li.textContent='Nothing checked yet.';factList.appendChild(li);return;}checkedFacts.forEach(text=>{const li=document.createElement('li');li.textContent=text;factList.appendChild(li);});}
-  function addFact(text){checkedFacts.add(text);updateFactFile();}
+  function setMessage(lines){const clean=lines.filter(Boolean);message.innerHTML=clean.map(t=>'* '+t).join('<br>');srStatus.textContent=clean.join(' ');}
+  function setOverload(n){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';if(overload>=8&&!crashed&&!rebootOverlay.classList.contains('show'))setSprite('cat-overwhelmed.png');updateState();}
+  function addFact(text){if(!facts.includes(text))facts.push(text);renderFacts();}
+  function renderFacts(){factList.innerHTML='';if(!facts.length){factList.innerHTML='<li>Cat has a score. Cat does not yet know what happened.</li>';return;}facts.forEach(text=>{const li=document.createElement('li');li.textContent=text;factList.appendChild(li);});if(evidenceEnough()){factFile.classList.add('enough');factTitle.textContent='FACT FILE: ENOUGH TO DECIDE';}else{factFile.classList.remove('enough');factTitle.textContent='FACT FILE';}}
+  function setDecision(title,text,warn=false){decisionTitle.textContent=title;decisionText.textContent=text;decisionPanel.classList.add('show');decisionPanel.classList.toggle('warn',warn);}
+  function updateAssignmentAction(){if(evidenceEnough()){actionValue.textContent='NONE REQUIRED RIGHT NOW';actionValue.classList.add('revealed','good');}}
+  function updateState(){stateBar.className='state-bar';continueBtn.classList.remove('ready');rebootBtn.classList.toggle('suggested',crashed||overload>=7);
+    if(crashed){stateBar.classList.add('room');stateLabel.textContent='CAT NEEDS: ROOM TO CHOOSE';stateText.textContent='Decision-making systems are offline. REBOOT CAT is available when Cat is ready.';return;}
+    if(!evidenceEnough()){stateLabel.textContent='CAT NEEDS: INFORMATION';stateText.textContent='What happened here, and is there actually anything to do?';return;}
+    if(!usefulActUsed){stateBar.classList.add('decision');stateLabel.textContent='CAT NEEDS: A DECISION';stateText.textContent='Cat knows what happened. What does Cat do with that information?';return;}
+    stateBar.classList.add('ready');stateLabel.textContent=overload>=8?'CAT HAS A PATH FORWARD':'CAT HAS ENOUGH TO CONTINUE';stateText.textContent=overload>=8?'The next move is known. REBOOT CAT is available if overload is making it hard to use.':'The grade is still 93%. Cat knows what happens next. CONTINUE is available.';continueBtn.classList.add('ready');
+  }
+  function recomputeReady(){actBtn.disabled=!evidenceEnough()||crashed;continueBtn.disabled=!(evidenceEnough()&&usefulActUsed&&!crashed);checkBtn.disabled=crashed;updateState();}
+  setOverload(1);renderFacts();recomputeReady();
 
   function clearBullets(){activeAttack=false;attackGeneration++;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
   function hitCheck(b){const br=b.getBoundingClientRect(),hr=heart.getBoundingClientRect();return!(br.right<hr.left||br.left>hr.right||br.bottom<hr.top||br.top>hr.bottom);}
-  function thoughtSpeed(text,level){let ms=4700+Math.min(2200,text.length*90);if(factsChecked)ms*=1.18;if(repeatedGradeChecks)ms*=Math.max(.72,1-repeatedGradeChecks*.07);if(hypotheticalLoops)ms*=.88;if(level>=3)ms*=.88;return Math.round(ms);}
-  function spawnBullet(text,level=1,cls=''){
-    const generation=attackGeneration,b=document.createElement('div');b.className='bullet '+cls;b.textContent=text;
-    const fromLeft=Math.random()>.5,top=22+Math.random()*(arena.clientHeight-54),off=Math.max(220,text.length*9+85);b.style.top=top+'px';b.style.left=fromLeft?-off+'px':arena.clientWidth+25+'px';arena.appendChild(b);
-    const speed=thoughtSpeed(text,level),start=performance.now();
-    function anim(now){if(!b.isConnected||generation!==attackGeneration)return;const p=Math.min(1,(now-start)/speed),sx=fromLeft?-off:arena.clientWidth+25,ex=fromLeft?arena.clientWidth+25:-off;b.style.left=(sx+(ex-sx)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1);setMessage(['Cat got hit by a thought.','A thought can be loud without becoming a fact.']);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}
-    requestAnimationFrame(anim);
-  }
-  function attack(level=1,customThoughts=null){if(activeAttack||crashed)return;activeAttack=true;const pool=customThoughts||thoughts;setMessage(['The thoughts are loud enough to read now.','Dodge what you can. You do not need to dodge everything.']);const count=Math.min(7,3+level);const spacing=factsChecked?1250:1100;for(let i=0;i<count;i++){const t=setTimeout(()=>{let text=pool[Math.floor(Math.random()*pool.length)];if(repeatedGradeChecks&&Math.random()<.35)text='CHECK AGAIN';spawnBullet(text,level,factsChecked?'soft':(level>=3?'hot':' fast'));},i*spacing);bulletTimers.push(t);}const done=setTimeout(()=>{activeAttack=false},count*spacing+7600);bulletTimers.push(done);}
+  function availableThoughts(){return baseThoughts.filter(t=>!(checked.feedback&&t==='WHAT DID I MISS?'));}
+  function thoughtSpeed(text,level){let ms=5300+Math.min(2700,text.length*110);if(evidenceEnough())ms*=1.12;if(repeatedGradeChecks)ms*=Math.max(.72,1-repeatedGradeChecks*.07);if(hypotheticalLoops)ms*=.88;if(level>=3)ms*=.88;return Math.round(ms);}
+  function spawnBullet(text,level=1,cls=''){const generation=attackGeneration,b=document.createElement('div');b.className='bullet '+cls;b.textContent=text;const fromLeft=Math.random()>.5,top=22+Math.random()*(arena.clientHeight-54),off=Math.max(230,text.length*10+90);b.style.top=top+'px';b.style.left=fromLeft?-off+'px':arena.clientWidth+25+'px';arena.appendChild(b);const speed=thoughtSpeed(text,level),start=performance.now();function anim(now){if(!b.isConnected||generation!==attackGeneration)return;const p=Math.min(1,(now-start)/speed),sx=fromLeft?-off:arena.clientWidth+25,ex=fromLeft?arena.clientWidth+25:-off;b.style.left=(sx+(ex-sx)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1);setMessage(['Cat got hit by a thought.','Thought detected. Evidence status unchanged.']);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}requestAnimationFrame(anim);}
+  function attack(level=1,pool=null,opts={}){if(activeAttack||crashed)return;activeAttack=true;const source=pool||availableThoughts();if(opts.announce!==false)setMessage(opts.message||['The thoughts are loud enough to read.','Dodge what you can. You do not need to dodge everything.']);const count=opts.count??Math.min(7,3+level),spacing=opts.spacing??(evidenceEnough()?1300:1150);for(let i=0;i<count;i++){bulletTimers.push(setTimeout(()=>{let text=source[Math.floor(Math.random()*source.length)];if(repeatedGradeChecks&&Math.random()<.35)text='CHECK AGAIN';spawnBullet(text,level,evidenceEnough()?'soft':(level>=3?'hot':''));},i*spacing));}bulletTimers.push(setTimeout(()=>{activeAttack=false;if(typeof opts.onDone==='function')opts.onDone();},count*spacing+7600));}
+  function scheduleAttack(level=1,pool=null,delay=1700){setTimeout(()=>{if(!crashed&&!overlay.classList.contains('show')&&!rebootOverlay.classList.contains('show'))attack(level,pool,{announce:false});},delay);}
 
-  function showChoices(title,intro,choices){choiceTitle.textContent=title;choiceIntro.textContent=intro||'';choiceList.innerHTML='';choices.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c.label;if(c.visited)b.classList.add('visited');b.addEventListener('click',()=>{overlay.classList.remove('show');c.run();});choiceList.appendChild(b);});overlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button')?.focus(),20);}
-  function closeChoices(){overlay.classList.remove('show');}
-  choiceClose.addEventListener('click',closeChoices);overlay.addEventListener('click',e=>{if(e.target===overlay)closeChoices();});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeChoices();});
-
-  function recomputeReady(){actBtn.disabled=!factsChecked||crashed;continueBtn.disabled=!(factsChecked&&usefulActUsed&&!crashed);checkBtn.disabled=crashed;}
+  function showChoices(title,intro,choices){choiceTitle.textContent=title;choiceIntro.textContent=intro||'';choiceList.innerHTML='';choices.forEach(c=>{const b=document.createElement('button');b.type='button';if(c.desc){b.innerHTML='<strong>'+c.label+'</strong><small>'+c.desc+'</small>';}else b.textContent=c.label;if(c.visited)b.classList.add('visited');b.addEventListener('click',()=>{overlay.classList.remove('show');c.run();});choiceList.appendChild(b);});overlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button')?.focus(),20);}
+  function closeChoices(){overlay.classList.remove('show');}choiceClose.addEventListener('click',closeChoices);overlay.addEventListener('click',e=>{if(e.target===overlay)closeChoices();});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeChoices();});
 
   const checks={
-    score:{label:'WHAT DOES 93% ACTUALLY TELL ME?',fact:'93% is the score on this assignment. The number alone does not explain why points were missed.',run(){setSprite('cat-robot.png');addFact(this.fact);setMessage(['FACT: 93% describes this assignment score.','The number does not explain the cause by itself.']);}},
-    fix:{label:'IS THERE SOMETHING I ACTUALLY NEED TO FIX?',fact:'The score alone cannot answer that. Feedback or missed items can show whether there is something useful to learn or correct.',run(){setSprite('cat-focused.png');addFact(this.fact);setMessage(['Useful information lives in feedback or missed items—not in staring harder at 93%.','There may be something to learn. There may be nothing to do right now.']);}},
-    overall:{label:'WHAT DOES THIS SAY ABOUT MY OVERALL GRADE?',fact:'Not enough information. The effect depends on the class grading system and the rest of the gradebook.',run(){setSprite('cat-worried.png');addFact(this.fact);setMessage(['UNKNOWN: One assignment does not reveal the entire course grade.','The exact effect depends on information Cat does not have on this screen.']);}},
-    self:{label:'WHAT DOES THIS SAY ABOUT ME?',fact:'An assignment score measures performance on that assignment. It does not contain a complete character report.',run(){setSprite('cat-robot.png');addFact(this.fact);setMessage(['ROBOT REPORT: PERSONALITY DATA NOT FOUND IN ASSIGNMENT SCORE.','93% is information. It is not a biography.']);}}
+    feedback:{label:'OPEN THE FEEDBACK',desc:'What did the teacher actually say?',run(){if(!checked.feedback){checked.feedback=true;feedbackValue.textContent='Q4: CLEARER EXAMPLE';feedbackValue.classList.add('revealed');addFact('Question 4 needed a clearer example.');}setSprite('cat-focused.png');setOverload(overload-1);setMessage(['TEACHER FEEDBACK: “Question 4: give a clearer example.”','Now Cat knows what cost the points.']);updateAssignmentAction();recomputeReady();scheduleAttack(1,['I SHOULD\'VE KNOWN THAT','THIS SHOULD\'VE BEEN EASY','WHAT IF I KEEP MESSING UP?']);}},
+    status:{label:'CHECK THE ASSIGNMENT STATUS',desc:'Is something missing, incomplete, or waiting for Cat?',run(){if(!checked.status){checked.status=true;statusValue.textContent='COMPLETE · ON TIME';statusValue.classList.add('revealed','good');addFact('Assignment is complete, submitted on time, and no resubmission was requested.');}setSprite('cat-robot.png');setOverload(overload-1);setMessage(['STATUS: COMPLETE · SUBMITTED ON TIME · NO RESUBMISSION REQUESTED.','There is no hidden task waiting behind the number.']);updateAssignmentAction();recomputeReady();scheduleAttack(1,['NOT 100','WHAT IF MY GRADE DROPS?','I SHOULD\'VE KNOWN THAT']);}},
+    unknown:{label:'CHECK WHAT IS STILL UNKNOWN',desc:'Where does the available information stop?',run(){if(!checked.unknown){checked.unknown=true;addFact('Future grades, future mistakes, and whether 93% will ever feel emotionally satisfying are still unknown.');}setSprite('cat-robot.png');setMessage(['UNKNOWN: exact future course grade, next score, future mistakes.','ALSO UNKNOWN: whether Cat will ever feel spiritually reconciled with 93%.','CHECK has reached the edge of available information.']);recomputeReady();scheduleAttack(1,['WHAT IF MY GRADE DROPS?','WHAT IF I KEEP MESSING UP?']);}}
   };
-  function openCheck(){const choices=Object.entries(checks).map(([key,c])=>({label:c.label,visited:checkedFacts.has(c.fact),run:()=>{factsChecked=true;c.run.call(c);setOverload(overload-1);recomputeReady();setTimeout(()=>{if(!crashed){if(overload<8)setSprite('cat-disappointed.png');attack(1);}},700);}}));showChoices('CHECK','CHECK means: What do we actually know? Choose the information Cat needs—not reassurance.',choices);}
+  function openCheck(){showChoices('CHECK','What does Cat want to find out?',Object.values(checks).map(c=>({label:c.label,desc:c.desc,visited:(c===checks.feedback&&checked.feedback)||(c===checks.status&&checked.status)||(c===checks.unknown&&checked.unknown),run:c.run})));}
 
-  function markUseful(sprite,lines,overloadChange=-1){usefulActUsed=true;if(sprite)setSprite(sprite);setOverload(overload+overloadChange);setMessage(lines);recomputeReady();setTimeout(()=>attack(1),700);}
-  function openAct(){showChoices('ACT','There is more than one workable response. Some actions give Cat useful information or space; some feed the loop.',[
-    {label:'IF THERE IS FEEDBACK, LOOK FOR ONE USEFUL THING',run:()=>markUseful('cat-focused.png',['Cat looks for one useful piece of feedback—not a verdict.','One thing to learn is enough for now.'])},
-    {label:'ASK ONE SPECIFIC QUESTION IF SOMETHING IS UNCLEAR',run:()=>markUseful('cat-connect.png',['A specific question can gather information.','“Can you explain why this part was marked wrong?” is different from “Am I still okay?”'])},
-    {label:'LEAVE THE GRADE ALONE FOR NOW',run:()=>markUseful('cat-hands-off.png',['Cat sits on the paws.','The 93% is temporarily unsupervised.','Nothing explodes.'])},
-    {label:'REFRESH THE GRADEBOOK AGAIN',run:()=>{repeatedGradeChecks++;setSprite('cat-urge.png');setOverload(overload+1);setMessage(['Cat refreshes the gradebook.','Remarkably, it is still 93%.',repeatedGradeChecks>1?'The gradebook remains committed to the bit.':'No new information has appeared.']);recomputeReady();setTimeout(()=>attack(Math.min(4,1+repeatedGradeChecks),['CHECK AGAIN','WHAT IF IT CHANGES?','MAYBE REFRESH ONCE MORE','WHAT DID I MISS?']),500);}},
-    {label:'CALCULATE EVERY POSSIBLE FUTURE GRADE',run:()=>{hypotheticalLoops++;setSprite('cat-overwhelmed.png');setOverload(overload+2);setMessage(['Cat opens fourteen hypothetical futures.','None of them contain new information about this assignment.','The spreadsheet has become sentient.']);recomputeReady();setTimeout(()=>attack(3,['WHAT IF MY GRADE DROPS?','WHAT IF THE NEXT ONE IS WORSE?','WHAT IF THIS KEEPS HAPPENING?','CHECK AGAIN']),500);}},
-    {label:'CRASH OUT. CIVILIZATION IS ENDING.',run:crashOut}
+  function markUseful(sprite,title,text,lines,attackPool){usefulActUsed=true;pathForward=title;if(sprite)setSprite(sprite);setDecision(title,text,false);setOverload(overload-1);setMessage(lines);recomputeReady();scheduleAttack(1,attackPool||availableThoughts(),1900);}
+  function flashGrade(){enemyTitle.classList.remove('refreshing');void enemyTitle.offsetWidth;enemyTitle.classList.add('refreshing');}
+  function openAct(){showChoices('ACT','Cat knows what happened. What does Cat do now?',[
+    {label:'SAVE ONE THING FOR NEXT TIME',desc:'Q4 → use one clearer example.',run:()=>markUseful('cat-focused.png','NEXT-TIME NOTE ADDED','Q4 → USE ONE CLEAR EXAMPLE.',['NEXT-TIME NOTE ADDED: Q4 → use one clear example.','The 93% stays 93%. Cat extracted one useful thing.'],['I SHOULD\'VE KNOWN THAT','WHAT IF I MESS UP NEXT TIME?','NOT 100'])},
+    {label:'ASK ONE SPECIFIC QUESTION ABOUT Q4',desc:'If the feedback is still unclear.',run:()=>markUseful('cat-connect.png','MESSAGE SENT','“For Q4, do you mean add another example or explain this one more?” · WAITING FOR REPLY.',['Cat sent one specific question.','The reply has not arrived yet. Cat does not have to stare at the inbox.'],['WHAT IF THAT WAS A DUMB QUESTION?','WHAT IF THEY THINK I SHOULD KNOW?','NOT 100'])},
+    {label:'LEAVE THE GRADE ALONE FOR NOW',desc:'Nothing on this assignment currently requires action.',run:()=>{enemySub.textContent='Gradebook closed for now. 93% remains stored somewhere on the internet.';markUseful('cat-hands-off.png','GRADEBOOK CLOSED','93% IS TEMPORARILY UNSUPERVISED.',['Cat closes the gradebook.','93% remains successfully stored on the server.','It manages without supervision.'],['CHECK AGAIN','WHAT IF MY GRADE DROPS?','NOT 100']);}},
+    {label:'REFRESH. MAYBE 93 WILL FEEL DIFFERENT THIS TIME.',run:()=>{repeatedGradeChecks++;setSprite('cat-urge.png');flashGrade();setDecision('NEW INFORMATION: 0','GRADEBOOK REFRESHED · SCORE: 93%',true);setOverload(overload+1);setMessage(['Cat refreshes the gradebook.','93%.',repeatedGradeChecks>1?'The gradebook remains committed to the bit.':'The number has declined to become emotionally different.']);recomputeReady();scheduleAttack(Math.min(4,1+repeatedGradeChecks),['CHECK AGAIN','MAYBE REFRESH ONCE MORE','WHAT IF IT CHANGES?','I NEED TO FIX THIS'],700);}},
+    {label:'CALCULATE HOW MANY FUTURE 100s WOULD ERASE THIS 93.',run:()=>{hypotheticalLoops++;setSprite('cat-overwhelmed.png');setDecision('ACADEMIC FUTURE SIMULATOR','SCENARIOS GENERATED: 14 · NEW INFORMATION ABOUT Q4: 0',true);setOverload(overload+2);setMessage(['Cat opens fourteen hypothetical futures.','Several contain spreadsheets. None contain new information about Question 4.','The simulator requests additional 100s.']);recomputeReady();scheduleAttack(3,['WHAT IF MY GRADE DROPS?','WHAT IF THE NEXT ONE IS WORSE?','WHAT IF I KEEP MESSING UP?','CHECK AGAIN'],700);}},
+    {label:'CRASH OUT. ACADEMIC CAREER OVER.',run:crashOut}
   ]);}
 
-  function crashOut(){clearBullets();crashed=true;rebootComplete=false;setOverload(10);setSprite('cat-alarm.png');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.textContent='93% DETECTED\nCIVILIZATION STATUS: QUESTIONABLE';setMessage(['SEVEN PERCENT OF POINTS ARE UNACCOUNTED FOR.','THIS IS NOW A LEVEL-10 ACADEMIC WEATHER EVENT.']);recomputeReady();
-    setTimeout(()=>{frame.classList.remove('crash-shake');crashBannerText.textContent='EMOTIONAL RAM: 0%';},1000);
-    setTimeout(()=>{setSprite('cat-crashed.png');crashBanner.classList.remove('show');frame.classList.remove('crash-flash');setMessage(['Cat has crashed out.','The grade is still 93%.','Decision-making systems are temporarily offline.','REBOOT is available when Cat is ready.']);rebootBtn.focus();},1900);
-  }
+  function crashOut(){clearBullets();crashed=true;rebootComplete=false;setOverload(10);setSprite('cat-alarm.png');setDecision('SYSTEM FAILURE','STRATEGIC DECISION-MAKING OFFLINE.',true);frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.textContent='93% DETECTED\nSEVEN PERCENT UNACCOUNTED FOR\nACADEMIC FUTURE: PRESUMED LOST AT SEA';setMessage(['THIS IS NOW A LEVEL-10 ACADEMIC WEATHER EVENT.','ALL DEPARTMENTS REPORT PANIC.']);recomputeReady();setTimeout(()=>{frame.classList.remove('crash-shake');crashBannerText.textContent='EMOTIONAL RAM: 0%';},1100);setTimeout(()=>{setSprite('cat-crashed.png');crashBanner.classList.remove('show');frame.classList.remove('crash-flash');setMessage(['Cat has crashed out.','The grade is still 93%.','Cat is currently unavailable for strategic decision-making.','REBOOT CAT is available when Cat is ready.']);rebootBtn.focus();},2100);}
 
-  function openReboot(){if(crashed)setSprite('cat-booting.png');rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
-  function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to become happy. The goal is to get enough room to choose.</p>';rebootActions.innerHTML='';[
-    ['BREATHE WITH CAT','Two slow breaths. The exhale is a little longer.',startBreathing],
-    ['UNCLENCH + FIND THE FLOOR','Jaw → shoulders → paws → feet.',startBodyUnlock],
-    ['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');}]
+  function openReboot(){if(activeAttack)clearBullets();if(crashed)setSprite('cat-booting.png');rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
+  function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>'+(crashed?'Systems are offline.':'Optional system maintenance.')+'</p><p>The goal is not to become happy. The goal is to get enough room to choose.</p>';rebootActions.innerHTML='';[
+    ['BREATHE WITH CAT','Two slow breaths. The exhale is a little longer.',startBreathing],['UNCLENCH + FIND THE FLOOR','Jaw → shoulders → paws → feet.',startBodyUnlock],['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');}]
   ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});}
-
   const wait=ms=>new Promise(resolve=>setTimeout(resolve,ms));
-  async function startBreathing(){rebootActions.innerHTML='<button type="button" id="rebootSkip">NOT NOW</button>';document.getElementById('rebootSkip').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};setSprite(crashed?'cat-booting.png':'cat-grounded.png');
-    for(let breath=1;breath<=2;breath++){
-      rebootStage.innerHTML='<div class="big">BREATHE WITH CAT</div><p>Breath '+breath+' of 2 — breathe in slowly.</p><div class="reboot-count" id="count"></div>';catSprite.classList.remove('breathe-out');void catSprite.offsetWidth;catSprite.classList.add('breathe-in');for(let n=4;n>=1;n--){document.getElementById('count').textContent=n;await wait(1000);if(!rebootOverlay.classList.contains('show'))return;}
-      rebootStage.innerHTML='<div class="big">LONGER EXHALE</div><p>Let the air out slowly. No perfect breathing required.</p><div class="reboot-count" id="count"></div>';catSprite.classList.remove('breathe-in');void catSprite.offsetWidth;catSprite.classList.add('breathe-out');for(let n=6;n>=1;n--){document.getElementById('count').textContent=n;await wait(1000);if(!rebootOverlay.classList.contains('show'))return;}
-    }
-    catSprite.classList.remove('breathe-in','breathe-out');completeReboot(['Two breaths completed.','The grade did not need to change for Cat’s body to come down a notch.']);
-  }
-
+  async function startBreathing(){rebootActions.innerHTML='<button type="button" id="rebootSkip">NOT NOW</button>';document.getElementById('rebootSkip').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};setSprite(crashed?'cat-booting.png':'cat-grounded.png');for(let breath=1;breath<=2;breath++){rebootStage.innerHTML='<div class="big">BREATHE WITH CAT</div><p>Breath '+breath+' of 2 — breathe in slowly.</p><div class="reboot-count" id="count"></div>';catSprite.classList.remove('breathe-out');void catSprite.offsetWidth;catSprite.classList.add('breathe-in');for(let n=4;n>=1;n--){document.getElementById('count').textContent=n;await wait(1000);if(!rebootOverlay.classList.contains('show'))return;}rebootStage.innerHTML='<div class="big">LONGER EXHALE</div><p>Let the air out slowly. No perfect breathing required.</p><div class="reboot-count" id="count"></div>';catSprite.classList.remove('breathe-in');void catSprite.offsetWidth;catSprite.classList.add('breathe-out');for(let n=5;n>=1;n--){document.getElementById('count').textContent=n;await wait(1000);if(!rebootOverlay.classList.contains('show'))return;}}catSprite.classList.remove('breathe-in','breathe-out');completeReboot(['Two breaths completed.','The grade did not need to change for Cat’s body to come down a notch.']);}
   function startBodyUnlock(){setSprite('cat-grounded.png');rebootStage.innerHTML='<div class="big">UNCLENCH CAT</div><p>Tap each body check. Nothing has to become perfectly relaxed.</p>';rebootActions.innerHTML='<div class="body-steps" id="bodySteps"></div><button type="button" id="bodyNotNow">NOT NOW</button>';const steps=[['JAW','Loosen the jaw one notch.'],['SHOULDERS','Let the shoulders drop away from the ears.'],['PAWS','Let the paws rest instead of gripping.'],['FEET','Notice where the feet are supported.']];const bodySteps=document.getElementById('bodySteps');let done=0;steps.forEach(([name,desc])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+name+'</strong><br>'+desc;b.onclick=()=>{if(b.classList.contains('done'))return;b.classList.add('done');b.setAttribute('aria-pressed','true');done++;if(done===steps.length)completeReboot(['Jaw, shoulders, paws, feet: checked.','Cat is still allowed to dislike the grade.']);};bodySteps.appendChild(b);});document.getElementById('bodyNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};}
+  function completeReboot(lines){rebootComplete=true;crashed=false;setOverload(Math.max(2,overload-4));setSprite(usefulActUsed?'cat-ready.png':'cat-rumpled.png');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS AVAILABLE</div><p>'+lines.join('<br>')+'</p><p>'+(evidenceEnough()?'Cat has enough room to choose.':'Cat has enough room to keep investigating.')+'</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';document.getElementById('rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setMessage([usefulActUsed?'Cat still has a next move.':'Cat may still be disappointed.','Strategic decision-making has returned.']);recomputeReady();};}
 
-  function completeReboot(lines){rebootComplete=true;crashed=false;setOverload(Math.max(2,overload-4));setSprite('cat-ready.png');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS AVAILABLE</div><p>'+lines.join('<br>')+'</p><p>Cat has enough room to choose a next step.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';document.getElementById('rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setMessage(['Cat may still be disappointed.','Strategic decision-making has returned.']);if(factsChecked&&usefulActUsed)continueBtn.disabled=false;};}
+  function doContinue(){if(!(evidenceEnough()&&usefulActUsed&&!crashed)){setMessage(['CONTINUE is not open yet.','Cat needs enough information and one next move.']);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');setMessage(['Cat still wishes the grade were 100%.','Cat knows what happened and knows what happens next.','The disappointment is allowed to come along.']);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 01 complete');localStorage.setItem('cvc-encounter-01','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
 
-  function doContinue(){if(!(factsChecked&&usefulActUsed&&!crashed)){setMessage(['Not yet.','CHECK what is known, then choose one workable ACT.']);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');setMessage(['Cat still wishes the grade were 100%.','Cat has enough information and enough capacity to continue anyway.']);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 01 complete');localStorage.setItem('cvc-encounter-01','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
-
-  checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});
-  actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});
-  rebootBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openReboot();});
-  continueBtn.addEventListener('click',doContinue);
-  recomputeReady();
-  setTimeout(()=>attack(1),1900);
+  checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});rebootBtn.addEventListener('click',openReboot);continueBtn.addEventListener('click',doContinue);
+  setTimeout(()=>{if(!overlay.classList.contains('show')&&!rebootOverlay.classList.contains('show'))attack(1,['NOT 100','WHAT DID I MISS?','I MESSED UP'],{announce:false,count:3,spacing:1300,onDone:()=>{if(!facts.length&&!overlay.classList.contains('show'))setMessage(['Cat’s brain has generated several explanations.','Evidence generated so far: 0.','CHECK the assignment.']);}});},1500);
 })();
 </script>
 </body>
