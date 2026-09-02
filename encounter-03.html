@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="favicon3.png">
 <title>Cat vs. Civilization — Encounter 03: Everyone Else</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -70,6 +71,22 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
 @keyframes screenShake{0%{transform:translate(0)}25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,2px)}100%{transform:translate(0)}}
 .end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:700px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}
 .sr-status{position:absolute;left:-9999px}
+
+.need-bar{margin:0 20px 14px;border:3px solid var(--yellow);background:#0a0802;padding:12px 14px;display:grid;gap:5px;box-shadow:4px 4px 0 #2d2508}
+.need-label{font-family:"Press Start 2P";font-size:.58rem;line-height:1.5;color:var(--yellow);letter-spacing:.05em}
+.need-text{font-size:1.04rem;line-height:1.4;color:#fff;letter-spacing:.025em}
+.need-bar[data-state="focus"]{border-color:var(--orange);box-shadow:4px 4px 0 #38200c}.need-bar[data-state="focus"] .need-label{color:var(--orange)}
+.need-bar[data-state="capacity"]{border-color:var(--blue);box-shadow:4px 4px 0 #10263b}.need-bar[data-state="capacity"] .need-label{color:var(--blue)}
+.need-bar[data-state="ready"]{border-color:var(--green);box-shadow:4px 4px 0 #17331d}.need-bar[data-state="ready"] .need-label{color:var(--green)}
+.focus-panel{width:min(100%,450px);margin:0 auto 10px;border:2px solid #555;background:#040404;padding:9px 11px;text-align:left;display:grid;gap:4px;font-size:.96rem;line-height:1.3;color:#bbb}
+.focus-panel strong{font-family:"Press Start 2P";font-size:.5rem;color:var(--blue);line-height:1.5}
+.focus-panel .value{color:#fff}.focus-panel.ready{border-color:var(--green)}.focus-panel.warn{border-color:var(--orange)}
+.peer-feed.paused .peer-card{opacity:.45;border-color:#555}.peer-feed.paused .peer-card#peerCat{opacity:1;border-color:var(--green)}
+.peer-card.active{box-shadow:0 0 0 2px var(--orange) inset}
+.cmd.suggested{box-shadow:0 0 0 3px var(--blue),0 0 18px rgba(103,183,255,.28)}
+.enemy-title.contextual{font-size:clamp(1.25rem,4vw,2.5rem);color:var(--blue)}
+@media(max-width:430px){.need-bar{margin:0 12px 12px;padding:10px 11px}.need-text{font-size:.98rem}.focus-panel{font-size:.9rem}}
+
 @media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:300px}.enemy-title{font-size:clamp(1.65rem,10vw,3rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.cat-wrap{min-height:185px}.cat-sprite{max-height:185px}.peer-feed{width:min(100%,520px)}}
 @media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.fact-file{font-size:.9rem}.peer-card{font-size:.94rem}}
 @media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
@@ -101,20 +118,26 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
         <div class="peer-feed" id="peerFeed" aria-label="Visible snapshots about classmates and Cat">
           <div class="peer-card" id="peerMaya">
             <strong>MAYA:</strong> DONE ALREADY
-            <div class="hidden">More context: Maya started last night. “Finished” does not show how easy it felt. She still has a question about #4.</div>
+            <div class="hidden">TIMELINE: Maya started before Cat. That is the available timing information.</div>
           </div>
           <div class="peer-card" id="peerNoah">
             <strong>NOAH:</strong> 100%
-            <div class="hidden">More context: this is one displayed assignment. His other scores, process, and difficult moments are not on screen.</div>
+            <div class="hidden">SCOPE: Noah mentioned one 100% assignment. Cat cannot see a complete gradebook or process from that number.</div>
           </div>
           <div class="peer-card" id="peerEli">
             <strong>ELI:</strong> “EASY.”
-            <div class="hidden">Confirmed: Eli said “easy.” Unknown: exactly what he meant, how much effort it took, or whether anyone else agrees.</div>
+            <div class="hidden">QUOTE: Eli said “easy.” It describes Eli's reaction, not a speed requirement for the room.</div>
           </div>
           <div class="peer-card" id="peerCat">
-            <strong>CAT:</strong> STILL WORKING
-            <div class="hidden">Current location: question 4. “Still working” is a moment in time, not a class rank.</div>
+            <strong>CAT:</strong> QUESTION 4
+            <div class="hidden">OWN SCREEN: Question 4 asks for one example. No finish-first or speed requirement is visible.</div>
           </div>
+        </div>
+
+        <div class="focus-panel" id="focusPanel" aria-live="polite">
+          <strong>ATTENTION MONITOR</strong>
+          <div id="feedStatus">COMPARISON FEED: LIVE</div>
+          <div class="value" id="focusStatus">CAT'S NEXT FOCUS: ?</div>
         </div>
 
         <div class="cat-wrap"><img class="cat-sprite" id="catSprite" src="cat-embarrassed.png" alt="Orange pixel-art Cat looking self-conscious"></div>
@@ -128,8 +151,8 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
         </div>
 
         <div class="fact-file" aria-live="polite">
-          <strong>SNAPSHOT FILE</strong>
-          <ul id="factList"><li>Nothing checked yet.</li></ul>
+          <strong>COMPARISON FILE</strong>
+          <ul id="factList"><li>Claim: EVERYONE ELSE IS AHEAD. Evidence checked: none.</li></ul>
         </div>
 
         <div class="arena" id="arena" tabindex="0" aria-label="Dodge comparison thoughts with arrow keys, WASD, or touch controls">
@@ -137,8 +160,8 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
         </div>
 
         <div class="message" id="message" aria-live="polite">
-          * Cat is comparing a whole self to a few visible snapshots.<br>
-          * CHECK what the snapshots actually show.
+          * Three visible moments have become an unofficial class ranking.<br>
+          * Cat does not yet know whether the comparison is even measuring the same thing.
         </div>
 
         <div class="touch-help">MOVE: arrows / WASD / touch. The touch area is protected from accidental zoom.</div>
@@ -153,6 +176,11 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
       </section>
     </div>
 
+    <div class="need-bar" id="needBar" data-state="info" aria-live="polite">
+      <div class="need-label" id="needLabel">CAT NEEDS: ORIENTATION</div>
+      <div class="need-text" id="needText">What do these snapshots actually tell Cat — and what is on Cat's own screen?</div>
+    </div>
+
     <div class="controls" aria-label="Battle commands">
       <button class="cmd" id="checkBtn" data-cmd="check">CHECK</button>
       <button class="cmd" id="actBtn" data-cmd="act" disabled>ACT</button>
@@ -164,10 +192,10 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
 
     <section class="end-screen" id="endScreen" aria-live="polite">
       <h2>CIVILIZATION SURVIVED.</h2>
-      <p>Other people are allowed to be fast, finished, confused, excellent, or somewhere in between.</p>
-      <p>Their visible moments do not become evidence against Cat.</p>
-      <p>Cat can return to the next thing Cat actually knows how to do.</p>
-      <p><strong>A SNAPSHOT IS NOT A SCOREBOARD.</strong></p>
+      <p>Maya can be finished. Noah can have a 100%. Eli can call something easy.</p>
+      <p>Those moments still do not calculate Cat's place in the room.</p>
+      <p>Cat knows what is on Cat's own screen and what to do next.</p>
+      <p><strong>A FEW SNAPSHOTS ARE NOT A SCOREBOARD.</strong></p>
       <p><strong>ENCOUNTER COMPLETE.</strong></p>
       <a href="index.html">RETURN TO MAP</a>
     </section>
@@ -202,6 +230,9 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   const rebootOverlay=document.getElementById('rebootOverlay'),rebootStage=document.getElementById('rebootStage'),rebootActions=document.getElementById('rebootActions');
   const checkBtn=document.getElementById('checkBtn'),actBtn=document.getElementById('actBtn'),rebootBtn=document.getElementById('rebootBtn'),continueBtn=document.getElementById('continueBtn');
   const floodBanner=document.getElementById('floodBanner'),floodBannerText=document.getElementById('floodBannerText'),srStatus=document.getElementById('srStatus');
+  const needBar=document.getElementById('needBar'),needLabel=document.getElementById('needLabel'),needText=document.getElementById('needText');
+  const peerFeed=document.getElementById('peerFeed'),feedStatus=document.getElementById('feedStatus'),focusStatus=document.getElementById('focusStatus'),focusPanel=document.getElementById('focusPanel');
+  const enemyTitle=document.querySelector('.enemy-title'),enemySub=document.querySelector('.enemy-sub');
 
   const spriteAlt={
     'cat.png':'Orange pixel-art Cat','cat-embarrassed.png':'Cat looking self-conscious','cat-robot.png':'Cat in objective reporting mode',
@@ -213,13 +244,18 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   function setSprite(name){catSprite.onerror=()=>{catSprite.onerror=null;catSprite.src='cat.png';catSprite.alt=spriteAlt['cat.png'];};catSprite.src=name;catSprite.alt=spriteAlt[name]||spriteAlt['cat.png'];}
 
   let x=.5,y=.72,overload=2,activeAttack=false,bulletTimers=[],attackGeneration=0;
-  let usefulActUsed=false,flooded=false,rebootComplete=false,scanLoops=0,scoreLoops=0,raceLoops=0,rankingLoops=0;
+  let nextFocusChosen=false,flooded=false,rebootComplete=false,scanLoops=0,scoreLoops=0,raceLoops=0,rankingLoops=0;
+  let ownChecked=false;
+  const peerChecked=new Set();
   const checkedFacts=new Map();
 
-  const thoughts=[
+  const baseThoughts=[
     "THEY'RE AHEAD","I'M BEHIND","THEY'RE FASTER THAN ME","EVERYONE ELSE GETS IT","I SHOULD BE DONE BY NOW",
-    "THEY GOT 100","WHY AM I STILL WORKING?","I NEED TO CATCH UP","WHAT IF I'M THE ONLY ONE?","THEY MAKE IT LOOK EASY"
+    "WHY AM I STILL WORKING?","I NEED TO CATCH UP","WHAT IF I'M THE ONLY ONE?","THEY MAKE IT LOOK EASY"
   ];
+  const afterFocusThoughts=["BUT THEY'RE STILL DONE","WHAT IF I'M SLOWER?","SHOULD I CHECK AGAIN?","WHAT IF I'M THE ONLY ONE?","I STILL FEEL BEHIND"];
+
+  function orientationReady(){return ownChecked && peerChecked.size>=1;}
 
   function placeHeart(){const r=arena.getBoundingClientRect();const px=Math.max(18,Math.min(r.width-18,x*r.width));const py=Math.max(18,Math.min(r.height-18,y*r.height));heart.style.left=px+'px';heart.style.top=py+'px';}
   function move(dx,dy){if(flooded)return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
@@ -238,37 +274,78 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   });
 
   function setMessage(lines){const clean=lines.filter(Boolean);message.innerHTML=clean.map(t=>'* '+t).join('<br>');srStatus.textContent=clean.join(' ');}
-  function updateFactFile(){factList.innerHTML='';if(!checkedFacts.size){const li=document.createElement('li');li.textContent='Nothing checked yet.';factList.appendChild(li);return;}checkedFacts.forEach(text=>{const li=document.createElement('li');li.textContent=text;factList.appendChild(li);});}
+  function updateFactFile(){factList.innerHTML='';if(!checkedFacts.size){const li=document.createElement('li');li.textContent='Claim: EVERYONE ELSE IS AHEAD. Evidence checked: none.';factList.appendChild(li);return;}checkedFacts.forEach(text=>{const li=document.createElement('li');li.textContent=text;factList.appendChild(li);});}
   function addFact(key,text,peerId){checkedFacts.set(key,text);updateFactFile();if(peerId)document.getElementById(peerId)?.classList.add('revealed');}
-  function enoughChecked(){return checkedFacts.size>=2;}
+
+  function setEnemyContext(){
+    if(orientationReady() && !rankingLoops){
+      enemyTitle.innerHTML='THREE<br>SNAPSHOTS';
+      enemyTitle.classList.add('contextual');
+      enemySub.textContent='Three classmates. One Cat. No official ranking detected.';
+    } else if(!rankingLoops){
+      enemyTitle.innerHTML='EVERYONE<br>ELSE';
+      enemyTitle.classList.remove('contextual');
+      enemySub.textContent='A mysterious group with excellent publicity.';
+    }
+  }
+
+  function updateNeed(){
+    if(flooded){
+      needBar.dataset.state='capacity';needLabel.textContent='CAT NEEDS: ROOM TO CHOOSE';needText.textContent='The comparison feed is louder than the assignment. REBOOT can make room without proving a rank.';
+    } else if(nextFocusChosen){
+      needBar.dataset.state='ready';needLabel.textContent='CAT HAS A NEXT FOCUS';needText.textContent='Other people can keep doing things. Cat knows what Cat is doing next.';
+    } else if(overload>=8){
+      needBar.dataset.state='capacity';needLabel.textContent='CAT MAY NEED: ROOM TO CHOOSE';needText.textContent='The comparison feed is very loud. REBOOT is available; Cat can also keep gathering context if that still feels possible.';
+    } else if(orientationReady()){
+      needBar.dataset.state='focus';needLabel.textContent='CAT NEEDS: A NEXT FOCUS';needText.textContent='The evidence is a few snapshots, not a class ranking. Where does Cat put attention now?';
+    } else if(ownChecked){
+      needBar.dataset.state='info';needLabel.textContent='CAT STILL NEEDS: CONTEXT';needText.textContent='Cat knows the actual task. Look closer at at least one comparison snapshot before deciding what it means.';
+    } else if(peerChecked.size){
+      needBar.dataset.state='info';needLabel.textContent='CAT STILL NEEDS: ORIENTATION';needText.textContent='One comparison snapshot is clearer. What is actually on Cat\'s own screen?';
+    } else {
+      needBar.dataset.state='info';needLabel.textContent='CAT NEEDS: ORIENTATION';needText.textContent='What do these snapshots actually tell Cat — and what is on Cat\'s own screen?';
+    }
+  }
 
   function recomputeReady(){
     checkBtn.disabled=flooded;
-    actBtn.disabled=!enoughChecked()||flooded;
-    continueBtn.disabled=!(enoughChecked()&&usefulActUsed&&!flooded);
+    actBtn.disabled=!orientationReady()||flooded;
+    continueBtn.disabled=!(orientationReady()&&nextFocusChosen&&!flooded);
+    rebootBtn.classList.toggle('suggested',flooded||overload>=7);
+    updateNeed();setEnemyContext();
   }
 
   function setOverload(n,allowFlood=true){
     overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';
+    rebootBtn.classList.toggle('suggested',flooded||overload>=7);
     if(allowFlood&&overload>=10&&!flooded)enterFlooded();
+    else updateNeed();
   }
   setOverload(2,false);
 
   function clearBullets(){activeAttack=false;attackGeneration++;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
   function hitCheck(b){const br=b.getBoundingClientRect(),hr=heart.getBoundingClientRect();return!(br.right<hr.left||br.left>hr.right||br.bottom<hr.top||br.top>hr.bottom);}
-  function thoughtSpeed(text,level){let ms=5200+Math.min(2600,text.length*105);if(enoughChecked())ms*=1.17;if(scanLoops)ms*=Math.max(.7,1-scanLoops*.07);if(scoreLoops)ms*=Math.max(.78,1-scoreLoops*.05);if(raceLoops)ms*=.9;if(rankingLoops)ms*=.84;if(level>=3)ms*=.9;return Math.round(ms);}
+  function thoughtSpeed(text,level){let ms=5350+Math.min(2800,text.length*110);if(orientationReady())ms*=1.17;if(nextFocusChosen)ms*=1.08;if(scanLoops)ms*=Math.max(.7,1-scanLoops*.07);if(scoreLoops)ms*=Math.max(.78,1-scoreLoops*.05);if(raceLoops)ms*=.9;if(rankingLoops)ms*=.84;if(level>=3)ms*=.9;return Math.round(ms);}
+  function currentThoughtPool(){
+    let pool=nextFocusChosen?[...afterFocusThoughts]:[...baseThoughts];
+    if(peerChecked.has('maya')) pool=pool.filter(t=>t!=="THEY'RE FASTER THAN ME").concat("I SHOULD'VE STARTED EARLIER");
+    if(peerChecked.has('noah')) pool=pool.filter(t=>t!=="EVERYONE ELSE GETS IT").concat("WHAT IF I'M LOWER?");
+    if(peerChecked.has('eli')) pool=pool.filter(t=>t!=="THEY MAKE IT LOOK EASY").concat("WHAT IF IT'S EASIER FOR THEM?");
+    if(ownChecked) pool=pool.filter(t=>t!=="I SHOULD BE DONE BY NOW");
+    return pool;
+  }
   function spawnBullet(text,level=1,cls=''){
     const generation=attackGeneration,b=document.createElement('div');b.className='bullet '+cls;b.textContent=text;
     const fromLeft=Math.random()>.5,top=22+Math.random()*(arena.clientHeight-54),off=Math.max(230,text.length*9+95);b.style.top=top+'px';b.style.left=fromLeft?-off+'px':arena.clientWidth+25+'px';arena.appendChild(b);
     const speed=thoughtSpeed(text,level),start=performance.now();
     function anim(now){if(!b.isConnected||generation!==attackGeneration)return;const p=Math.min(1,(now-start)/speed),sx=fromLeft?-off:arena.clientWidth+25,ex=fromLeft?arena.clientWidth+25:-off;b.style.left=(sx+(ex-sx)*p)+'px';
-      if(hitCheck(b)){b.remove();setOverload(overload+1);if(flooded)return;if(!flooded)setSprite(overload>=7?'cat-worried.png':'cat-embarrassed.png');setMessage(['Cat got hit by a comparison thought.','A thought about someone else’s snapshot still does not reveal Cat’s rank.']);return;}
+      if(hitCheck(b)){b.remove();setOverload(overload+1);if(flooded)return;setSprite(overload>=7?'cat-worried.png':'cat-embarrassed.png');setMessage(['Cat got hit by a comparison thought.','The thought may feel ranking-shaped. The room still has not published official standings.']);return;}
       if(p<1)requestAnimationFrame(anim);else b.remove();}
     requestAnimationFrame(anim);
   }
-  function attack(level=1,customThoughts=null){if(activeAttack||flooded)return;activeAttack=true;const pool=customThoughts||thoughts;setMessage(['Comparison thoughts incoming.','Dodge what you can. You do not need to win the hallway.']);const count=Math.min(7,3+level);const spacing=enoughChecked()?1020:900;
-    for(let i=0;i<count;i++)bulletTimers.push(setTimeout(()=>spawnBullet(pool[Math.floor(Math.random()*pool.length)],level,enoughChecked()?'soft':(level>=3?'hot':'')),i*Math.max(650,spacing-level*70)));
-    bulletTimers.push(setTimeout(()=>activeAttack=false,count*Math.max(650,spacing-level*70)+7600));
+  function attack(level=1,customThoughts=null,after=null){if(activeAttack||flooded)return;activeAttack=true;const pool=customThoughts||currentThoughtPool();setMessage(['Comparison thoughts incoming.','Dodge what you can. Reading them does not make them instructions.']);const count=Math.min(7,3+level),spacing=orientationReady()?1120:980;
+    for(let i=0;i<count;i++)bulletTimers.push(setTimeout(()=>spawnBullet(pool[Math.floor(Math.random()*pool.length)],level,orientationReady()?'soft':(level>=3?'hot':'')),i*Math.max(720,spacing-level*65)));
+    bulletTimers.push(setTimeout(()=>{activeAttack=false;if(after)after();},count*Math.max(720,spacing-level*65)+8200));
   }
 
   function showChoices(title,intro,choices){choiceTitle.textContent=title;choiceIntro.textContent=intro||'';choiceList.innerHTML='';choices.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c.label;if(c.visited)b.classList.add('visited');b.addEventListener('click',()=>{overlay.classList.remove('show');c.run();});choiceList.appendChild(b);});overlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button')?.focus(),30);}
@@ -277,57 +354,74 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeChoices();});
 
   const checks={
-    maya:{label:'WHAT DO I ACTUALLY KNOW ABOUT MAYA?',peer:'peerMaya',fact:'Maya is finished. She started earlier. “Finished” does not tell Cat how easy it felt or how long it took.',run(){setSprite('cat-robot.png');setMessage(['OBSERVED: Maya is finished.','MORE CONTEXT: she started last night and still has a question about #4.','Her finish time does not calculate Cat’s rank.']);}},
-    noah:{label:'WHAT DOES NOAH\'S 100% ACTUALLY TELL ME?',peer:'peerNoah',fact:'Noah has 100% on one displayed assignment. That score does not show his whole grade, process, or Cat’s ability.',run(){setSprite('cat-robot.png');setMessage(['OBSERVED: Noah has 100% on this assignment.','NOT OBSERVED: his whole gradebook, every difficult moment, or a comparison score for Cat.']);}},
-    eli:{label:'WHAT DOES “EASY” ACTUALLY TELL ME?',peer:'peerEli',fact:'Eli said “easy.” That reports Eli’s comment, not the difficulty level for the whole room.',run(){setSprite('cat-robot.png');setMessage(['OBSERVED: Eli said “easy.”','The statement has not been promoted to universal law.']);}},
-    cat:{label:'WHAT DO I KNOW ABOUT CAT\'S OWN TASK?',peer:'peerCat',fact:'Cat is still working on question 4. “Still working” is a current state, not a ranking.',run(){setSprite('cat-focused.png');setMessage(['OBSERVED: Cat is on question 4.','Cat can see the actual next piece of the assignment.','This is much more actionable than the unofficial leaderboard.']);}}
+    maya:{label:'CHECK MAYA\'S TIMELINE',peer:'peerMaya',fact:'MAYA: finished now; started before Cat. Available timing data ends there.',run(){peerChecked.add('maya');setSprite('cat-robot.png');setMessage(['OBSERVED: Maya is finished now.','TIMELINE: Maya started before Cat.','That does not produce a required finishing time for Cat.']);}},
+    noah:{label:'CHECK WHAT NOAH\'S 100% IS FROM',peer:'peerNoah',fact:'NOAH: mentioned one 100% assignment. A whole gradebook or work process is not visible.',run(){peerChecked.add('noah');setSprite('cat-robot.png');setMessage(['OBSERVED: Noah mentioned a 100% on one assignment.','NOT OBSERVED: a complete gradebook, his process, or Cat\'s rank.']);}},
+    eli:{label:'CHECK ELI\'S “EASY” COMMENT',peer:'peerEli',fact:'ELI: said “easy.” That is one person\'s reaction, not a rule for the room.',run(){peerChecked.add('eli');setSprite('cat-robot.png');setMessage(['OBSERVED: Eli said “easy.”','The quote belongs to Eli. It has not become an assignment requirement.']);}},
+    cat:{label:'CHECK CAT\'S OWN SCREEN',peer:'peerCat',fact:'CAT: on Question 4. It asks for one example. No speed or finish-first requirement is visible.',run(){ownChecked=true;setSprite('cat-focused.png');setMessage(['OWN SCREEN: Question 4 asks for one example.','REQUIRED SPEED: not found.','NEXT ACTUAL TASK: choose or write one example.']);}}
   };
-  function openCheck(){const choices=Object.entries(checks).map(([key,c])=>({label:c.label,visited:checkedFacts.has(key),run:()=>{addFact(key,c.fact,c.peer);c.run.call(c);setOverload(overload-1);recomputeReady();setTimeout(()=>{if(!flooded){if(enoughChecked())setSprite('cat-embarrassed.png');attack(1);}},2400);}}));showChoices('CHECK','CHECK means: What do we actually know? Two checked snapshots are enough to unlock ACT.',choices);}
+  function openCheck(){
+    const choices=Object.entries(checks).map(([key,c])=>({label:c.label,visited:checkedFacts.has(key),run:()=>{
+      const alreadyChecked=checkedFacts.has(key);addFact(key,c.fact,c.peer);c.run.call(c);setOverload(overload-(alreadyChecked?0:1));recomputeReady();
+      if(orientationReady()){
+        setTimeout(()=>{if(!flooded){setSprite('cat-embarrassed.png');setMessage(['The giant category EVERYONE ELSE has shrunk to a few actual snapshots.','Cat now knows what is on Cat\'s own screen. ACT is available.']);attack(1);}},1250);
+      } else {
+        setTimeout(()=>{if(!flooded){setSprite('cat-embarrassed.png');attack(1);}},1450);
+      }
+    }}));
+    showChoices('CHECK','Which part of the comparison does Cat want to look at more closely?',choices);
+  }
 
-  function markUseful(sprite,lines,overloadChange=-1){usefulActUsed=true;if(sprite)setSprite(sprite);setOverload(overload+overloadChange);setMessage(lines);recomputeReady();setTimeout(()=>attack(1),2200);}
-  function openAct(){showChoices('ACT','Several responses can work. Others mostly create more comparison data for Cat’s brain to rank.',[
-    {label:'RETURN TO THE NEXT THING ON MY SCREEN',run:()=>markUseful('cat-focused.png',['Cat returns to the actual assignment.','Question 4 has not changed because Maya finished first.','Very inconvenient for the leaderboard.'])},
-    {label:'ASK FOR HELP ON THE ACTUAL QUESTION — IF I NEED IT',run:()=>markUseful('cat-connect.png',['Cat asks about the thing Cat actually needs help with.','Capability and asking a question can exist in the same save file.'])},
-    {label:'STOP COLLECTING COMPARISON DATA FOR FIVE MINUTES',run:()=>markUseful('cat-hands-off.png',['Cat stops checking who is done, who is fast, and who got what.','The room continues existing without live rankings.'])},
-    {label:'SCAN THE ROOM AGAIN FOR WHO IS DONE',run:()=>{scanLoops++;setSprite('cat-look-side.png');setOverload(overload+2);if(flooded)return;setMessage(['Cat scans for more evidence of being behind.','Comparison search results are extremely customizable.']);recomputeReady();setTimeout(()=>attack(Math.min(4,1+scanLoops),['THEY\'RE ALREADY DONE','I\'M THE SLOW ONE','CATCH UP','WHY AM I STILL WORKING?']),1500);}},
-    {label:'ASK EVERYONE WHAT THEY GOT',run:()=>{scoreLoops++;setSprite('cat-urge.png');setOverload(overload+2);if(flooded)return;setMessage(['Cat requests additional scoreboard material.','More numbers arrive. Cat’s understanding of the assignment does not.']);recomputeReady();setTimeout(()=>attack(3,['THEY GOT HIGHER','WHAT DID EVERYONE GET?','I NEED TO KNOW','WHAT IF I\'M LOWEST?']),1500);}},
-    {label:'RUSH SO I DON\'T LOOK BEHIND',run:()=>{raceLoops++;setSprite('cat-worried.png');setOverload(overload+2);if(flooded)return;setMessage(['Cat increases speed.','Reading comprehension has filed a workplace complaint.','Finishing faster and understanding better are not always the same task.']);recomputeReady();setTimeout(()=>attack(3,['FASTER','DON\'T BE LAST','HURRY UP','THEY\'RE AHEAD']),1500);}},
-    {label:'BUILD A CLASS RANKING FROM THREE DATA POINTS',run:()=>{rankingLoops++;setSprite('cat-overwhelmed.png');setOverload(overload+3);if(flooded)return;setMessage(['Cat creates a complete ranking from three visible moments.','Statistical methods have left the chat.']);recomputeReady();setTimeout(()=>attack(4,['EVERYONE IS AHEAD','I\'M LAST','THEY ALL GET IT','I HAVE TO CATCH UP']),1500);}}
+  function chooseFocus(sprite,feedLine,focusLine,lines){
+    nextFocusChosen=true;rankingLoops=0;if(sprite)setSprite(sprite);peerFeed.classList.toggle('paused',feedLine.includes('PAUSED'));feedStatus.textContent=feedLine;focusStatus.textContent=focusLine;focusPanel.classList.add('ready');focusPanel.classList.remove('warn');setOverload(overload-1);setMessage(lines);recomputeReady();setTimeout(()=>attack(1,afterFocusThoughts),1700);
+  }
+
+  function openAct(){showChoices('ACT','Cat knows what is actually on the screen. Where does Cat put attention now?',[
+    {label:'RETURN TO QUESTION 4',run:()=>chooseFocus('cat-focused.png','COMPARISON FEED: LIVE','CAT\'S NEXT FOCUS: QUESTION 4 — WRITE ONE EXAMPLE',['Cat returns to Question 4.','Maya being finished does not edit the instructions.','The next move is still one example.'])},
+    {label:'ASK ONE QUESTION ABOUT QUESTION 4',run:()=>chooseFocus('cat-connect.png','COMPARISON FEED: LIVE','CAT\'S NEXT FOCUS: QUESTION ASKED — THEN CONTINUE WHAT I CAN',['Cat asks: “Can you clarify what kind of example you want for Question 4?”','The question is about the assignment, not Cat\'s place in the room.'])},
+    {label:'PAUSE THE COMPARISON FEED FOR FIVE MINUTES + WORK ON Q4',run:()=>chooseFocus('cat-hands-off.png','COMPARISON FEED: PAUSED FOR FIVE MINUTES','CAT\'S NEXT FOCUS: QUESTION 4',['Cat stops checking who is finished, fast, or high-scoring for five minutes.','The room continues existing without live rankings.','Question 4 remains available.'])},
+    {label:'SCAN THE ROOM AGAIN FOR WHO IS DONE',run:()=>{scanLoops++;setSprite('cat-look-side.png');feedStatus.textContent='NEW SNAPSHOT: SOMEONE TURNED A PAGE';focusStatus.textContent='USEFUL INFORMATION ABOUT QUESTION 4: 0';focusPanel.classList.add('warn');setOverload(overload+2);if(flooded)return;setMessage(['Cat scans for more evidence of being behind.','A new person has turned a page.','The page turn contains no instructions for Question 4.']);recomputeReady();setTimeout(()=>attack(Math.min(4,1+scanLoops),["THEY'RE ALREADY DONE","I'M THE SLOW ONE","CATCH UP","WHY AM I STILL WORKING?"]),1200);}},
+    {label:'ASK EVERYONE WHAT THEY GOT',run:()=>{scoreLoops++;setSprite('cat-urge.png');feedStatus.textContent='MORE SCORE DATA ACQUIRED';focusStatus.textContent='USEFUL INFORMATION ABOUT QUESTION 4: 0';focusPanel.classList.add('warn');setOverload(overload+2);if(flooded)return;setMessage(['Cat requests additional scoreboard material.','More numbers arrive.','Question 4 remains exactly as clear as before.']);recomputeReady();setTimeout(()=>attack(3,['THEY GOT HIGHER','WHAT DID EVERYONE GET?','I NEED TO KNOW',"WHAT IF I'M LOWEST?"]),1200);}},
+    {label:'RUSH SO I DON\'T LOOK BEHIND',run:()=>{raceLoops++;setSprite('cat-worried.png');feedStatus.textContent='MODE: RUSHING';focusStatus.textContent='QUESTION 4: STILL REQUIRES ONE EXAMPLE';focusPanel.classList.add('warn');setOverload(overload+2);if(flooded)return;setMessage(['Cat reads Question 4 at combat speed.','Understanding has requested that speed stop making executive decisions.','Finishing first was not in the directions.']);recomputeReady();setTimeout(()=>attack(3,['FASTER','DON\'T BE LAST','HURRY UP',"THEY'RE AHEAD"]),1200);}},
+    {label:'BUILD A CLASS RANKING FROM THREE SNAPSHOTS',run:()=>{rankingLoops++;setSprite('cat-overwhelmed.png');enemyTitle.innerHTML='UNOFFICIAL<br>LEADERBOARD';enemyTitle.classList.remove('contextual');enemySub.textContent='Confidence level: wildly unjustified.';feedStatus.textContent='RANKING MODEL: ACTIVE';focusStatus.textContent='SAMPLE SIZE: THREE CLASSMATES';focusPanel.classList.add('warn');setOverload(overload+3);if(flooded)return;setMessage(['Cat creates a class ranking from three visible moments.','Several important variables have escaped through a window.']);recomputeReady();setTimeout(()=>attack(4,['EVERYONE IS AHEAD',"I'M LAST",'THEY ALL GET IT','I HAVE TO CATCH UP']),1200);}}
   ]);}
 
-  function enterFlooded(){clearBullets();flooded=true;setSprite('cat-overwhelmed.png');frame.classList.add('flood-shake','flood-flash');floodBanner.classList.add('show');floodBannerText.textContent='COMPARISON FEED\n100% CPU';setMessage(['Cat has collected enough comparison data to overload the system.','Nothing about the assignment became clearer.','REBOOT is available when Cat is ready.']);recomputeReady();
+  function enterFlooded(){clearBullets();flooded=true;setSprite('cat-overwhelmed.png');frame.classList.add('flood-shake','flood-flash');floodBanner.classList.add('show');floodBannerText.textContent='COMPARISON FEED\n100% CPU';feedStatus.textContent='COMPARISON FEED: TOO MANY TABS';focusStatus.textContent='CAT\'S ACTUAL TASK: TEMPORARILY OBSCURED';focusPanel.classList.add('warn');setMessage(['Cat has collected enough comparison data to overload the system.','The assignment did not become clearer.']);recomputeReady();
     setTimeout(()=>{frame.classList.remove('flood-shake');floodBannerText.textContent='UNOFFICIAL LEADERBOARD: TOO MANY TABS';},850);
     setTimeout(()=>{floodBanner.classList.remove('show');frame.classList.remove('flood-flash');rebootBtn.focus();},1650);
   }
 
   function openReboot(){rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
-  function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to prove Cat is better than anyone. The goal is to get out of the imaginary ranking long enough to choose.</p>';rebootActions.innerHTML='';[
-    ['REPORT LIKE A ROBOT','Turn ranking stories into plain observations.',startRobotReport],
-    ['OWN-SCREEN RESET','A short grounding sequence: feet → sound → actual task.',startOwnScreen],
-    ['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(flooded)setSprite('cat-overwhelmed.png');}]
-  ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});}
+  function renderRebootMenu(){
+    const why=flooded?'The comparison feed has buried Cat\'s own screen. The goal is enough room to choose — not to prove Cat ranks higher.':'Comparison can feel loud even when the data is incomplete. REBOOT is optional; the goal is room to choose, not a better rank.';
+    rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>'+why+'</p>';rebootActions.innerHTML='';[
+      ['REPORT LIKE A ROBOT','Turn ranking stories into plain observations.',startRobotReport],
+      ['OWN-SCREEN RESET','A short grounding sequence: feet → sound → actual task.',startOwnScreen],
+      ['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(flooded)setSprite('cat-overwhelmed.png');}]
+    ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});
+  }
 
   function startRobotReport(){setSprite('cat-robot.png');const cards=[
-    ['STORY: EVERYONE IS AHEAD.','OBSERVED: A few classmates were noticed. Their full timelines are unavailable.'],
-    ['STORY: I AM TOO SLOW.','OBSERVED: Cat is still working. Required speed was not found in the assignment directions.'],
-    ['STORY: THEY ALL GET IT.','OBSERVED: Understanding level of the entire room = UNKNOWN.']
+    ['STORY: EVERYONE IS AHEAD.','OBSERVED: Maya is done, Noah mentioned 100%, and Eli said “easy.” A complete class ranking is unavailable.'],
+    ['STORY: I AM TOO SLOW.','OBSERVED: Cat is on Question 4. No required speed was found in the directions.'],
+    ['STORY: THEY ALL GET IT.','OBSERVED: One person said “easy.” Understanding level of the room = UNKNOWN.']
   ];let i=0;
-    function render(){const [story,report]=cards[i];rebootStage.innerHTML='<div class="big">REPORT LIKE A ROBOT</div><div class="robot-card"><div class="storyline">'+story+'</div><div class="report" id="robotReport">...</div></div>';rebootActions.innerHTML='<button type="button" id="robotize">ROBOTIZE THIS</button><button type="button" id="robotNotNow">NOT NOW</button>';document.getElementById('robotize').onclick=()=>{document.getElementById('robotReport').textContent=report;document.getElementById('robotize').textContent=i===cards.length-1?'COMPLETE REPORT':'NEXT REPORT';document.getElementById('robotize').onclick=()=>{i++;if(i>=cards.length)completeReboot(['Robot report complete.','Fewer rankings. More observations.']);else render();};};document.getElementById('robotNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(flooded)setSprite('cat-overwhelmed.png');};}
+    function render(){const [story,report]=cards[i];rebootStage.innerHTML='<div class="big">REPORT LIKE A ROBOT</div><div class="robot-card"><div class="storyline">'+story+'</div><div class="report" id="robotReport">...</div></div>';rebootActions.innerHTML='<button type="button" id="robotize">ROBOTIZE THIS</button><button type="button" id="robotNotNow">NOT NOW</button>';document.getElementById('robotize').onclick=()=>{document.getElementById('robotReport').textContent=report;document.getElementById('robotize').textContent=i===cards.length-1?'COMPLETE REPORT':'NEXT REPORT';document.getElementById('robotize').onclick=()=>{i++;if(i>=cards.length)completeReboot(['Robot report complete.','The room contains observations. The ranking was added later.']);else render();};};document.getElementById('robotNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(flooded)setSprite('cat-overwhelmed.png');};}
     render();
   }
 
-  function startOwnScreen(){setSprite('cat-grounded.png');rebootStage.innerHTML='<div class="big">OWN-SCREEN RESET</div><p>Tap each step after you actually do it.</p>';rebootActions.innerHTML='<div class="ground-steps" id="groundSteps"></div><button type="button" id="groundNotNow">NOT NOW</button>';const steps=[['FEET','Notice where your feet or body touch something solid.'],['SOUND','Notice one sound in the room.'],['OWN SCREEN','Look at one actual line, question, or instruction in your own work.']];const wrap=document.getElementById('groundSteps');let done=0;steps.forEach(([name,desc],idx)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+name+'</strong><br>'+desc;b.onclick=()=>{if(b.classList.contains('done'))return;b.classList.add('done');b.setAttribute('aria-pressed','true');done++;if(idx===2)setSprite('cat-focused.png');if(done===steps.length)completeReboot(['Feet: here. Room: here. Assignment: here.','The hallway does not need to disappear for Cat to return to Cat’s own task.']);};wrap.appendChild(b);});document.getElementById('groundNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(flooded)setSprite('cat-overwhelmed.png');};}
+  function startOwnScreen(){setSprite('cat-grounded.png');rebootStage.innerHTML='<div class="big">OWN-SCREEN RESET</div><p>Tap each step after you actually do it.</p>';rebootActions.innerHTML='<div class="ground-steps" id="groundSteps"></div><button type="button" id="groundNotNow">NOT NOW</button>';const steps=[['FEET','Notice where your feet or body touch something solid.'],['SOUND','Notice one sound in the room.'],['OWN SCREEN','Look at one actual line, question, or instruction in your own work.']];const wrap=document.getElementById('groundSteps');let done=0;steps.forEach(([name,desc],idx)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+name+'</strong><br>'+desc;b.onclick=()=>{if(b.classList.contains('done'))return;b.classList.add('done');b.setAttribute('aria-pressed','true');done++;if(idx===2){setSprite('cat-focused.png');focusStatus.textContent='RETURN POINT: QUESTION 4';}if(done===steps.length)completeReboot(['Feet: here. Room: here. Question 4: here.','The hallway does not need to disappear for Cat to return to Cat\'s own task.']);};wrap.appendChild(b);});document.getElementById('groundNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(flooded)setSprite('cat-overwhelmed.png');};}
 
-  function completeReboot(lines){rebootComplete=true;flooded=false;setOverload(Math.max(2,overload-4),false);setSprite('cat-rumpled.png');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS RETURNING</div><p>'+lines.join('<br>')+'</p><p>Cat may still feel comparison. Cat has enough room to choose.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';document.getElementById('rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setSprite('cat-ready.png');setMessage(['Comparison thoughts may still exist.','Strategic decision-making has returned.']);recomputeReady();};}
+  function completeReboot(lines){rebootComplete=true;flooded=false;rankingLoops=0;setOverload(Math.max(2,overload-4),false);setSprite('cat-rumpled.png');feedStatus.textContent=peerFeed.classList.contains('paused')?'COMPARISON FEED: PAUSED':'COMPARISON FEED: LIVE';focusPanel.classList.remove('warn');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS RETURNING</div><p>'+lines.join('<br>')+'</p><p>Comparison may still be present. Cat has enough room to choose.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';document.getElementById('rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setSprite(nextFocusChosen?'cat-ready.png':'cat-embarrassed.png');setMessage(['Comparison thoughts may still exist.','Cat can see the room without turning it into standings.']);recomputeReady();};}
 
-  function doContinue(){if(!(enoughChecked()&&usefulActUsed&&!flooded)){setMessage(['Not yet.','CHECK at least two snapshots, then choose one workable ACT.']);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');setMessage(['Other people can do well without becoming evidence against Cat.','Cat knows the next thing on Cat’s own screen.','That is enough to continue.']);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 03 complete');localStorage.setItem('cvc-encounter-03','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
+  function doContinue(){if(!(orientationReady()&&nextFocusChosen&&!flooded)){setMessage(['Not yet.','Cat needs enough context to orient, then one actual next focus.']);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');needBar.dataset.state='ready';needLabel.textContent='CAT HAS ENOUGH TO CONTINUE';needText.textContent='The class ranking is still unavailable. Cat\'s next focus is not.';setMessage(['Maya can be done. Noah can have 100%. Eli can call it easy.','Cat does not need to turn those facts into a position on an imaginary leaderboard.','Cat knows what to do next on Cat\'s own screen.']);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 03 complete');localStorage.setItem('cvc-encounter-03','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
 
   checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});
   actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});
   rebootBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openReboot();});
   continueBtn.addEventListener('click',doContinue);
+
   recomputeReady();
-  setTimeout(()=>attack(1),3500);
+  setTimeout(()=>attack(1,["THEY'RE AHEAD","I'M BEHIND","I SHOULD BE DONE BY NOW"],()=>setMessage(['Cat has a conclusion.','Evidence currently consists of a few visible moments. CHECK can look closer.'])),1800);
 })();
 </script>
 </body>
