@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
+<link rel="icon" type="image/png" href="favicon3.png">
+<link rel="apple-touch-icon" href="favicon3.png">
 <title>Cat vs. Civilization — Encounter 02: Missing</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
@@ -36,37 +38,43 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
 .arena-col{display:flex;flex-direction:column;gap:14px}
 .hud{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:1rem;letter-spacing:.05em}
 .meter{height:18px;border:3px solid #fff;background:#111;position:relative}.meter-fill{height:100%;width:0;background:var(--purple);transition:width .2s linear}
-.fact-file{border:3px solid #fff;background:#030303;padding:10px 12px;min-height:68px}
-.fact-file strong{font-family:"Press Start 2P";font-size:.52rem;color:var(--yellow)}
-.fact-file ul{margin:.45rem 0 0;padding-left:1.2rem;line-height:1.35;font-size:.94rem}.fact-file li+li{margin-top:.28rem}
+.case-file{border:3px solid #fff;background:#030303;padding:12px;min-height:155px}
+.case-file h3{font-family:"Press Start 2P";font-size:.55rem;color:var(--yellow);margin:0 0 10px;line-height:1.5}
+.case-grid{display:grid;gap:7px}
+.case-row{display:grid;grid-template-columns:minmax(125px,.95fr) 1.25fr;gap:10px;padding:6px 0;border-top:1px dashed #333;align-items:start}
+.case-row:first-child{border-top:0}.case-label{color:var(--muted);letter-spacing:.04em}.case-value{font-weight:700;text-align:right;word-break:break-word}.case-value.unknown{color:#888}.case-value.good{color:var(--green)}.case-value.warn{color:var(--yellow)}.case-value.red{color:var(--red)}
 .arena{position:relative;height:300px;border:4px solid #fff;background:#000;overflow:hidden;touch-action:none}
 .heart{position:absolute;width:22px;height:22px;left:50%;top:72%;transform:translate(-50%,-50%) rotate(45deg);background:var(--orange);box-shadow:0 0 0 2px #000}
 .heart::before,.heart::after{content:"";position:absolute;width:22px;height:22px;background:var(--orange);border-radius:50%}.heart::before{left:-11px}.heart::after{top:-11px}
 .bullet{position:absolute;white-space:nowrap;font-family:"Press Start 2P";font-size:.58rem;color:#fff;pointer-events:none;line-height:1.25}.bullet.soft{color:var(--yellow)}.bullet.hot{color:var(--red)}
-.message{border:3px solid #fff;padding:14px 16px;min-height:90px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}
+.message{border:3px solid #fff;padding:14px 16px;min-height:98px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}
 .touch-help{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2px}
 .touchpad-shell{display:grid;place-items:center;padding:6px 0 2px}
 .touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;padding:10px;border:2px dashed #444;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .touchpad button{width:76px;height:76px;border:3px solid #fff;background:#080808;color:#fff;font-family:"Press Start 2P";font-size:1.15rem;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}
 .touchpad button:active{background:#191919;border-color:var(--orange);color:var(--orange)}
 .touchpad .up{grid-column:2;grid-row:1}.touchpad .left{grid-column:1;grid-row:2}.touchpad .right{grid-column:3;grid-row:2}.touchpad .down{grid-column:2;grid-row:3}
+.need-bar{margin:0 20px 12px;border:3px solid var(--yellow);background:#090700;padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;box-shadow:4px 4px 0 #2f2a10}
+.need-label{font-family:"Press Start 2P";font-size:.58rem;color:var(--yellow);line-height:1.5;white-space:nowrap}.need-text{font-size:1.03rem;line-height:1.35}.need-bar.decision{border-color:var(--orange);box-shadow:4px 4px 0 #32200d}.need-bar.decision .need-label{color:var(--orange)}.need-bar.room{border-color:var(--blue);box-shadow:4px 4px 0 #102b3a}.need-bar.room .need-label{color:var(--blue)}.need-bar.done{border-color:var(--green);box-shadow:4px 4px 0 #17301d}.need-bar.done .need-label{color:var(--green)}
 .controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px 20px}
-.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}
+.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer;position:relative}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}
 .cmd:hover:not(:disabled){outline:4px solid currentColor;outline-offset:2px}.cmd:disabled{opacity:.32;cursor:not-allowed}
+.cmd.recommended:not(:disabled){box-shadow:0 0 0 3px var(--blue),0 0 18px rgba(103,183,255,.35)}
+.cmd.available:not(:disabled){box-shadow:0 0 0 3px var(--green),0 0 18px rgba(117,221,136,.3)}
 .choice-overlay,.reboot-overlay{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;place-items:center;padding:18px;z-index:50}.choice-overlay.show,.reboot-overlay.show{display:grid}
-.choice-box,.reboot-box{width:min(680px,100%);max-height:min(86vh,760px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}
+.choice-box,.reboot-box{width:min(700px,100%);max-height:min(86vh,780px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}
 .choice-box h2,.reboot-box h2{font-family:"Press Start 2P";font-size:1rem;line-height:1.5;color:var(--purple);margin:0 0 12px}.choice-intro{margin:0 0 14px;line-height:1.45;color:#ddd}.choice-list{display:grid;gap:10px}
-.choice-list button,.reboot-actions button,.sense-steps button,.urge-list button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover,.reboot-actions button:hover,.sense-steps button:hover,.urge-list button:hover{border-color:var(--orange);color:var(--orange)}
-.choice-list button.visited::after{content:"  ✓";color:var(--green)}
+.choice-list button,.reboot-actions button,.sense-steps button,.urge-list button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover:not(:disabled),.reboot-actions button:hover,.sense-steps button:hover,.urge-list button:hover{border-color:var(--orange);color:var(--orange)}
+.choice-list button.visited::after{content:"  ✓";color:var(--green)}.choice-list button:disabled{opacity:.42;cursor:not-allowed}
 .close-row{display:flex;justify-content:flex-end;margin-top:14px}.close-btn{border:2px solid #777;background:#000;color:#ddd;padding:9px 12px;cursor:pointer}
 .reboot-stage{border:3px solid #fff;padding:16px;min-height:170px;display:grid;align-content:center;gap:12px;text-align:center}.reboot-stage .big{font-family:"Press Start 2P";font-size:clamp(.9rem,3vw,1.25rem);line-height:1.5;color:var(--blue)}.reboot-stage p{margin:0;font-size:1.08rem;line-height:1.45}.reboot-count{font-family:"Press Start 2P";font-size:2rem;color:var(--yellow);min-height:2.4rem}.reboot-actions{display:grid;gap:10px;margin-top:14px}.reboot-actions button{text-align:center}.sense-steps,.urge-list{display:grid;gap:10px}.sense-steps button.done,.urge-list button.done{border-color:var(--green);color:var(--green)}
-.crash-banner{position:absolute;inset:0;display:none;place-items:center;background:rgba(35,0,0,.88);z-index:20;text-align:center;padding:20px}.crash-banner.show{display:grid}.crash-banner div{font-family:"Press Start 2P";font-size:clamp(1rem,4vw,2rem);line-height:1.65;color:var(--red);text-shadow:3px 3px 0 #000}
+.crash-banner{position:absolute;inset:0;display:none;place-items:center;background:rgba(35,0,0,.88);z-index:20;text-align:center;padding:20px}.crash-banner.show{display:grid}.crash-banner div{font-family:"Press Start 2P";font-size:clamp(1rem,4vw,2rem);line-height:1.65;color:var(--red);text-shadow:3px 3px 0 #000;white-space:pre-line}
 .frame.crash-shake{animation:screenShake .1s steps(2,end) 8}.frame.crash-flash{box-shadow:0 0 0 8px var(--red),8px 8px 0 #202020}
 @keyframes screenShake{0%{transform:translate(0)}25%{transform:translate(4px,-3px)}50%{transform:translate(-4px,3px)}75%{transform:translate(3px,3px)}100%{transform:translate(0)}}
-.end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:680px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}
+.end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:700px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}
 .sr-status{position:absolute;left:-9999px}
-@media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:265px}.enemy-title{font-size:clamp(2.7rem,15vw,5rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.cat-wrap{min-height:190px}.cat-sprite{max-height:190px}}
-@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.fact-file{font-size:.9rem}}
+@media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:265px}.enemy-title{font-size:clamp(2.7rem,15vw,5rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.cat-wrap{min-height:190px}.cat-sprite{max-height:190px}.need-bar{grid-template-columns:1fr;gap:5px}.need-label{white-space:normal}}
+@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.need-bar{margin:0 12px 10px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.case-row{grid-template-columns:1fr;gap:2px}.case-value{text-align:left}.case-file{font-size:.94rem}}
 @media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -100,9 +108,20 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
 
       <section class="arena-col" aria-label="Battle area">
         <div class="hud"><span>OVERLOAD</span><div class="meter" aria-label="Overload meter"><div id="meterFill" class="meter-fill"></div></div><span id="meterText">2/10</span></div>
-        <div class="fact-file" id="factFile" aria-live="polite"><strong>CASE FILE</strong><ul id="factList"><li>Nothing checked yet.</li></ul></div>
+
+        <div class="case-file" id="caseFile" aria-live="polite">
+          <h3>CASE FILE</h3>
+          <div class="case-grid">
+            <div class="case-row"><span class="case-label">GRADEBOOK</span><span class="case-value red" id="caseGradebook">MISSING</span></div>
+            <div class="case-row"><span class="case-label">SUBMISSION HISTORY</span><span class="case-value unknown" id="caseHistory">?</span></div>
+            <div class="case-row"><span class="case-label">ASSIGNMENT PORTAL</span><span class="case-value unknown" id="casePortal">?</span></div>
+            <div class="case-row"><span class="case-label">FILE</span><span class="case-value unknown" id="caseFileValue">?</span></div>
+            <div class="case-row"><span class="case-label">NEXT STEP</span><span class="case-value unknown" id="caseNext">?</span></div>
+          </div>
+        </div>
+
         <div class="arena" id="arena" tabindex="0" aria-label="Dodge thoughts with arrow keys, WASD, or the touch controls below"><div class="heart" id="heart" aria-hidden="true"></div></div>
-        <div class="message" id="message" aria-live="polite">* MISSING blocks the path.<br>* Before Cat fixes, apologizes, refreshes, or vanishes into the floor, CHECK what is actually known.</div>
+        <div class="message" id="message" aria-live="polite">* MISSING blocks the path.<br>* Cat has theories. Evidence has not yet joined the meeting.</div>
         <div class="touch-help">MOVE CAT — arrow keys / WASD / touch pad</div>
         <div class="touchpad-shell">
           <div class="touchpad" id="touchpad" aria-label="Touch movement controls. Taps in the gaps do nothing.">
@@ -115,17 +134,22 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
       </section>
     </div>
 
+    <div class="need-bar" id="needBar" aria-live="polite">
+      <div class="need-label" id="needLabel">CAT NEEDS: INFORMATION</div>
+      <div class="need-text" id="needText">Why does the gradebook say MISSING?</div>
+    </div>
+
     <div class="controls" aria-label="Battle commands">
       <button class="cmd" data-cmd="check">CHECK</button>
       <button class="cmd" data-cmd="act" disabled>ACT</button>
-      <button class="cmd" data-cmd="reboot">REBOOT</button>
+      <button class="cmd" data-cmd="reboot">REBOOT CAT</button>
       <button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
     </div>
 
     <section class="end-screen" id="endScreen" aria-live="polite">
       <h2>CIVILIZATION SURVIVED.</h2>
-      <p>MISSING was a problem to investigate.</p>
-      <p>Cat gathered evidence and chose a next step.</p>
+      <p id="endLine1">MISSING was a problem to investigate.</p>
+      <p id="endLine2">Cat moved the case forward.</p>
       <p>The problem did not have to be fully solved before Cat could continue.</p>
       <p><strong>ENCOUNTER COMPLETE.</strong></p>
       <a href="index.html">RETURN TO MAP</a>
@@ -158,27 +182,34 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   const overlay=document.getElementById('choiceOverlay'),choiceTitle=document.getElementById('choiceTitle'),choiceIntro=document.getElementById('choiceIntro'),choiceList=document.getElementById('choiceList'),choiceClose=document.getElementById('choiceClose');
   const rebootOverlay=document.getElementById('rebootOverlay'),rebootStage=document.getElementById('rebootStage'),rebootActions=document.getElementById('rebootActions');
   const endScreen=document.getElementById('endScreen'),srStatus=document.getElementById('srStatus'),catSprite=document.getElementById('catSprite');
-  const factList=document.getElementById('factList'),crashBanner=document.getElementById('crashBanner'),crashBannerText=document.getElementById('crashBannerText');
+  const crashBanner=document.getElementById('crashBanner'),crashBannerText=document.getElementById('crashBannerText');
+  const needBar=document.getElementById('needBar'),needLabel=document.getElementById('needLabel'),needText=document.getElementById('needText');
+  const caseHistory=document.getElementById('caseHistory'),casePortal=document.getElementById('casePortal'),caseFileValue=document.getElementById('caseFileValue'),caseNext=document.getElementById('caseNext');
   const checkBtn=document.querySelector('[data-cmd="check"]'),actBtn=document.querySelector('[data-cmd="act"]'),rebootBtn=document.querySelector('[data-cmd="reboot"]'),continueBtn=document.querySelector('[data-cmd="continue"]');
+  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const spriteAlt={
     'cat.png':'Pixel-art Cat','cat-worried.png':'Cat looking worried','cat-robot.png':'Cat in objective reporting mode','cat-focused.png':'Cat focusing on evidence','cat-connect.png':'Cat reaching out for help','cat-hands-off.png':'Cat sitting on its paws to avoid checking','cat-urge.png':'Cat feeling a strong urge to act','cat-overwhelmed.png':'Cat feeling overwhelmed','cat-embarrassed.png':'Cat feeling self-conscious','cat-alarm.png':'Cat in exaggerated alarm','cat-crashed.png':'Cat dramatically crashed out','cat-booting.png':'Cat rebooting after a crash','cat-grounded.png':'Cat grounded with paws planted','cat-braced.png':'Cat bracing through an urge','cat-ready.png':'Cat ready for one next step','cat-rumpled.png':'Cat tired but functional'};
   function setSprite(name){catSprite.onerror=()=>{catSprite.onerror=null;catSprite.src='cat.png';catSprite.alt=spriteAlt['cat.png'];};catSprite.src=name;catSprite.alt=spriteAlt[name]||spriteAlt['cat.png'];}
 
-  let x=.5,y=.72,overload=2,activeAttack=false,bulletTimers=[],attackGeneration=0;
-  let factsChecked=false,usefulActUsed=false,crashed=false,rebootComplete=false,refreshLoops=0,apologyLoops=0;
-  const checkedFacts=new Set();
-
-  const thoughts=[
-    'HOW DID I MISS THIS?','WHAT IF IT\'S A ZERO?','IT\'S TOO LATE','I SHOULD\'VE REMEMBERED',
-    'THEY\'LL THINK I DON\'T CARE','MY GRADE IS GOING TO DROP','I HAVE TO FIX THIS NOW','CHECK AGAIN'
+  const cases=[
+    {receipt:true,portal:'CLOSED',file:true},
+    {receipt:false,portal:'OPEN',file:true},
+    {receipt:false,portal:'CLOSED',file:true}
   ];
+  const activeCase=cases[Math.floor(Math.random()*cases.length)];
+
+  let x=.5,y=.72,overload=2,activeAttack=false,bulletTimers=[],attackGeneration=0;
+  let crashed=false,rebootComplete=false,refreshLoops=0,apologyLoops=0,usefulActUsed=false,actionKind=null;
+  let historyChecked=false,portalChecked=false,fileChecked=false;
+  let historyResult=null,portalResult=null,fileResult=null;
+  const visitedChecks=new Set();
 
   function placeHeart(){const r=arena.getBoundingClientRect();const px=Math.max(18,Math.min(r.width-18,x*r.width));const py=Math.max(18,Math.min(r.height-18,y*r.height));heart.style.left=px+'px';heart.style.top=py+'px';}
-  function move(dx,dy){if(crashed)return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
+  function move(dx,dy){if(crashed||overlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
   window.addEventListener('resize',placeHeart);placeHeart();
   const keys={ArrowUp:[0,-.055],w:[0,-.055],W:[0,-.055],ArrowDown:[0,.055],s:[0,.055],S:[0,.055],ArrowLeft:[-.055,0],a:[-.055,0],A:[-.055,0],ArrowRight:[.055,0],d:[.055,0],D:[.055,0]};
-  document.addEventListener('keydown',e=>{if(overlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;if(keys[e.key]){e.preventDefault();move(...keys[e.key]);}});
+  document.addEventListener('keydown',e=>{if(keys[e.key]&&!overlay.classList.contains('show')&&!rebootOverlay.classList.contains('show')){e.preventDefault();move(...keys[e.key]);}});
 
   const touchpad=document.getElementById('touchpad');
   ['touchstart','touchmove'].forEach(type=>touchpad.addEventListener(type,e=>e.preventDefault(),{passive:false}));
@@ -190,16 +221,89 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     ['pointerup','pointercancel','pointerleave','lostpointercapture'].forEach(ev=>btn.addEventListener(ev,stop));
   });
 
-  function setMessage(lines){message.innerHTML=lines.filter(Boolean).map(t=>'* '+t).join('<br>');srStatus.textContent=lines.filter(Boolean).join(' ');}
-  function setOverload(n){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';if(overload>=8&&!crashed)setSprite('cat-overwhelmed.png');}
-  setOverload(2);
+  function setMessage(lines){const clean=lines.filter(Boolean);message.innerHTML=clean.map(t=>'* '+t).join('<br>');srStatus.textContent=clean.join(' ');}
+  function styleCase(el,kind){el.classList.remove('unknown','good','warn','red');if(kind)el.classList.add(kind);}
+  function setCase(el,text,kind){el.textContent=text;styleCase(el,kind);}
 
-  function updateFactFile(){factList.innerHTML='';if(!checkedFacts.size){const li=document.createElement('li');li.textContent='Nothing checked yet.';factList.appendChild(li);return;}checkedFacts.forEach(text=>{const li=document.createElement('li');li.textContent=text;factList.appendChild(li);});}
-  function addFact(text){checkedFacts.add(text);updateFactFile();}
+  function enoughInfo(){
+    if(!historyChecked)return false;
+    if(historyResult==='RECEIPT FOUND')return true;
+    return historyResult==='NO RECEIPT FOUND' && portalChecked && fileChecked;
+  }
+
+  function recommendedAction(){
+    if(!enoughInfo())return null;
+    if(historyResult==='RECEIPT FOUND')return 'SEND RECEIPT + ONE QUESTION';
+    if(portalResult==='OPEN' && fileResult==='FILE FOUND')return 'SUBMIT FILE';
+    if(portalResult==='CLOSED' && fileResult==='FILE FOUND')return 'MESSAGE + ATTACH FILE';
+    return 'ASK ONE CLEAR QUESTION';
+  }
+
+  function updateNextStep(){
+    if(usefulActUsed){
+      if(actionKind==='submitted')setCase(caseNext,'SUBMITTED · DONE FOR NOW','good');
+      else setCase(caseNext,'WAITING FOR REPLY','warn');
+      return;
+    }
+    const action=recommendedAction();
+    if(action)setCase(caseNext,'DECISION AVAILABLE','good');
+    else setCase(caseNext,'?','unknown');
+  }
+
+  function needsRoom(){return crashed || overload>=8;}
+  function updateNeeds(){
+    needBar.className='need-bar';
+    rebootBtn.classList.remove('recommended');
+    continueBtn.classList.remove('available');
+
+    if(crashed){
+      needBar.classList.add('room');needLabel.textContent='CAT NEEDS: ROOM TO CHOOSE';needText.textContent='Decision-making systems are offline. The case file can wait.';rebootBtn.classList.add('recommended');return;
+    }
+    if(usefulActUsed && overload>=8){
+      needBar.classList.add('room');needLabel.textContent='CAT NEEDS: ROOM TO CHOOSE';needText.textContent='Cat has done the available part. Overload is still too loud to steer comfortably.';rebootBtn.classList.add('recommended');return;
+    }
+    if(usefulActUsed){
+      needBar.classList.add('done');needLabel.textContent='CAT HAS DONE THE AVAILABLE PART';needText.textContent=actionKind==='submitted'?'The file is submitted. The gradebook may take time to catch up.':'The message is sent. Cat is waiting for information that only someone else can provide.';continueBtn.classList.add('available');return;
+    }
+    if(overload>=7 && enoughInfo()){
+      needBar.classList.add('room');needLabel.textContent='CAT NEEDS: ROOM TO CHOOSE';needText.textContent='The case file has enough information. Urgency is currently louder than the evidence.';rebootBtn.classList.add('recommended');return;
+    }
+    if(enoughInfo()){
+      needBar.classList.add('decision');needLabel.textContent='CAT NEEDS: A NEXT STEP';needText.textContent='The case file has enough information. What does Cat do now?';return;
+    }
+    needLabel.textContent=historyChecked?'CAT STILL NEEDS: INFORMATION':'CAT NEEDS: INFORMATION';
+    if(!historyChecked){needText.textContent='Why does the gradebook say MISSING? Start with the submission history.';return;}
+    if(historyResult==='NO RECEIPT FOUND' && !portalChecked && !fileChecked){needText.textContent='No receipt was found. Can Cat submit it now, and does Cat have the file?';return;}
+    if(historyResult==='NO RECEIPT FOUND' && !portalChecked){needText.textContent='Cat found the file. Is the assignment portal still open?';return;}
+    if(historyResult==='NO RECEIPT FOUND' && !fileChecked){needText.textContent='Cat knows the portal status. Does Cat actually have the file?';return;}
+    needText.textContent='What piece of evidence would change the next move?';
+  }
+
+  function recomputeReady(){
+    actBtn.disabled=!enoughInfo()||crashed;
+    checkBtn.disabled=crashed;
+    continueBtn.disabled=!(usefulActUsed&&!crashed&&overload<8);
+    updateNextStep();
+    updateNeeds();
+  }
+
+  function setOverload(n){
+    overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';
+    if(overload>=8&&!crashed)setSprite('cat-overwhelmed.png');
+    recomputeReady();
+  }
+  setOverload(2);
 
   function clearBullets(){activeAttack=false;attackGeneration++;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
   function hitCheck(b){const br=b.getBoundingClientRect(),hr=heart.getBoundingClientRect();return!(br.right<hr.left||br.left>hr.right||br.bottom<hr.top||br.top>hr.bottom);}
-  function thoughtSpeed(text,level){let ms=4900+Math.min(2500,text.length*95);if(factsChecked)ms*=1.18;if(refreshLoops)ms*=Math.max(.72,1-refreshLoops*.07);if(apologyLoops)ms*=.9;if(level>=3)ms*=.88;return Math.round(ms);}
+  function currentThoughts(){
+    if(usefulActUsed&&actionKind==='message')return ['WHAT IF THEY DON\'T ANSWER?','SHOULD I SEND ANOTHER MESSAGE?','CHECK EMAIL AGAIN','WHAT IF THEY THINK I DON\'T CARE?','WHAT IF IT\'S STILL A ZERO?'];
+    if(usefulActUsed&&actionKind==='submitted')return ['WHAT IF IT\'S STILL LATE?','WHAT IF IT DOESN\'T COUNT?','CHECK AGAIN','WHAT IF IT\'S STILL A ZERO?','WHAT IF MY GRADE DROPS?'];
+    if(historyChecked&&historyResult==='RECEIPT FOUND')return ['WHAT IF THEY DON\'T BELIEVE IT?','WHAT IF IT\'S STILL A ZERO?','SHOULD I SEND ANOTHER MESSAGE?','WHAT IF MY GRADE DROPS?','CHECK AGAIN'];
+    if(historyChecked&&historyResult==='NO RECEIPT FOUND')return ['I\'M GOING TO GET A ZERO','THEY\'LL THINK I DON\'T CARE','I RUINED EVERYTHING','IT\'S TOO LATE','I HAVE TO FIX THIS NOW','CHECK AGAIN'];
+    return ['HOW DID I MISS THIS?','WHAT IF IT\'S A ZERO?','IT\'S TOO LATE','I SHOULD\'VE REMEMBERED','THEY\'LL THINK I DON\'T CARE','MY GRADE IS GOING TO DROP','I HAVE TO FIX THIS NOW','CHECK AGAIN'];
+  }
+  function thoughtSpeed(text,level){let ms=5000+Math.min(2700,text.length*100);if(historyChecked)ms*=1.14;if(enoughInfo())ms*=1.08;if(refreshLoops)ms*=Math.max(.72,1-refreshLoops*.07);if(apologyLoops)ms*=.9;if(level>=3)ms*=.88;return Math.round(ms);}
   function spawnBullet(text,level=1,cls=''){
     const generation=attackGeneration,b=document.createElement('div');b.className='bullet '+cls;b.textContent=text;
     const fromLeft=Math.random()>.5,top=22+Math.random()*(arena.clientHeight-54),off=Math.max(220,text.length*9+85);b.style.top=top+'px';b.style.left=fromLeft?-off+'px':arena.clientWidth+25+'px';arena.appendChild(b);
@@ -207,62 +311,164 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     function anim(now){if(!b.isConnected||generation!==attackGeneration)return;const p=Math.min(1,(now-start)/speed),sx=fromLeft?-off:arena.clientWidth+25,ex=fromLeft?arena.clientWidth+25:-off;b.style.left=(sx+(ex-sx)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1);setMessage(['Cat got hit by a thought.','A thought is not a submission receipt.']);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}
     requestAnimationFrame(anim);
   }
-  function attack(level=1,customThoughts=null){if(activeAttack||crashed)return;activeAttack=true;const pool=customThoughts||thoughts;setMessage(['The thoughts are slow enough to read now.','Dodge what you can. You do not need to dodge everything.']);const count=Math.min(7,3+level);const spacing=factsChecked?1300:1120;for(let i=0;i<count;i++){const t=setTimeout(()=>{let text=pool[Math.floor(Math.random()*pool.length)];if(refreshLoops&&Math.random()<.35)text='CHECK AGAIN';if(apologyLoops&&Math.random()<.25)text='THEY\'LL THINK I DON\'T CARE';spawnBullet(text,level,factsChecked?'soft':(level>=3?'hot':''));},i*spacing);bulletTimers.push(t);}const done=setTimeout(()=>{activeAttack=false},count*spacing+8000);bulletTimers.push(done);}
+  function attack(level=1,customThoughts=null){
+    if(activeAttack||crashed||reducedMotion)return;
+    activeAttack=true;const pool=customThoughts||currentThoughts();
+    const count=Math.min(7,3+level),spacing=historyChecked?1320:1150;
+    for(let i=0;i<count;i++){
+      const t=setTimeout(()=>{let text=pool[Math.floor(Math.random()*pool.length)];if(refreshLoops&&Math.random()<.35)text='CHECK AGAIN';if(apologyLoops&&Math.random()<.25)text='THEY\'LL THINK I DON\'T CARE';spawnBullet(text,level,enoughInfo()?'soft':(level>=3?'hot':''));},i*spacing);bulletTimers.push(t);
+    }
+    bulletTimers.push(setTimeout(()=>{activeAttack=false;},count*spacing+8200));
+  }
+  function openingBurst(){
+    if(reducedMotion){setTimeout(()=>setMessage(['Cat has theories.','Evidence generated so far: 0.','CHECK the case file.']),900);return;}
+    activeAttack=true;const pool=['WHAT IF IT\'S A ZERO?','HOW DID I MISS THIS?','I HAVE TO FIX THIS NOW'];
+    pool.forEach((text,i)=>bulletTimers.push(setTimeout(()=>spawnBullet(text,1,''),i*1050)));
+    bulletTimers.push(setTimeout(()=>{activeAttack=false;setMessage(['Cat has theories.','Evidence generated so far: 0.','CHECK the case file.']);},6900));
+  }
 
-  function showChoices(title,intro,choices){choiceTitle.textContent=title;choiceIntro.textContent=intro||'';choiceList.innerHTML='';choices.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c.label;if(c.visited)b.classList.add('visited');b.addEventListener('click',()=>{overlay.classList.remove('show');c.run();});choiceList.appendChild(b);});overlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button')?.focus(),20);}
+  function showChoices(title,intro,choices){
+    choiceTitle.textContent=title;choiceIntro.textContent=intro||'';choiceList.innerHTML='';
+    choices.forEach(c=>{const b=document.createElement('button');b.type='button';b.textContent=c.label;if(c.visited)b.classList.add('visited');if(c.disabled)b.disabled=true;b.addEventListener('click',()=>{if(b.disabled)return;overlay.classList.remove('show');c.run();});choiceList.appendChild(b);});
+    overlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button:not(:disabled)')?.focus(),20);
+  }
   function closeChoices(){overlay.classList.remove('show');}
   choiceClose.addEventListener('click',closeChoices);overlay.addEventListener('click',e=>{if(e.target===overlay)closeChoices();});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&overlay.classList.contains('show'))closeChoices();});
 
-  function recomputeReady(){actBtn.disabled=!factsChecked||crashed;continueBtn.disabled=!(factsChecked&&usefulActUsed&&!crashed);checkBtn.disabled=crashed;}
+  function checkHistory(){
+    visitedChecks.add('history');historyChecked=true;setSprite('cat-focused.png');
+    if(activeCase.receipt){historyResult='RECEIPT FOUND';setCase(caseHistory,'RECEIPT FOUND','good');setMessage(['SUBMISSION HISTORY: receipt found.','A timestamp and confirmation are sitting right there.','MISSING and the receipt currently disagree.']);}
+    else{historyResult='NO RECEIPT FOUND';setCase(caseHistory,'NO RECEIPT FOUND','warn');setMessage(['SUBMISSION HISTORY: no receipt or LMS submission record found.','That is useful evidence.','It still does not tell Cat whether the portal is open or whether the file exists.']);}
+    setOverload(overload-1);recomputeReady();setTimeout(()=>attack(1),700);
+  }
+  function checkPortal(){
+    visitedChecks.add('portal');portalChecked=true;portalResult=activeCase.portal;setSprite('cat-robot.png');
+    setCase(casePortal,portalResult,portalResult==='OPEN'?'good':'warn');
+    setMessage(portalResult==='OPEN' ? ['ASSIGNMENT PAGE: submissions are still open.','If Cat has the file and no submission record, a direct fix may exist.'] : ['ASSIGNMENT PAGE: submissions are closed.','Refreshing cannot reopen it. If action is needed, Cat may need another human.']);
+    setOverload(overload-1);recomputeReady();setTimeout(()=>attack(1),700);
+  }
+  function checkFile(){
+    visitedChecks.add('file');fileChecked=true;fileResult=activeCase.file?'FILE FOUND':'FILE NOT FOUND';setSprite('cat-focused.png');
+    setCase(caseFileValue,fileResult,activeCase.file?'good':'warn');
+    setMessage(activeCase.file ? ['FILE FOUND: assignment-final.pdf.','The assignment exists. It did not evaporate.'] : ['FILE NOT FOUND.','Cat now knows what problem needs solving first.']);
+    setOverload(overload-1);recomputeReady();setTimeout(()=>attack(1),700);
+  }
+  function openCheck(){
+    showChoices('CHECK','What does Cat want to find out?',[
+      {label:'CHECK SUBMISSION HISTORY — Did anything actually go through?',visited:visitedChecks.has('history'),run:checkHistory},
+      {label:'CHECK THE ASSIGNMENT PAGE — Is the portal still open?',visited:visitedChecks.has('portal'),run:checkPortal},
+      {label:'FIND THE FILE — Does Cat actually have the assignment?',visited:visitedChecks.has('file'),run:checkFile}
+    ]);
+  }
 
-  const checks={
-    status:{label:'WHAT DO I ACTUALLY KNOW FROM THE WORD “MISSING”?',fact:'The gradebook currently displays MISSING. The label does not explain the cause by itself.',run(){setSprite('cat-robot.png');addFact(this.fact);setMessage(['FACT: the gradebook currently says MISSING.','UNKNOWN: why it says that. A label is data, not the whole case file.']);}},
-    proof:{label:'DO I HAVE EVIDENCE I SUBMITTED IT?',fact:'A submission receipt, timestamp, confirmation screen, or LMS record can show whether a submission went through.',run(){setSprite('cat-focused.png');addFact(this.fact);setMessage(['Useful evidence: receipt, timestamp, confirmation, or submission history.','Memory is useful. A receipt is better evidence.']);}},
-    options:{label:'WHAT OPTIONS EXIST IF IT REALLY IS MISSING?',fact:'The next step depends on the actual submission settings and course policy: submit if possible; if closed or unclear, ask what to do next.',run(){setSprite('cat-robot.png');addFact(this.fact);setMessage(['The portal and course policy determine the available options.','If the portal is open, submit. If it is closed or unclear, ask one specific question.']);}},
-    unknown:{label:'WHAT IS STILL UNKNOWN?',fact:'The reason for the label, any penalty, whether late work is allowed, the teacher response, and the exact grade impact may still be unknown.',run(){setSprite('cat-worried.png');addFact(this.fact);setMessage(['UNKNOWN is allowed to stay unknown until Cat gets evidence.','Cat does not have to invent the missing information.']);}}
-  };
-  function openCheck(){const choices=Object.values(checks).map(c=>({label:c.label,visited:checkedFacts.has(c.fact),run:()=>{factsChecked=true;c.run.call(c);setOverload(overload-1);recomputeReady();setTimeout(()=>{if(!crashed){if(overload<8)setSprite('cat-worried.png');attack(1);}},700);}}));showChoices('CHECK','CHECK means: What do we actually know? Build the case file before acting.',choices);}
+  function finishUsefulAction(kind,lines,sprite='cat-ready.png'){
+    usefulActUsed=true;actionKind=kind;setSprite(sprite);setOverload(overload-1);setMessage(lines);recomputeReady();setTimeout(()=>attack(1),850);
+  }
+  async function submitFile(){
+    checkBtn.disabled=true;actBtn.disabled=true;setSprite('cat-focused.png');setMessage(['UPLOADING assignment-final.pdf ...']);
+    await new Promise(r=>setTimeout(r,reducedMotion?250:900));
+    historyResult='SUBMITTED NOW';historyChecked=true;setCase(caseHistory,'SUBMITTED NOW','good');
+    finishUsefulAction('submitted',['SUBMISSION RECEIVED.','A timestamp now exists.','The gradebook may not update immediately, but Cat has done the available part.'],'cat-ready.png');
+  }
+  function sendReceiptMessage(){
+    finishUsefulAction('message',['MESSAGE SENT:','“Hi — this assignment is marked MISSING, but my submission history shows a receipt. Could you check what happened?”','STATUS: waiting for reply.'],'cat-connect.png');
+  }
+  function sendFileMessage(){
+    finishUsefulAction('message',['MESSAGE SENT + FILE ATTACHED:','“Hi — I noticed this is marked MISSING. I do not see a submission receipt, the portal is closed, and I have the completed file. What should I do next?”','STATUS: waiting for reply.'],'cat-connect.png');
+  }
+  function loopRefresh(){
+    refreshLoops++;setSprite('cat-urge.png');setOverload(overload+1);setMessage(['REFRESH '+refreshLoops+': MISSING.','NEW INFORMATION ACQUIRED: 0.',refreshLoops>1?'Cat is now checking whether checking has started working.':'The gradebook has not developed remorse.']);setTimeout(()=>attack(Math.min(4,1+refreshLoops),['CHECK AGAIN','MAYBE IT CHANGED','WHAT IF IT\'S A ZERO?','I HAVE TO FIX THIS NOW']),500);
+  }
+  function loopApology(){
+    apologyLoops++;setSprite('cat-embarrassed.png');setOverload(overload+2);
+    const words=Math.min(900,180+apologyLoops*245);
+    setMessage(['APOLOGY DRAFT: '+words+' WORDS.','Verified cause of MISSING: '+(enoughInfo()?'partly investigated':'still unknown')+'.',words>500?'The apology now includes historical context.':'The apology has acquired a thesis statement.']);
+    setTimeout(()=>attack(3,['THEY\'LL THINK I DON\'T CARE','I SHOULD\'VE REMEMBERED','I RUINED EVERYTHING','IT\'S TOO LATE']),500);
+  }
+  function loopAfterAction(){
+    setSprite('cat-urge.png');setOverload(overload+1);
+    setMessage(actionKind==='message' ? ['Cat considers sending another message immediately.','The first message is still less than one minute old.','NEW INFORMATION ACQUIRED: 0.'] : ['Cat considers submitting again just in case.','A submission receipt already exists.','NEW INFORMATION ACQUIRED: 0.']);
+    setTimeout(()=>attack(3),500);
+  }
+  function openAct(){
+    const choices=[];
+    const rec=recommendedAction();
+    if(rec==='SEND RECEIPT + ONE QUESTION')choices.push({label:'SEND THE RECEIPT WITH ONE QUESTION',visited:usefulActUsed,disabled:usefulActUsed,run:sendReceiptMessage});
+    if(rec==='SUBMIT FILE')choices.push({label:'SUBMIT THE FILE NOW',visited:usefulActUsed,disabled:usefulActUsed,run:submitFile});
+    if(rec==='MESSAGE + ATTACH FILE')choices.push({label:'SEND ONE CLEAR MESSAGE + ATTACH THE FILE',visited:usefulActUsed,disabled:usefulActUsed,run:sendFileMessage});
+    if(usefulActUsed)choices.push({label:actionKind==='message'?'SEND ANOTHER MESSAGE JUST IN CASE':'DO THE SAME FIX AGAIN JUST IN CASE',run:loopAfterAction});
+    choices.push({label:'REFRESH THE GRADEBOOK UNTIL IT APOLOGIZES',run:loopRefresh});
+    if(!usefulActUsed)choices.push({label:'WRITE A 900-WORD APOLOGY BEFORE KNOWING WHAT HAPPENED',run:loopApology});
+    else choices.push({label:'WRITE A MUCH LONGER EXPLANATION JUST IN CASE',run:loopApology});
+    choices.push({label:'CRASH OUT. MISSING = ACADEMIC EXTINCTION.',run:crashOut});
+    showChoices('ACT',usefulActUsed?'Cat has already moved the case forward. You can continue, or keep experimenting.':'The evidence changes which next move makes sense.',choices);
+  }
 
-  function markUseful(sprite,lines,overloadChange=-1){usefulActUsed=true;if(sprite)setSprite(sprite);setOverload(overload+overloadChange);setMessage(lines);recomputeReady();setTimeout(()=>attack(1),700);}
-  function openAct(){showChoices('ACT','Several responses could help. Others mainly make Cat feel busier while the same information stays missing.',[
-    {label:'LOOK FOR THE FILE + SUBMISSION RECEIPT',run:()=>markUseful('cat-focused.png',['Cat checks the actual file and submission history.','Evidence first. Narrative later.'])},
-    {label:'SUBMIT IT NOW — IF THE PORTAL IS OPEN',run:()=>markUseful('cat-ready.png',['If Cat has the file and submissions are open, Cat submits it.','A direct fix is allowed to be boring.'])},
-    {label:'SEND ONE CLEAR MESSAGE IF IT\'S CLOSED OR UNCLEAR',run:()=>markUseful('cat-connect.png',['Cat sends one specific message.','“I noticed this is marked missing. I checked my submission history. What should I do next?”','Information gathering: still undefeated.'])},
-    {label:'WRITE DOWN THE NEXT STEP, THEN STOP CHECKING',run:()=>markUseful('cat-hands-off.png',['Cat writes down one next step.','Then Cat sits on the paws.','The gradebook is temporarily unsupervised.'])},
-    {label:'REFRESH THE GRADEBOOK UNTIL IT APOLOGIZES',run:()=>{refreshLoops++;setSprite('cat-urge.png');setOverload(overload+1);setMessage(['Cat refreshes the gradebook.','MISSING remains impressively committed to the bit.',refreshLoops>1?'The gradebook has not developed remorse.':'No new evidence has entered the building.']);recomputeReady();setTimeout(()=>attack(Math.min(4,1+refreshLoops),['CHECK AGAIN','MAYBE IT CHANGED','WHAT IF IT\'S A ZERO?','I HAVE TO FIX THIS NOW']),500);}},
-    {label:'WRITE A 900-WORD APOLOGY BEFORE KNOWING WHAT HAPPENED',run:()=>{apologyLoops++;setSprite('cat-embarrassed.png');setOverload(overload+2);setMessage(['Cat begins an apology manifesto.','Current verified facts: one red word.','The apology now has a thesis statement.']);recomputeReady();setTimeout(()=>attack(3,['THEY\'LL THINK I DON\'T CARE','I SHOULD\'VE REMEMBERED','HOW DID I MISS THIS?','IT\'S TOO LATE']),500);}},
-    {label:'CRASH OUT. MISSING = ACADEMIC EXTINCTION.',run:crashOut}
-  ]);}
-
-  function crashOut(){clearBullets();crashed=true;rebootComplete=false;setOverload(10);setSprite('cat-alarm.png');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.textContent='MISSING DETECTED\nCIVILIZATION HAS BEEN MARKED LATE';setMessage(['A RED WORD HAS OCCURRED.','THIS IS NOW AN ACADEMIC EXTINCTION EVENT.']);recomputeReady();
+  function crashOut(){
+    clearBullets();crashed=true;rebootComplete=false;setOverload(10);setSprite('cat-alarm.png');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.textContent='MISSING DETECTED\nCIVILIZATION HAS BEEN MARKED LATE';
+    setMessage(['A RED WORD HAS OCCURRED.','Cause of MISSING: '+(enoughInfo()?'partly investigated':'still unknown')+'.','Cat has nevertheless completed the emotional sentencing phase.']);recomputeReady();
     setTimeout(()=>{frame.classList.remove('crash-shake');crashBannerText.textContent='EMOTIONAL OPERATING SYSTEM: NOT FOUND';},1000);
     setTimeout(()=>{setSprite('cat-crashed.png');crashBanner.classList.remove('show');frame.classList.remove('crash-flash');setMessage(['Cat has crashed out.','MISSING is still on the screen.','Decision-making systems are temporarily offline.','REBOOT is available when Cat is ready.']);rebootBtn.focus();},1900);
   }
 
   function openReboot(){if(crashed)setSprite('cat-booting.png');rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
-  function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to solve MISSING inside Cat’s nervous system. The goal is to get enough room to choose.</p>';rebootActions.innerHTML='';[
-    ['FIND ONE REAL THING','A very short grounding check: see → feel → hear.',startGrounding],
-    ['NAME THE URGE','Notice what Cat wants to do without automatically doing it.',startUrgePractice],
-    ['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');}]
-  ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});}
+  function renderRebootMenu(){
+    rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to solve MISSING inside Cat’s nervous system. The goal is to get enough room to choose.</p>';
+    rebootActions.innerHTML='';[
+      ['FIND ONE REAL THING','A very short grounding check: see → feel → hear.',startGrounding],
+      ['NAME THE URGE','Notice what Cat wants to do without automatically doing it.',startUrgePractice],
+      ['NOT NOW','Close this. No penalty.',()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');}]
+    ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});
+  }
+  function startGrounding(){
+    setSprite('cat-grounded.png');rebootStage.innerHTML='<div class="big">FIND ONE REAL THING</div><p>Grounding can be short. Tap each step after you actually notice something.</p>';rebootActions.innerHTML='<div class="sense-steps" id="senseSteps"></div><button type="button" id="groundingNotNow">NOT NOW</button>';
+    const steps=[['SEE','Find one thing you can see.'],['FEEL','Notice where your feet, legs, or body touch something solid.'],['HEAR','Notice one sound you can hear.']];const senseSteps=document.getElementById('senseSteps');let done=0;
+    steps.forEach(([name,desc])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+name+'</strong><br>'+desc;b.onclick=()=>{if(b.classList.contains('done'))return;b.classList.add('done');b.setAttribute('aria-pressed','true');done++;if(done===steps.length)completeReboot(['Three real things noticed.','MISSING did not have to disappear for Cat to come back into the room.']);};senseSteps.appendChild(b);});
+    document.getElementById('groundingNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};
+  }
+  function currentUrges(){
+    if(usefulActUsed&&actionKind==='message')return ['SEND ANOTHER MESSAGE','CHECK EMAIL EVERY 20 SECONDS','EXPLAIN MORE','HIDE FROM THE PROBLEM'];
+    if(usefulActUsed&&actionKind==='submitted')return ['REFRESH THE GRADEBOOK','SUBMIT AGAIN JUST IN CASE','CALCULATE THE PENALTY','HIDE FROM THE PROBLEM'];
+    return ['REFRESH AGAIN','FIX EVERYTHING RIGHT NOW','SEND MULTIPLE MESSAGES','HIDE FROM THE PROBLEM'];
+  }
+  function startUrgePractice(){
+    setSprite('cat-urge.png');rebootStage.innerHTML='<div class="big">NAME THE URGE</div><p>What does Cat most want to do right now?</p>';rebootActions.innerHTML='<div class="urge-list" id="urgeList"></div><button type="button" id="urgeNotNow">NOT NOW</button>';const urgeList=document.getElementById('urgeList');
+    currentUrges().forEach(label=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>beginUrgeWait(label);urgeList.appendChild(b);});
+    document.getElementById('urgeNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};
+  }
+  async function beginUrgeWait(label){
+    setSprite('cat-braced.png');rebootStage.innerHTML='<div class="big">URGE DETECTED</div><p>'+label+' is an urge. An urge is not a command.</p><p>For five seconds, do not solve anything.</p><div class="reboot-count" id="urgeCount">5</div>';rebootActions.innerHTML='<button type="button" id="urgeSkip">NOT NOW</button>';
+    document.getElementById('urgeSkip').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};
+    for(let n=5;n>=1;n--){const el=document.getElementById('urgeCount');if(!el)return;el.textContent=n;await new Promise(resolve=>setTimeout(resolve,reducedMotion?250:1000));if(!rebootOverlay.classList.contains('show'))return;}
+    completeReboot(['The urge was allowed to exist without running the controls.','Cat still gets to choose what happens next.']);
+  }
+  function completeReboot(lines){
+    rebootComplete=true;crashed=false;setOverload(Math.max(2,overload-4));setSprite('cat-ready.png');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS AVAILABLE</div><p>'+lines.join('<br>')+'</p><p>Cat has enough room to choose a next step.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';
+    document.getElementById('rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setMessage(usefulActUsed?['The available part is done.','Cat can wait without solving the rest right now.']:['The problem may still be real.','Strategic decision-making has returned.']);recomputeReady();};
+  }
 
-  function startGrounding(){setSprite('cat-grounded.png');rebootStage.innerHTML='<div class="big">FIND ONE REAL THING</div><p>Grounding can be short. Tap each step after you actually notice something.</p>';rebootActions.innerHTML='<div class="sense-steps" id="senseSteps"></div><button type="button" id="groundingNotNow">NOT NOW</button>';const steps=[['SEE','Find one thing you can see.'],['FEEL','Notice where your feet, legs, or body touch something solid.'],['HEAR','Notice one sound you can hear.']];const senseSteps=document.getElementById('senseSteps');let done=0;steps.forEach(([name,desc])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+name+'</strong><br>'+desc;b.onclick=()=>{if(b.classList.contains('done'))return;b.classList.add('done');b.setAttribute('aria-pressed','true');done++;if(done===steps.length)completeReboot(['Three real things noticed.','MISSING did not have to disappear for Cat to come back into the room.']);};senseSteps.appendChild(b);});document.getElementById('groundingNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};}
-
-  function startUrgePractice(){setSprite('cat-urge.png');rebootStage.innerHTML='<div class="big">NAME THE URGE</div><p>What does Cat most want to do right now?</p>';rebootActions.innerHTML='<div class="urge-list" id="urgeList"></div><button type="button" id="urgeNotNow">NOT NOW</button>';const urges=['REFRESH AGAIN','FIX EVERYTHING RIGHT NOW','SEND MULTIPLE MESSAGES','HIDE FROM THE PROBLEM'];const urgeList=document.getElementById('urgeList');urges.forEach(label=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>beginUrgeWait(label);urgeList.appendChild(b);});document.getElementById('urgeNotNow').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};}
-
-  async function beginUrgeWait(label){setSprite('cat-braced.png');rebootStage.innerHTML='<div class="big">URGE DETECTED</div><p>'+label+' is an urge. An urge is not a command.</p><p>For five seconds, do not solve anything.</p><div class="reboot-count" id="urgeCount">5</div>';rebootActions.innerHTML='<button type="button" id="urgeSkip">NOT NOW</button>';document.getElementById('urgeSkip').onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png');};for(let n=5;n>=1;n--){const el=document.getElementById('urgeCount');if(!el)return;el.textContent=n;await new Promise(resolve=>setTimeout(resolve,1000));if(!rebootOverlay.classList.contains('show'))return;}completeReboot(['The urge was allowed to exist for five seconds without running the controls.','Cat still gets to choose what happens next.']);}
-
-  function completeReboot(lines){rebootComplete=true;crashed=false;setOverload(Math.max(2,overload-4));setSprite('cat-ready.png');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS AVAILABLE</div><p>'+lines.join('<br>')+'</p><p>Cat has enough room to choose a next step.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';document.getElementById('rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setMessage(['The problem may still be real.','Strategic decision-making has returned.']);if(factsChecked&&usefulActUsed)continueBtn.disabled=false;};}
-
-  function doContinue(){if(!(factsChecked&&usefulActUsed&&!crashed)){setMessage(['Not yet.','CHECK the case file, then choose one workable ACT.']);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');setMessage(['Cat has a next step.','MISSING may still need attention.','Cat does not need certainty or calm to continue.']);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 02 complete');localStorage.setItem('cvc-encounter-02','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
+  function doContinue(){
+    if(!(usefulActUsed&&!crashed&&overload<8)){setMessage(['Not yet.','Cat needs an available next step and enough room to choose.']);return;}
+    clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png');
+    if(actionKind==='submitted'){
+      setMessage(['Cat submitted the file.','MISSING may not update immediately.','Cat does not currently have another useful action.']);
+      document.getElementById('endLine1').textContent='Cat found the available fix and used it.';
+      document.getElementById('endLine2').textContent='The gradebook may take time to catch up.';
+    }else{
+      setMessage(['Cat sent the needed information.','MISSING may still be on the screen.','Cat is waiting for a response that only someone else can provide.']);
+      document.getElementById('endLine1').textContent='Cat gathered evidence and sent one clear message.';
+      document.getElementById('endLine2').textContent='Waiting is now part of the solution.';
+    }
+    endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 02 complete');localStorage.setItem('cvc-encounter-02','complete');endScreen.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'center'});
+  }
 
   checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});
   actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});
   rebootBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openReboot();});
   continueBtn.addEventListener('click',doContinue);
   recomputeReady();
-  setTimeout(()=>attack(1),1900);
+  setTimeout(openingBurst,900);
 })();
 </script>
 </body>
