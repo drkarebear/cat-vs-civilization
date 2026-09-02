@@ -9,24 +9,48 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fontlibrary.org//face/pixel-operator');
-:root{--bg:#000;--white:#f8f8f8;--purple:#b56be0;--orange:#ff9f2f;--yellow:#ffd75a;--blue:#67b7ff;--green:#75dd88;--red:#ff6b6b;--muted:#bca9ca;--panel:#070707}
-*{box-sizing:border-box}html{background:#000;color-scheme:dark}body{margin:0;min-height:100vh;min-height:100dvh;background:#000;color:var(--white);font-family:"PixelOperatorRegular","Courier New",monospace}
-button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.7rem;z-index:1000}
-.shell{width:min(1120px,calc(100% - 22px));margin:auto;padding:22px 0 34px}.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:14px}.brand{font-family:"Press Start 2P";font-size:clamp(.68rem,2vw,.92rem);color:var(--purple);line-height:1.5}.home-link{border:2px solid #fff;padding:.65rem .8rem;text-decoration:none;font-family:"Press Start 2P";font-size:.58rem;color:#fff}.home-link:hover{border-color:var(--orange);color:var(--orange)}
-.frame{border:4px solid #fff;background:var(--panel);box-shadow:8px 8px 0 #202020;position:relative;overflow:hidden}.story{padding:20px 22px;min-height:150px;border-bottom:4px solid #fff;font-size:clamp(1.05rem,2.3vw,1.22rem);letter-spacing:.035em;line-height:1.55}.story p{margin:.25rem 0}.story .accent{color:var(--purple)}
-.battle{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.15fr);gap:18px;padding:20px}.enemy-panel{min-height:370px;text-align:center}.enemy-title{font-family:"Press Start 2P";font-size:clamp(2rem,6.8vw,4.7rem);line-height:1.1;color:#fff;text-shadow:5px 5px 0 #292929;margin:8px 0 10px}.enemy-sub{color:var(--muted);font-size:1.08rem;letter-spacing:.04em;line-height:1.45;margin-bottom:14px}
-.future-file{width:min(100%,450px);margin:0 auto 12px;border:3px solid #fff;background:#0b0b0b;padding:13px;text-align:left;box-shadow:5px 5px 0 #1d1d1d}.future-head{font-family:"Press Start 2P";font-size:.65rem;color:var(--yellow);line-height:1.45;border-bottom:2px solid #555;padding-bottom:8px;margin-bottom:8px}.future-row{display:grid;grid-template-columns:78px 1fr;gap:8px;padding:7px 0;border-bottom:1px dotted #444;font-size:.96rem;line-height:1.25}.future-row:last-child{border-bottom:0}.future-label{color:var(--purple)}.future-value{color:#777}.future-value.revealed{color:#fff}.sort-readout{margin-top:9px;color:var(--green);font-size:.96rem}.cat-wrap{margin-top:8px;display:grid;place-items:center;min-height:195px}.cat-sprite{width:min(215px,68%);max-height:190px;object-fit:contain;image-rendering:pixelated;transform-origin:50% 75%}
-.arena-col{display:flex;flex-direction:column;gap:14px}.hud{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:1rem;letter-spacing:.05em}.meter{height:18px;border:3px solid #fff;background:#111}.meter-fill{height:100%;width:30%;background:var(--purple);transition:width .2s linear}.fact-file{border:3px solid #fff;background:#030303;padding:10px 12px;min-height:72px}.fact-file strong{font-family:"Press Start 2P";font-size:.52rem;color:var(--yellow)}.fact-file ul{margin:.45rem 0 0;padding-left:1.2rem;line-height:1.35;font-size:.94rem}.fact-file li+li{margin-top:.28rem}
-.arena{position:relative;height:300px;border:4px solid #fff;background:#000;overflow:hidden;touch-action:none}.heart{position:absolute;width:22px;height:22px;left:50%;top:72%;transform:translate(-50%,-50%) rotate(45deg);background:var(--orange);box-shadow:0 0 0 2px #000}.heart::before,.heart::after{content:"";position:absolute;width:22px;height:22px;background:var(--orange);border-radius:50%}.heart::before{left:-11px}.heart::after{top:-11px}.bullet{position:absolute;white-space:nowrap;font-family:"Press Start 2P";font-size:.58rem;color:#fff;pointer-events:none;line-height:1.25}.bullet.soft{color:var(--yellow)}.bullet.hot{color:var(--red)}.bullet.calm{color:var(--blue)}
-.message{border:3px solid #fff;padding:14px 16px;min-height:94px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}.touch-help{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2px}.touchpad-shell{display:grid;place-items:center;padding:6px 0 2px}.touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;padding:10px;border:2px dashed #444;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.touchpad button{width:76px;height:76px;border:3px solid #fff;background:#080808;color:#fff;font-family:"Press Start 2P";font-size:1.15rem;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}.touchpad button:active{background:#191919;border-color:var(--orange);color:var(--orange)}.touchpad .up{grid-column:2;grid-row:1}.touchpad .left{grid-column:1;grid-row:2}.touchpad .right{grid-column:3;grid-row:2}.touchpad .down{grid-column:2;grid-row:3}
-.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px 20px}.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}.cmd:hover:not(:disabled){outline:4px solid currentColor;outline-offset:2px}.cmd:disabled{opacity:.32;cursor:not-allowed}
-.choice-overlay,.sort-overlay,.reboot-overlay{position:fixed;inset:0;background:rgba(0,0,0,.89);display:none;place-items:center;padding:18px;z-index:50}.choice-overlay.show,.sort-overlay.show,.reboot-overlay.show{display:grid}.choice-box,.sort-box,.reboot-box{width:min(740px,100%);max-height:min(86vh,790px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}.choice-box h2,.sort-box h2,.reboot-box h2{font-family:"Press Start 2P";font-size:1rem;line-height:1.5;color:var(--purple);margin:0 0 12px}.choice-intro{margin:0 0 14px;line-height:1.45;color:#ddd}.choice-list,.reboot-actions{display:grid;gap:10px}.choice-list button,.reboot-actions button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover,.reboot-actions button:hover{border-color:var(--orange);color:var(--orange)}.choice-list button:disabled{opacity:.4;cursor:not-allowed}.choice-list button.visited::after{content:"  ✓";color:var(--green)}.close-row{display:flex;justify-content:flex-end;margin-top:14px}.close-btn{border:2px solid #777;background:#000;color:#ddd;padding:9px 12px;cursor:pointer}
-.thought-card{border:3px solid var(--purple);padding:18px;margin:12px 0 16px;text-align:center;font-size:1.22rem;line-height:1.45;color:#fff}.sort-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sort-buttons button{border:3px solid #fff;background:#000;color:#fff;padding:14px 10px;cursor:pointer;font-size:1.02rem;line-height:1.25}.sort-buttons button:hover{border-color:var(--orange);color:var(--orange)}.sort-help{font-size:.98rem;color:var(--muted);line-height:1.4;margin-top:12px}
+:root{
+  --bg:#000;--white:#f8f8f8;--purple:#b56be0;--orange:#ff9f2f;--yellow:#ffd75a;
+  --blue:#67b7ff;--green:#75dd88;--red:#ff6b6b;--muted:#bca9ca;--panel:#070707;
+}
+*{box-sizing:border-box}
+html{background:#000;color-scheme:dark}
+body{margin:0;min-height:100vh;min-height:100dvh;background:#000;color:var(--white);font-family:"PixelOperatorRegular","Courier New",monospace}
+button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.7rem;z-index:1000}
+.shell{width:min(1120px,calc(100% - 22px));margin:auto;padding:22px 0 34px}
+.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:14px}
+.brand{font-family:"Press Start 2P";font-size:clamp(.68rem,2vw,.92rem);color:var(--purple);line-height:1.5}
+.home-link{border:2px solid #fff;padding:.65rem .8rem;text-decoration:none;font-family:"Press Start 2P";font-size:.58rem;color:#fff}.home-link:hover{border-color:var(--orange);color:var(--orange)}
+.frame{border:4px solid #fff;background:var(--panel);box-shadow:8px 8px 0 #202020;position:relative;overflow:hidden}
+.story{padding:20px 22px;min-height:150px;border-bottom:4px solid #fff;font-size:clamp(1.05rem,2.3vw,1.22rem);letter-spacing:.035em;line-height:1.55}.story p{margin:.25rem 0}.story .accent{color:var(--purple)}
+.battle{display:grid;grid-template-columns:minmax(280px,1fr) minmax(300px,1.15fr);gap:18px;padding:20px}
+.enemy-panel{min-height:390px;text-align:center}
+.enemy-title{font-family:"Press Start 2P";font-size:clamp(2rem,6.8vw,4.7rem);line-height:1.1;color:#fff;text-shadow:5px 5px 0 #292929;margin:8px 0 10px;transition:opacity .2s linear}
+.enemy-sub{color:var(--muted);font-size:1.08rem;letter-spacing:.04em;line-height:1.45;margin-bottom:14px}
+.future-file{width:min(100%,460px);margin:0 auto 12px;border:3px solid #fff;background:#0b0b0b;padding:13px;text-align:left;box-shadow:5px 5px 0 #1d1d1d}
+.future-head{font-family:"Press Start 2P";font-size:.65rem;color:var(--yellow);line-height:1.45;border-bottom:2px solid #555;padding-bottom:8px;margin-bottom:8px}
+.future-row{display:grid;grid-template-columns:96px 1fr;gap:8px;padding:7px 0;border-bottom:1px dotted #444;font-size:.96rem;line-height:1.3}.future-row:last-of-type{border-bottom:0}
+.future-label{color:var(--purple)}.future-value{color:#777}.future-value.revealed{color:#fff}.future-value.warning{color:var(--orange)}.future-value.good{color:var(--green)}
+.future-status{margin-top:10px;border-top:2px solid #555;padding-top:9px;color:var(--green);font-size:.98rem;line-height:1.35}
+.cat-wrap{margin-top:8px;display:grid;place-items:center;min-height:195px}.cat-sprite{width:min(215px,68%);max-height:190px;object-fit:contain;image-rendering:pixelated;transform-origin:50% 75%}
+.arena-col{display:flex;flex-direction:column;gap:14px}.hud{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:1rem;letter-spacing:.05em}.meter{height:18px;border:3px solid #fff;background:#111}.meter-fill{height:100%;width:30%;background:var(--purple);transition:width .2s linear}
+.fact-file{border:3px solid #fff;background:#030303;padding:10px 12px;min-height:72px}.fact-file strong{font-family:"Press Start 2P";font-size:.52rem;color:var(--yellow)}.fact-file ul{margin:.45rem 0 0;padding-left:1.2rem;line-height:1.35;font-size:.94rem}.fact-file li+li{margin-top:.28rem}
+.arena{position:relative;height:300px;border:4px solid #fff;background:#000;overflow:hidden;touch-action:pan-y pinch-zoom}.heart{position:absolute;width:22px;height:22px;left:50%;top:72%;transform:translate(-50%,-50%) rotate(45deg);background:var(--orange);box-shadow:0 0 0 2px #000}.heart::before,.heart::after{content:"";position:absolute;width:22px;height:22px;background:var(--orange);border-radius:50%}.heart::before{left:-11px}.heart::after{top:-11px}
+.bullet{position:absolute;white-space:nowrap;font-family:"Press Start 2P";font-size:.58rem;color:#fff;pointer-events:none;line-height:1.25}.bullet.soft{color:var(--yellow)}.bullet.hot{color:var(--red)}
+.message{border:3px solid #fff;padding:14px 16px;min-height:94px;line-height:1.5;font-size:1.08rem;letter-spacing:.035em}
+.need-bar{margin:0 20px 14px;border:3px solid var(--purple);background:#08030b;padding:12px 14px;display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;line-height:1.4}
+.need-label{font-family:"Press Start 2P";font-size:.58rem;color:var(--purple);line-height:1.5}.need-text{font-size:1.05rem;color:#fff}.need-bar.ready{border-color:var(--green)}.need-bar.ready .need-label{color:var(--green)}.need-bar.warn{border-color:var(--blue)}.need-bar.warn .need-label{color:var(--blue)}
+.touch-help{text-align:center;color:var(--muted);font-size:.9rem;margin-top:2px}.touchpad-shell{display:grid;place-items:center;padding:6px 0 2px}.touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;padding:10px;border:2px dashed #444;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}.touchpad button{width:76px;height:76px;border:3px solid #fff;background:#080808;color:#fff;font-family:"Press Start 2P";font-size:1.15rem;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer}.touchpad button:active{background:#191919;border-color:var(--orange);color:var(--orange)}.touchpad .up{grid-column:2;grid-row:1}.touchpad .left{grid-column:1;grid-row:2}.touchpad .right{grid-column:3;grid-row:2}.touchpad .down{grid-column:2;grid-row:3}
+.controls{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 20px 20px}.cmd{min-height:64px;border:4px solid #fff;background:#050505;color:#fff;font-family:"Press Start 2P";font-size:.72rem;cursor:pointer}.cmd[data-cmd="check"]{color:var(--yellow)}.cmd[data-cmd="act"]{color:var(--orange)}.cmd[data-cmd="reboot"]{color:var(--blue)}.cmd[data-cmd="continue"]{color:var(--green)}.cmd:hover:not(:disabled){outline:4px solid currentColor;outline-offset:2px}.cmd:disabled{opacity:.32;cursor:not-allowed}.cmd.recommended{box-shadow:0 0 0 3px var(--blue),0 0 18px rgba(103,183,255,.35)}
+.choice-overlay,.sort-overlay,.reboot-overlay{position:fixed;inset:0;background:rgba(0,0,0,.89);display:none;place-items:center;padding:18px;z-index:50}.choice-overlay.show,.sort-overlay.show,.reboot-overlay.show{display:grid}.choice-box,.sort-box,.reboot-box{width:min(760px,100%);max-height:min(86vh,800px);overflow:auto;border:4px solid #fff;background:#050505;padding:20px;box-shadow:8px 8px 0 #222}.choice-box h2,.sort-box h2,.reboot-box h2{font-family:"Press Start 2P";font-size:1rem;line-height:1.5;color:var(--purple);margin:0 0 12px}.choice-intro{margin:0 0 14px;line-height:1.45;color:#ddd}.choice-list,.reboot-actions{display:grid;gap:10px}.choice-list button,.reboot-actions button{border:3px solid #fff;background:#000;color:#fff;padding:14px;text-align:left;cursor:pointer;font-size:1.05rem;letter-spacing:.025em;line-height:1.3}.choice-list button:hover,.reboot-actions button:hover{border-color:var(--orange);color:var(--orange)}.choice-list button:disabled{opacity:.4;cursor:not-allowed}.choice-list button.visited::after{content:"  ✓";color:var(--green)}.choice-list button small{display:block;color:var(--muted);margin-top:4px}.close-row{display:flex;justify-content:flex-end;margin-top:14px}.close-btn{border:2px solid #777;background:#000;color:#ddd;padding:9px 12px;cursor:pointer}
+.thought-card{border:3px solid var(--purple);padding:18px;margin:12px 0 16px;text-align:center;font-size:1.22rem;line-height:1.45;color:#fff}.sort-buttons{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.sort-buttons button{border:3px solid #fff;background:#000;color:#fff;padding:14px 10px;cursor:pointer;font-size:1.02rem;line-height:1.25}.sort-buttons button:hover{border-color:var(--orange);color:var(--orange)}.sort-help{font-size:.98rem;color:var(--muted);line-height:1.4;margin-top:12px}.sort-result{border-top:2px solid #444;margin-top:14px;padding-top:12px;line-height:1.45}
 .reboot-stage{border:3px solid #fff;padding:16px;min-height:180px;display:grid;align-content:center;gap:12px;text-align:center}.reboot-stage .big{font-family:"Press Start 2P";font-size:clamp(.9rem,3vw,1.25rem);line-height:1.5;color:var(--blue)}.reboot-stage p{margin:0;font-size:1.08rem;line-height:1.45}.timer{font-family:"Press Start 2P";font-size:2rem;color:#fff}
 .crash-banner{position:absolute;inset:0;display:none;place-items:center;background:rgba(35,0,45,.93);z-index:20;text-align:center;padding:20px}.crash-banner.show{display:grid}.crash-banner div{font-family:"Press Start 2P";font-size:clamp(1rem,4vw,1.8rem);line-height:1.65;color:var(--red);text-shadow:3px 3px 0 #000}.frame.crash-shake{animation:screenShake .11s steps(2,end) 8}.frame.crash-flash{box-shadow:0 0 0 8px var(--red),8px 8px 0 #202020}@keyframes screenShake{0%{transform:translate(0)}25%{transform:translate(3px,-2px)}50%{transform:translate(-3px,2px)}75%{transform:translate(2px,2px)}100%{transform:translate(0)}}
 .end-screen{display:none;text-align:center;padding:34px 20px 44px;border-top:4px solid #fff}.end-screen.show{display:block}.end-screen h2{font-family:"Press Start 2P";font-size:clamp(1.25rem,4vw,2.2rem);color:var(--green);line-height:1.5}.end-screen p{max-width:720px;margin:12px auto;font-size:1.1rem;letter-spacing:.035em;line-height:1.7}.end-screen a{display:inline-block;margin-top:14px;border:3px solid #fff;padding:14px 18px;text-decoration:none;font-family:"Press Start 2P";font-size:.7rem;color:#fff}.sr-status{position:absolute;left:-9999px}
-@media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:320px}.enemy-title{font-size:clamp(2.2rem,13vw,4.3rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.sort-buttons{grid-template-columns:1fr}.cat-wrap{min-height:180px}.cat-sprite{max-height:180px}.future-file{width:min(100%,520px)}}
-@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.sort-box,.reboot-box{padding:15px}.fact-file{font-size:.9rem}.future-row{grid-template-columns:70px 1fr;font-size:.91rem}}
+@media(max-width:760px){.battle{grid-template-columns:1fr}.enemy-panel{min-height:320px}.enemy-title{font-size:clamp(2.2rem,13vw,4.3rem)}.arena{height:290px}.controls{grid-template-columns:1fr 1fr}.sort-buttons{grid-template-columns:1fr}.cat-wrap{min-height:180px}.cat-sprite{max-height:180px}.future-file{width:min(100%,520px)}.need-bar{grid-template-columns:1fr;margin-left:12px;margin-right:12px}}
+@media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.sort-box,.reboot-box{padding:15px}.fact-file{font-size:.9rem}.future-row{grid-template-columns:86px 1fr;font-size:.91rem}.need-text{font-size:1rem}}
 @media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
@@ -42,121 +66,243 @@ button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focu
       <p class="accent">* WHAT IF? has detected an opening.</p>
       <p>* It begins generating possibilities at industrial speed.</p>
     </div>
+
     <div class="battle">
       <section class="enemy-panel" aria-label="Encounter">
-        <div class="enemy-title">WHAT IF?</div>
-        <div class="enemy-sub">It specializes in turning uncertainty into a twelve-part documentary.</div>
+        <div class="enemy-title" id="enemyTitle">WHAT IF?</div>
+        <div class="enemy-sub" id="enemySub">It specializes in turning uncertainty into a twelve-part documentary.</div>
         <div class="future-file" aria-label="Future file">
-          <div class="future-head">FUTURE FILE // CURRENTLY PARTIAL</div>
+          <div class="future-head">FUTURE FILE // PARTIALLY UNAVAILABLE</div>
           <div class="future-row"><div class="future-label">EVENT</div><div class="future-value" id="futureEvent">???</div></div>
-          <div class="future-row"><div class="future-label">KNOWN</div><div class="future-value" id="futureKnown">???</div></div>
-          <div class="future-row"><div class="future-label">UNKNOWN</div><div class="future-value" id="futureUnknown">THE FUTURE IS NOT LOADED</div></div>
-          <div class="future-row"><div class="future-label">CHOICES</div><div class="future-value" id="futureChoices">???</div></div>
-          <div class="sort-readout">THOUGHTS SORTED: <span id="sortedText">0/4</span> &nbsp;•&nbsp; USEFUL ACT: <span id="actText">NO</span></div>
+          <div class="future-row"><div class="future-label">AVAILABLE</div><div class="future-value" id="futureAvailable">???</div></div>
+          <div class="future-row"><div class="future-label">NOT LOADED</div><div class="future-value" id="futureUnknown">EXACT FUTURE: UNAVAILABLE</div></div>
+          <div class="future-row"><div class="future-label">TONIGHT</div><div class="future-value" id="futurePlan">PLAN NOT CHOSEN</div></div>
+          <div class="future-row"><div class="future-label">WHAT-IF</div><div class="future-value" id="futureFilter">UNFILTERED</div></div>
+          <div class="future-status" id="futureStatus">FUTURE STATUS: PARTIALLY UNAVAILABLE</div>
         </div>
         <div class="cat-wrap"><img class="cat-sprite" id="catSprite" src="./cat-worried.png" alt="Pixel-art Cat looking worried" onerror="this.onerror=null;this.src='./cat.png'"></div>
       </section>
+
       <section class="arena-col" aria-label="Thought dodge game">
-        <div class="hud"><span>OVERLOAD</span><div class="meter"><div class="meter-fill" id="meterFill"></div></div><span id="meterText">3/10</span></div>
-        <div class="fact-file"><strong>CHECKED FACTS</strong><ul id="factList"><li>Nothing checked yet. ACT is waiting for evidence.</li></ul></div>
-        <div class="arena" id="arena" aria-label="Use arrow keys, WASD, or touch buttons to dodge thoughts"><div class="heart" id="heart" aria-hidden="true"></div></div>
-        <div class="message" id="message" aria-live="polite">* WHAT IF? is currently accepting uncertainty as evidence.</div>
-        <div class="touchpad-shell"><div class="touchpad" aria-label="Touch movement controls">
-          <button type="button" class="up" data-dir="up" aria-label="Move up">↑</button><button type="button" class="left" data-dir="left" aria-label="Move left">←</button><button type="button" class="right" data-dir="right" aria-label="Move right">→</button><button type="button" class="down" data-dir="down" aria-label="Move down">↓</button>
+        <div class="hud"><span>OVERLOAD</span><div class="meter" id="meter" role="progressbar" aria-label="Overload" aria-valuemin="0" aria-valuemax="10" aria-valuenow="3"><div class="meter-fill" id="meterFill"></div></div><span id="meterText">3/10</span></div>
+        <div class="fact-file"><strong>ORIENTATION FILE</strong><ul id="factList"><li>The quiz is tomorrow. Most of tomorrow is still not loaded.</li></ul></div>
+        <div class="arena" id="arena" tabindex="0" aria-label="Use arrow keys, WASD, or touch buttons to dodge thoughts"><div class="heart" id="heart" aria-hidden="true"></div></div>
+        <div class="message" id="message" aria-live="polite">* WHAT IF? is treating possible futures like breaking news.</div>
+        <div class="touchpad-shell"><div class="touchpad" id="touchpad" aria-label="Protected touch movement controls">
+          <button type="button" class="up" data-dir="up" aria-label="Move up">↑</button>
+          <button type="button" class="left" data-dir="left" aria-label="Move left">←</button>
+          <button type="button" class="right" data-dir="right" aria-label="Move right">→</button>
+          <button type="button" class="down" data-dir="down" aria-label="Move down">↓</button>
         </div><div class="touch-help">ARROWS / WASD / TOUCH • PRESS &amp; HOLD WORKS</div></div>
       </section>
     </div>
-    <div class="controls" aria-label="Encounter commands">
-      <button class="cmd" data-cmd="check">CHECK</button><button class="cmd" data-cmd="act" disabled>ACT</button><button class="cmd" data-cmd="reboot">REBOOT</button><button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
+
+    <div class="need-bar" id="needBar" aria-live="polite">
+      <div class="need-label" id="needLabel">CAT NEEDS: ORIENTATION</div>
+      <div class="need-text" id="needText">What is actually available tonight — and what belongs to tomorrow?</div>
     </div>
+
+    <div class="controls" aria-label="Encounter commands">
+      <button class="cmd" data-cmd="check">CHECK</button>
+      <button class="cmd" data-cmd="act" disabled>ACT</button>
+      <button class="cmd" data-cmd="reboot">REBOOT CAT</button>
+      <button class="cmd" data-cmd="continue" disabled>CONTINUE</button>
+    </div>
+
     <div class="crash-banner" id="crashBanner"><div id="crashBannerText">FUTURE SIMULATION ENGINE<br>OVER CAPACITY</div></div>
-    <div class="end-screen" id="endScreen"><h2>CIVILIZATION SURVIVED.</h2><p>Cat still does not know exactly what will happen tomorrow.</p><p>That is the normal amount of future knowledge.</p><p>Cat knows what is true now, what is merely possible, and what to do next.</p><a href="index.html">RETURN TO MAP</a></div>
+    <div class="end-screen" id="endScreen" aria-live="polite">
+      <h2>CIVILIZATION SURVIVED.</h2>
+      <p>Cat still does not know exactly what will happen tomorrow.</p>
+      <p>Tomorrow has declined to send spoilers.</p>
+      <p>Cat knows what belongs to tonight. The rest can stay in the unopened file.</p>
+      <p><strong>ENCOUNTER COMPLETE.</strong></p>
+      <a href="index.html">RETURN TO MAP</a>
+    </div>
   </section>
 </main>
-<div class="choice-overlay" id="choiceOverlay" role="dialog" aria-modal="true" aria-labelledby="choiceTitle"><div class="choice-box"><h2 id="choiceTitle">CHECK</h2><p class="choice-intro" id="choiceIntro"></p><div class="choice-list" id="choiceList"></div><div class="close-row"><button class="close-btn" id="choiceClose">CLOSE</button></div></div></div>
-<div class="sort-overlay" id="sortOverlay" role="dialog" aria-modal="true" aria-labelledby="sortTitle"><div class="sort-box"><h2 id="sortTitle">SORT THE WHAT-IF</h2><div class="thought-card" id="thoughtCard"></div><div class="sort-buttons"><button type="button" data-sort="fact">FACT</button><button type="button" data-sort="possibility">POSSIBILITY</button><button type="button" data-sort="fanfiction">BRAIN FANFICTION</button></div><div class="sort-help">FACT = known now. &nbsp; POSSIBILITY = could happen. &nbsp; BRAIN FANFICTION = a prediction dressed up like completed footage.</div></div></div>
-<div class="reboot-overlay" id="rebootOverlay" role="dialog" aria-modal="true" aria-labelledby="rebootTitle"><div class="reboot-box"><h2 id="rebootTitle">REBOOT CAT</h2><div class="reboot-stage" id="rebootStage"></div><div class="reboot-actions" id="rebootActions"></div></div></div>
+
+<div class="choice-overlay" id="choiceOverlay" role="dialog" aria-modal="true" aria-labelledby="choiceTitle">
+  <div class="choice-box">
+    <h2 id="choiceTitle">CHECK</h2>
+    <p class="choice-intro" id="choiceIntro"></p>
+    <div class="choice-list" id="choiceList"></div>
+    <div class="close-row"><button class="close-btn" id="choiceClose" type="button">CLOSE</button></div>
+  </div>
+</div>
+
+<div class="sort-overlay" id="sortOverlay" role="dialog" aria-modal="true" aria-labelledby="sortTitle">
+  <div class="sort-box">
+    <h2 id="sortTitle">CHECK A WHAT-IF</h2>
+    <div class="thought-card" id="thoughtCard"></div>
+    <div class="sort-buttons" id="sortButtons">
+      <button type="button" data-sort="fact">FACT</button>
+      <button type="button" data-sort="possibility">POSSIBILITY</button>
+      <button type="button" data-sort="fanfiction">BRAIN FANFICTION</button>
+    </div>
+    <div class="sort-help">FACT = known now. &nbsp; POSSIBILITY = could happen. &nbsp; BRAIN FANFICTION = several assumptions edited into a finished ending.</div>
+    <div class="sort-result" id="sortResult" hidden></div>
+  </div>
+</div>
+
+<div class="reboot-overlay" id="rebootOverlay" role="dialog" aria-modal="true" aria-labelledby="rebootTitle">
+  <div class="reboot-box">
+    <h2 id="rebootTitle">REBOOT CAT</h2>
+    <div class="reboot-stage" id="rebootStage"></div>
+    <div class="reboot-actions" id="rebootActions"></div>
+  </div>
+</div>
 <div class="sr-status" id="srStatus" aria-live="assertive"></div>
+
 <script>
 (() => {
   const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-  const arena=$('#arena'),heart=$('#heart'),message=$('#message'),meterFill=$('#meterFill'),meterText=$('#meterText'),frame=$('#frame'),cat=$('#catSprite');
+  const arena=$('#arena'),heart=$('#heart'),message=$('#message'),meter=$('#meter'),meterFill=$('#meterFill'),meterText=$('#meterText'),frame=$('#frame'),cat=$('#catSprite');
+  const enemyTitle=$('#enemyTitle'),enemySub=$('#enemySub');
   const choiceOverlay=$('#choiceOverlay'),choiceTitle=$('#choiceTitle'),choiceIntro=$('#choiceIntro'),choiceList=$('#choiceList'),choiceClose=$('#choiceClose');
-  const sortOverlay=$('#sortOverlay'),thoughtCard=$('#thoughtCard');
+  const sortOverlay=$('#sortOverlay'),thoughtCard=$('#thoughtCard'),sortButtons=$('#sortButtons'),sortResult=$('#sortResult');
   const rebootOverlay=$('#rebootOverlay'),rebootStage=$('#rebootStage'),rebootActions=$('#rebootActions'),endScreen=$('#endScreen'),srStatus=$('#srStatus');
   const checkBtn=$('[data-cmd="check"]'),actBtn=$('[data-cmd="act"]'),rebootBtn=$('[data-cmd="reboot"]'),continueBtn=$('[data-cmd="continue"]');
-  const factList=$('#factList'),futureEvent=$('#futureEvent'),futureKnown=$('#futureKnown'),futureUnknown=$('#futureUnknown'),futureChoices=$('#futureChoices'),sortedText=$('#sortedText'),actText=$('#actText');
+  const factList=$('#factList'),futureEvent=$('#futureEvent'),futureAvailable=$('#futureAvailable'),futureUnknown=$('#futureUnknown'),futurePlan=$('#futurePlan'),futureFilter=$('#futureFilter'),futureStatus=$('#futureStatus');
+  const needBar=$('#needBar'),needLabel=$('#needLabel'),needText=$('#needText');
   const crashBanner=$('#crashBanner'),crashBannerText=$('#crashBannerText');
 
-  let x=.5,y=.72,overload=3,activeAttack=false,bulletTimers=[],checked=new Set(),facts=new Map(),sorted=0,usefulAct=false,crashed=false,spiral=false,rebootComplete=false,currentThought=null;
-  let certaintyLoops=0;
+  let x=.5,y=.72,overload=3,activeAttack=false,bulletTimers=[],attackGeneration=0;
+  let crashed=false,spiral=false,rebootComplete=false,hasPlan=false,currentThought=null,sortClarity=0,certaintyLoops=0,reassuranceLoops=0,actionBusy=false;
+  let introFinished=false;
+  const checked=new Set(),facts=new Map(),planHistory=[];
 
-  const thoughts=["WHAT IF I BLANK?","WHAT IF I MISS SOMETHING EASY?","WHAT IF I STUDY THE WRONG THING?","WHAT IF EVERYONE ELSE KNOWS?","WHAT IF MY GRADE DROPS?","WHAT IF I PANIC?","WHAT IF IT'S HARDER THAN I EXPECT?","WHAT IF I DON'T KNOW?","WHAT IF I FORGET EVERYTHING?","WHAT IF I CAN'T STOP THINKING?"];
+  const baseThoughts=[
+    'WHAT IF I BLANK?','WHAT IF I MISS SOMETHING EASY?','WHAT IF I STUDY THE WRONG THING?','WHAT IF EVERYONE ELSE KNOWS?',
+    'WHAT IF MY GRADE DROPS?','WHAT IF I PANIC?','WHAT IF IT\'S HARDER THAN I EXPECT?','WHAT IF I DON\'T KNOW?',
+    'WHAT IF I FORGET EVERYTHING?','WHAT IF I CAN\'T STOP THINKING?'
+  ];
   const thoughtDeck=[
-    {text:"There is a quiz tomorrow.",type:"fact",explain:"Known now. No prediction required."},
-    {text:"I might miss a question.",type:"possibility",explain:"Possible. Not certain. A possibility does not need a dramatic soundtrack."},
-    {text:"If I blank for ten seconds, I will fail.",type:"fanfiction",explain:"A brief stuck moment has been promoted to the ending."},
-    {text:"I have notes I can review.",type:"fact",explain:"That is information Cat actually has tonight."},
-    {text:"I could feel nervous during the quiz.",type:"possibility",explain:"Yes. Feeling nervous is possible. It does not reveal the score."},
-    {text:"Everyone else will know every answer.",type:"fanfiction",explain:"Cat does not have access to everyone's future brain data."},
-    {text:"I can ask if directions are unclear.",type:"fact",explain:"That option exists whether or not Cat feels certain."},
-    {text:"The quiz could be harder than I expect.",type:"possibility",explain:"Could be. Could also be easier or about the same."},
-    {text:"If my grade drops, everything gets worse from here.",type:"fanfiction",explain:"Several future events have been stacked together and labeled inevitable."},
-    {text:"I could study something that is not on the quiz.",type:"possibility",explain:"Possible. Preparing never guarantees perfect prediction of the questions."}
+    {text:'There is a quiz tomorrow.',type:'fact',explain:'Known now. No prediction required.',reframe:'QUIZ TOMORROW = FACT'},
+    {text:'I might miss a question.',type:'possibility',explain:'Possible. Not certain. The word “might” is doing useful work.',reframe:'I MIGHT MISS ONE'},
+    {text:'If I blank for ten seconds, I will fail.',type:'fanfiction',explain:'A brief stuck moment has been edited into the ending.',reframe:'TEN SECONDS ≠ THE ENDING'},
+    {text:'I have notes and a marked topic to review.',type:'fact',explain:'That is information Cat actually has tonight.',reframe:'NOTES EXIST NOW'},
+    {text:'I could feel nervous during the quiz.',type:'possibility',explain:'Yes. Feeling nervous is possible. It does not reveal the score.',reframe:'NERVOUS IS POSSIBLE'},
+    {text:'Everyone else will know every answer.',type:'fanfiction',explain:'Cat does not have access to everyone’s future brain data.',reframe:'OTHER BRAINS: NOT LOADED'},
+    {text:'The quiz could be harder than I expect.',type:'possibility',explain:'Could be. It could also be easier or about the same.',reframe:'DIFFICULTY: UNKNOWN'},
+    {text:'If my grade drops, everything gets worse from here.',type:'fanfiction',explain:'Several future events have been stacked together and labeled inevitable.',reframe:'ONE SCORE ≠ THE WHOLE FUTURE'}
   ];
 
   function setSprite(name,alt){cat.src='./'+name;cat.alt=alt||'Pixel-art Cat';cat.onerror=()=>{cat.onerror=null;cat.src='./cat.png';};}
   function setMessage(lines){const clean=lines.filter(Boolean);message.innerHTML=clean.map(t=>'&ast; '+t).join('<br>');srStatus.textContent=clean.join(' ');}
-  function setOverload(n,allowSpiral=true){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';if(allowSpiral&&overload>=10&&!crashed&&!spiral)enterSpiral();}
+  function setNeed(label,text,mode=''){
+    needLabel.textContent=label;needText.textContent=text;needBar.classList.remove('ready','warn');if(mode)needBar.classList.add(mode);
+  }
+  function enoughOrientation(){return checked.has('event')&&checked.has('available');}
+  function updateNeed(){
+    rebootBtn.classList.remove('recommended');
+    if(crashed){setNeed('CAT NEEDS: ROOM TO CHOOSE','Tomorrow has occupied all available RAM. REBOOT restores decision-making.','warn');rebootBtn.classList.add('recommended');return;}
+    if(spiral){setNeed('CAT NEEDS: ROOM TO CHOOSE','Cat has more possible futures than usable information. REBOOT can return attention to now.','warn');rebootBtn.classList.add('recommended');return;}
+    if(overload>=8){setNeed(hasPlan?'CAT HAS A PLAN · OVERLOAD IS LOUD':'CAT MAY NEED: ROOM TO CHOOSE',hasPlan?'Tonight’s plan still exists. REBOOT is optional; CONTINUE is still allowed.':'Predictions are louder than the information Cat has. REBOOT may help.','warn');rebootBtn.classList.add('recommended');return;}
+    if(hasPlan){setNeed('TONIGHT\'S PART: HANDLED','The future is still unknown. Cat has a bounded plan for the part that exists now.','ready');return;}
+    if(enoughOrientation()){setNeed('CAT NEEDS: A PLAN FOR TONIGHT','What does Cat do with the part Cat can actually control?');return;}
+    setNeed('CAT NEEDS: ORIENTATION','What is actually available tonight — and what belongs to tomorrow?');
+  }
+
+  function setOverload(n,allowSpiral=true){overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';meter.setAttribute('aria-valuenow',String(overload));if(allowSpiral&&overload>=10&&!crashed&&!spiral)enterSpiral();updateNeed();}
+
   function placeHeart(){const r=arena.getBoundingClientRect();heart.style.left=Math.max(18,Math.min(r.width-18,x*r.width))+'px';heart.style.top=Math.max(18,Math.min(r.height-18,y*r.height))+'px';}
-  function move(dx,dy){if(choiceOverlay.classList.contains('show')||sortOverlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
+  function move(dx,dy){if(choiceOverlay.classList.contains('show')||sortOverlay.classList.contains('show')||rebootOverlay.classList.contains('show')||crashed||spiral)return;x=Math.max(.05,Math.min(.95,x+dx));y=Math.max(.07,Math.min(.93,y+dy));placeHeart();}
   addEventListener('resize',placeHeart);placeHeart();
   const keys={ArrowUp:[0,-.052],w:[0,-.052],W:[0,-.052],ArrowDown:[0,.052],s:[0,.052],S:[0,.052],ArrowLeft:[-.052,0],a:[-.052,0],A:[-.052,0],ArrowRight:[.052,0],d:[.052,0],D:[.052,0]};
   document.addEventListener('keydown',e=>{if(keys[e.key]){e.preventDefault();move(...keys[e.key]);}});
-  const dirs={up:[0,-.055],down:[0,.055],left:[-.055,0],right:[.055,0]};
-  const touchpad=$('.touchpad');let holdTimer=null,holdInterval=null;
+  const dirs={up:[0,-.06],down:[0,.06],left:[-.06,0],right:[.06,0]};
+  const touchpad=$('#touchpad');let holdTimer=null,holdInterval=null;
   function stopHold(){clearTimeout(holdTimer);clearInterval(holdInterval);holdTimer=holdInterval=null;}
-  if(touchpad){['pointerdown','touchstart','dblclick'].forEach(ev=>touchpad.addEventListener(ev,e=>{if(ev!=='pointerdown'||e.pointerType==='touch'||e.pointerType==='pen')e.preventDefault();},{passive:false}));}
-  $$('[data-dir]').forEach(btn=>{btn.addEventListener('pointerdown',e=>{e.preventDefault();stopHold();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);holdTimer=setTimeout(()=>{holdInterval=setInterval(()=>move(...dirs[btn.dataset.dir]),115);},260);});['pointerup','pointercancel','lostpointercapture','pointerleave'].forEach(ev=>btn.addEventListener(ev,stopHold));});
+  if(touchpad){['touchstart','touchmove','dblclick','contextmenu'].forEach(ev=>touchpad.addEventListener(ev,e=>e.preventDefault(),{passive:false}));}
+  $$('[data-dir]').forEach(btn=>{btn.addEventListener('pointerdown',e=>{e.preventDefault();stopHold();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);holdTimer=setTimeout(()=>{holdInterval=setInterval(()=>move(...dirs[btn.dataset.dir]),100);},260);});['pointerup','pointercancel','lostpointercapture','pointerleave'].forEach(ev=>btn.addEventListener(ev,stopHold));});
 
-  function clearBullets(){activeAttack=false;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
+  function clearBullets(){activeAttack=false;attackGeneration++;bulletTimers.forEach(clearTimeout);bulletTimers=[];arena.querySelectorAll('.bullet').forEach(b=>b.remove());}
   function hitCheck(b){const br=b.getBoundingClientRect(),hr=heart.getBoundingClientRect();return !(br.right<hr.left||br.left>hr.right||br.bottom<hr.top||br.top>hr.bottom);}
-  function bulletSpeed(text,level){const lengthBonus=Math.min(2600,text.length*78);const evidenceBonus=checked.size>=2?900:0;const sortBonus=Math.min(600,sorted*120);const pressure=Math.max(0,level-1)*320+certaintyLoops*100;return Math.max(4300,5200+lengthBonus+evidenceBonus+sortBonus-pressure);}
-  function spawnBullet(text,level=1,cls=''){const b=document.createElement('div');b.className='bullet '+cls;b.textContent=text;const fromLeft=Math.random()>.5;const top=22+Math.random()*(arena.clientHeight-54);const startX=fromLeft?-Math.max(280,text.length*9):arena.clientWidth+24;const endX=fromLeft?arena.clientWidth+24:-Math.max(280,text.length*9);b.style.top=top+'px';b.style.left=startX+'px';arena.appendChild(b);const duration=bulletSpeed(text,level),start=performance.now();function anim(now){if(!b.isConnected)return;const p=Math.min(1,(now-start)/duration);b.style.left=(startX+(endX-startX)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1);setMessage(["Cat got hit by a future that has not happened.","The future declines to confirm the prediction."]);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}requestAnimationFrame(anim);}
-  function attack(level=1){if(activeAttack||crashed||spiral)return;activeAttack=true;const calmer=checked.size>=2;setMessage([level>2?"WHAT IF? has opened several additional tabs.":"WHAT IF? is generating possible futures.","Dodge the thoughts. Read them if you can. None are evidence just because they are loud."]);const count=3+level*2;const gap=calmer?1180:980;for(let i=0;i<count;i++){bulletTimers.push(setTimeout(()=>spawnBullet(thoughts[Math.floor(Math.random()*thoughts.length)],level,level>2?'hot':(calmer?'soft':'')),i*gap));}bulletTimers.push(setTimeout(()=>activeAttack=false,count*gap+7800));}
+  function attackPool(){
+    let pool=[...baseThoughts];
+    if(checked.has('edge')) pool=pool.filter(t=>t!=="WHAT IF I DON'T KNOW?");
+    if(sortClarity>=1) pool=pool.filter(t=>t!=="WHAT IF I MISS SOMETHING EASY?").concat('I MIGHT MISS ONE');
+    if(sortClarity>=2) pool=pool.filter(t=>t!=="WHAT IF EVERYONE ELSE KNOWS?").concat('OTHER BRAINS: NOT LOADED');
+    if(hasPlan) pool=pool.concat('BUT WHAT ABOUT TOMORROW?');
+    if(reassuranceLoops) pool=pool.concat("WHAT IF THEY'RE JUST SAYING THAT?");
+    return pool;
+  }
+  function bulletSpeed(text,level){const lengthBonus=Math.min(3000,text.length*82);const evidenceBonus=enoughOrientation()?850:0;const edgeBonus=checked.has('edge')?450:0;const sortBonus=Math.min(900,sortClarity*300);const pressure=Math.max(0,level-1)*300+certaintyLoops*120+reassuranceLoops*80;return Math.max(4300,5300+lengthBonus+evidenceBonus+edgeBonus+sortBonus-pressure);}
+  function spawnBullet(text,level=1,cls=''){
+    const generation=attackGeneration,b=document.createElement('div');b.className='bullet '+cls;b.textContent=text;const fromLeft=Math.random()>.5;const top=22+Math.random()*(arena.clientHeight-54);const off=Math.max(300,text.length*9+100);const startX=fromLeft?-off:arena.clientWidth+24;const endX=fromLeft?arena.clientWidth+24:-off;b.style.top=top+'px';b.style.left=startX+'px';arena.appendChild(b);const duration=bulletSpeed(text,level),start=performance.now();
+    function anim(now){if(!b.isConnected||generation!==attackGeneration)return;const p=Math.min(1,(now-start)/duration);b.style.left=(startX+(endX-startX)*p)+'px';if(hitCheck(b)){b.remove();setOverload(overload+1);if(!crashed&&!spiral)setMessage(['Cat got hit by a future that has not happened.','The future declines to confirm the prediction.']);return;}if(p<1)requestAnimationFrame(anim);else b.remove();}
+    requestAnimationFrame(anim);
+  }
+  function attack(level=1,customPool=null){if(activeAttack||crashed||spiral)return;activeAttack=true;const pool=customPool||attackPool();const count=Math.min(8,3+level*2);const gap=enoughOrientation()?1180:1000;setMessage([level>2?'WHAT IF? has opened several additional tabs.':'WHAT IF? is generating possible futures.','Dodge what you can. Loud is not the same as loaded.']);for(let i=0;i<count;i++){bulletTimers.push(setTimeout(()=>spawnBullet(pool[Math.floor(Math.random()*pool.length)],level,level>2?'hot':(enoughOrientation()?'soft':'')),i*gap));}bulletTimers.push(setTimeout(()=>activeAttack=false,count*gap+8500));}
+  function introAttack(){if(activeAttack)return;activeAttack=true;const intro=['WHAT IF I BLANK?','WHAT IF IT\'S HARDER THAN I EXPECT?','WHAT IF MY GRADE DROPS?'];intro.forEach((text,i)=>bulletTimers.push(setTimeout(()=>spawnBullet(text,1,''),i*1250)));bulletTimers.push(setTimeout(()=>{activeAttack=false;introFinished=true;setMessage(['Three future reports received.','Verified footage from tomorrow: 0.']);updateNeed();},intro.length*1250+6500));}
 
-  function renderFacts(){factList.innerHTML='';if(facts.size===0){factList.innerHTML='<li>Nothing checked yet. ACT is waiting for evidence.</li>';return;}facts.forEach(v=>{const li=document.createElement('li');li.textContent=v;factList.appendChild(li);});}
-  function enoughChecked(){return checked.size>=2;}
-  function recomputeReady(){actBtn.disabled=!enoughChecked()||crashed||spiral;continueBtn.disabled=!(enoughChecked()&&sorted>=4&&usefulAct&&!crashed&&!spiral);sortedText.textContent=Math.min(sorted,4)+'/4';actText.textContent=usefulAct?'YES':'NO';}
-  function addFact(key,text,updates={}){checked.add(key);facts.set(key,text);renderFacts();Object.entries(updates).forEach(([name,value])=>{const el={futureEvent,futureKnown,futureUnknown,futureChoices}[name];if(el){el.textContent=value;el.classList.add('revealed');}});setOverload(overload-1,false);recomputeReady();}
-  function showChoices(title,intro,items){choiceTitle.textContent=title;choiceIntro.textContent=intro;choiceList.innerHTML='';items.forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=item.label;if(item.visited)b.classList.add('visited');if(item.disabled)b.disabled=true;b.addEventListener('click',()=>{choiceOverlay.classList.remove('show');item.run();});choiceList.appendChild(b);});choiceOverlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button:not(:disabled)')?.focus(),30);}
+  function renderFacts(){factList.innerHTML='';if(facts.size===0){factList.innerHTML='<li>The quiz is tomorrow. Most of tomorrow is still not loaded.</li>';return;}facts.forEach(v=>{const li=document.createElement('li');li.textContent=v;factList.appendChild(li);});}
+  function recomputeReady(){checkBtn.disabled=crashed||spiral||actionBusy;actBtn.disabled=!enoughOrientation()||crashed||spiral||actionBusy;continueBtn.disabled=!(hasPlan&&!crashed&&!spiral&&!actionBusy);updateNeed();}
+  function addFact(key,text,updates={}){checked.add(key);facts.set(key,text);renderFacts();Object.entries(updates).forEach(([name,value])=>{const el={futureEvent,futureAvailable,futureUnknown}[name];if(el){el.textContent=value;el.classList.add('revealed');}});setOverload(overload-1,false);recomputeReady();}
+
+  function showChoices(title,intro,items){choiceTitle.textContent=title;choiceIntro.textContent=intro;choiceList.innerHTML='';items.forEach(item=>{const b=document.createElement('button');b.type='button';b.textContent=item.label;if(item.visited)b.classList.add('visited');if(item.disabled)b.disabled=true;if(item.desc){const s=document.createElement('small');s.textContent=item.desc;b.appendChild(s);}b.addEventListener('click',()=>{choiceOverlay.classList.remove('show');item.run();});choiceList.appendChild(b);});choiceOverlay.classList.add('show');setTimeout(()=>choiceList.querySelector('button:not(:disabled)')?.focus(),30);}
   choiceClose.addEventListener('click',()=>choiceOverlay.classList.remove('show'));
+  choiceOverlay.addEventListener('click',e=>{if(e.target===choiceOverlay)choiceOverlay.classList.remove('show');});
+
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    if(choiceOverlay.classList.contains('show'))choiceOverlay.classList.remove('show');
+    if(sortOverlay.classList.contains('show')){sortOverlay.classList.remove('show');currentThought=null;}
+    if(rebootOverlay.classList.contains('show')&&!crashed&&!spiral)rebootOverlay.classList.remove('show');
+  });
 
   const checks={
-    event:{label:'WHAT IS ACTUALLY SCHEDULED?',fact:'There is a quiz tomorrow. That is the event; the outcome is not here yet.',updates:{futureEvent:'QUIZ TOMORROW'},run(){setSprite('cat-robot.png','Cat reporting facts');setMessage(["OBSERVED: there is a quiz tomorrow.","NOT OBSERVED: tomorrow's exact score.","The event exists. The ending has not happened."]);}},
-    known:{label:'WHAT CAN CAT ACTUALLY KNOW TONIGHT?',fact:'Cat knows what material has been taught, what notes exist, and what can be reviewed.',updates:{futureKnown:'MATERIAL + NOTES + WHAT HAS BEEN TAUGHT'},run(){setSprite('cat-focused.png','Cat focused on what is known');setMessage(["KNOWN: what has been taught.","KNOWN: what notes and materials Cat has.","That is enough information to choose a bounded review."]);}},
-    unknown:{label:'WHAT CAN CAT NOT KNOW TONIGHT?',fact:'Exact questions, exact score, and exactly how Cat will feel tomorrow are not loaded yet.',updates:{futureUnknown:'EXACT QUESTIONS + SCORE + FEELING: UNKNOWN'},run(){setSprite('cat-worried.png','Cat tolerating uncertainty');setMessage(["UNKNOWN: exact questions.","UNKNOWN: exact score.","UNKNOWN: exact future feeling.","Unknown is a category, not a warning label."]);}},
-    choices:{label:'WHAT CAN CAT DO WITHOUT KNOWING THE OUTCOME?',fact:'Cat can review one useful thing, prepare a question, decide when to stop, and show up tomorrow.',updates:{futureChoices:'REVIEW ONE THING • ASK ONE QUESTION • STOP • SHOW UP'},run(){setSprite('cat-ready.png','Cat ready for one next step');setMessage(["Cat does not need tomorrow's score to choose tonight's next step.","Useful action does not require certainty first."]);}}
+    event:{label:'CHECK THE QUIZ INFO',desc:'What is actually happening tomorrow?',fact:'Quiz tomorrow. Unit 3. That is the event; the result has not happened.',updates:{futureEvent:'QUIZ TOMORROW · UNIT 3'},run(){setSprite('cat-robot.png','Cat reporting the quiz facts');setMessage(['OBSERVED: quiz tomorrow, Unit 3.','NOT OBSERVED: tomorrow\'s exact questions or score.','The event exists. The ending does not.']);}},
+    available:{label:'CHECK WHAT CAT HAS TONIGHT',desc:'What resources and problems actually exist now?',fact:'Available tonight: class notes, Unit 3 review, and one topic Cat marked “??”.',updates:{futureAvailable:'NOTES · UNIT 3 REVIEW · ONE TOPIC MARKED ??'},run(){setSprite('cat-focused.png','Cat looking at available study material');setMessage(['AVAILABLE NOW: notes, Unit 3 review, one marked topic.','That is enough material to choose a bounded action.','No future score is required first.']);}},
+    edge:{label:'CHECK THE EDGE OF THE FUTURE',desc:'Where does available information stop?',fact:'Not loaded yet: exact questions, exact difficulty, exact score, and exactly how Cat will feel.',updates:{futureUnknown:'QUESTIONS · DIFFICULTY · SCORE · EXACT FEELING: NOT LOADED'},run(){setSprite('cat-worried.png','Cat noticing the edge of what can be known');setMessage(['The FUTURE FILE ends here.','Exact questions, difficulty, score, and future feeling are not loaded yet.','Unknown is a boundary, not an emergency.']);}}
   };
-  function openCheck(){showChoices('CHECK','CHECK means: What do we actually know? Two checked facts unlock ACT.',Object.entries(checks).map(([key,c])=>({label:c.label,visited:checked.has(key),run:()=>{addFact(key,c.fact,c.updates);c.run();setTimeout(()=>{if(!crashed&&!spiral)attack(1);},2600);}})));}
+  function openCheck(){
+    const items=Object.entries(checks).map(([key,c])=>({label:c.label,desc:c.desc,visited:checked.has(key),run:()=>{addFact(key,c.fact,c.updates);c.run();setTimeout(()=>{if(!crashed&&!spiral)attack(1);},2500);}}));
+    items.push({label:'CHECK A WHAT-IF',desc:'Optional: label one prediction more accurately. No quota.',run:openSorter});
+    showChoices('CHECK','What does Cat want to find out? CHECK can clarify what is here now. It cannot load tomorrow early.',items);
+  }
 
-  function openSorter(){if(activeAttack)clearBullets();let options=thoughtDeck.filter(t=>!t.used);if(options.length===0){thoughtDeck.forEach(t=>t.used=false);options=thoughtDeck;}currentThought=options[Math.floor(Math.random()*options.length)];thoughtCard.textContent=currentThought.text;sortOverlay.classList.add('show');setTimeout(()=>sortOverlay.querySelector('button')?.focus(),25);}
-  $$('[data-sort]').forEach(btn=>btn.addEventListener('click',()=>{if(!currentThought)return;const choice=btn.dataset.sort;sortOverlay.classList.remove('show');if(choice===currentThought.type){currentThought.used=true;sorted++;setOverload(overload-1,false);setSprite('cat-robot.png','Cat sorting a thought');setMessage(["SORTED: "+choice.toUpperCase().replace('FANFICTION','BRAIN FANFICTION'),currentThought.explain,sorted>=4?"Cat has enough sorting practice to move on when an ACT is chosen.":"WHAT IF? loses one dramatic sound effect."]);recomputeReady();if(sorted<4)setTimeout(()=>attack(1),2200);}else{setOverload(overload+1);setSprite('cat-worried.png','Cat uncertain about a thought');setMessage(["That category does not fit this one.",currentThought.explain,"Nothing failed. Cat can sort another thought."]);setTimeout(()=>attack(2),2400);}}));
+  function openSorter(){if(activeAttack)clearBullets();let options=thoughtDeck.filter(t=>!t.used);if(options.length===0){thoughtDeck.forEach(t=>t.used=false);options=thoughtDeck;}currentThought=options[Math.floor(Math.random()*options.length)];thoughtCard.textContent=currentThought.text;sortResult.hidden=true;sortResult.innerHTML='';sortButtons.hidden=false;sortOverlay.classList.add('show');setTimeout(()=>sortOverlay.querySelector('button')?.focus(),25);}
+  $$('[data-sort]').forEach(btn=>btn.addEventListener('click',()=>{
+    if(!currentThought)return;const choice=btn.dataset.sort;sortButtons.hidden=true;sortResult.hidden=false;currentThought.used=true;const best=currentThought.type;const choiceLabel=choice==='fanfiction'?'BRAIN FANFICTION':choice.toUpperCase();const bestLabel=best==='fanfiction'?'BRAIN FANFICTION':best.toUpperCase();
+    if(choice===best){sortClarity++;setOverload(overload-1,false);setSprite('cat-robot.png','Cat giving a what-if a more accurate label');futureFilter.textContent=currentThought.reframe;futureFilter.classList.add('revealed');enemySub.textContent='Some predictions have been demoted from breaking news.';sortResult.innerHTML='<strong>'+choiceLabel+' fits.</strong><br>'+currentThought.explain+'<br><br><span style="color:var(--green)">WHAT IF? loses one dramatic sound effect.</span>';}else{setSprite('cat-worried.png','Cat reconsidering a what-if label');futureFilter.textContent='BEST FIT: '+bestLabel;futureFilter.classList.add('revealed');sortResult.innerHTML='<strong>Best fit: '+bestLabel+'.</strong><br>'+currentThought.explain+'<br><br>Nothing failed. The label just got more precise.';}
+    const close=document.createElement('button');close.type='button';close.textContent='BACK TO ENCOUNTER';close.style.cssText='margin-top:14px;border:3px solid #fff;background:#000;color:#fff;padding:12px;cursor:pointer;width:100%';close.onclick=()=>{sortOverlay.classList.remove('show');currentThought=null;recomputeReady();setTimeout(()=>{if(!crashed&&!spiral)attack(1);},900);};sortResult.appendChild(close);
+  }));
+  sortOverlay.addEventListener('click',e=>{if(e.target===sortOverlay){sortOverlay.classList.remove('show');currentThought=null;}});
 
-  function markUseful(lines,sprite='cat-ready.png',alt='Cat ready for one next step'){usefulAct=true;setOverload(overload-1,false);setSprite(sprite,alt);setMessage(lines);recomputeReady();setTimeout(()=>{if(!crashed&&!spiral)attack(1);},2600);}
-  function certaintyLoop(kind){certaintyLoops++;setSprite('cat-urge.png','Cat feeling an urgent need for certainty');if(kind==='study'){setMessage(["Cat keeps studying until Cat feels completely certain.","Certainty does not arrive. A new chapter volunteers for review.","WHAT IF? opens two more tabs."]);setOverload(overload+2);}else{setMessage(["Cat asks someone to promise the quiz will go well.","Reassurance works for approximately one commercial break.","WHAT IF? returns with follow-up questions."]);setOverload(overload+2);}if(!crashed&&!spiral)setTimeout(()=>attack(Math.min(4,2+certaintyLoops)),1500);}
-  function fullCrash(){if(crashed)return;clearBullets();crashed=true;spiral=false;setOverload(10,false);setSprite('cat-alarm.png','Cat in alarm mode');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.innerHTML='SIMULATING EVERY FUTURE<br>4,096 TABS OPEN';checkBtn.disabled=true;actBtn.disabled=true;continueBtn.disabled=true;rebootBtn.disabled=false;setMessage(["Cat has chosen to personally manage every possible version of tomorrow.","Tomorrow was not available for consultation."]);setTimeout(()=>{setSprite('cat-crashed.png','Cat completely crashed out');crashBannerText.innerHTML='SYSTEM ERROR<br>NONE OF THESE ARE NOW';},950);setTimeout(()=>{crashBanner.classList.remove('show');frame.classList.remove('crash-shake','crash-flash');setMessage(["TOTAL FUTURE MANAGEMENT has concluded.","No future was successfully controlled.","Cat is temporarily offline. REBOOT is available."]);rebootBtn.focus();},1900);}
-  function openAct(){showChoices('ACT','Several actions make sense when the future feels uncertain. Notice what each one does to the loop.',[
-    {label:'SORT A WHAT-IF: FACT / POSSIBILITY / BRAIN FANFICTION',run:openSorter},
-    {label:'REVIEW ONE SPECIFIC THING I ACTUALLY NEED',run:()=>markUseful(["Cat chooses one specific topic to review.","The review has a target instead of an infinite horizon.","One useful thing is enough to count as an ACT."],'cat-focused.png','Cat focused on one useful review')},
-    {label:'WRITE DOWN ONE QUESTION FOR TOMORROW',run:()=>markUseful(["Cat writes down one question to ask if it is still unclear tomorrow.","The question does not require predicting the answer tonight."],'cat-focused.png','Cat focused on one useful question')},
-    {label:'DECIDE WHAT “ENOUGH FOR TONIGHT” MEANS',run:()=>markUseful(["Cat sets a stopping point for preparation.","WHAT IF? would prefer an unlimited subscription.","The subscription has been declined."],'cat-hands-off.png','Cat practicing a stopping rule')},
-    {label:'KEEP STUDYING UNTIL I FEEL CERTAIN',run:()=>certaintyLoop('study')},
-    {label:'ASK SOMEONE TO PROMISE I’LL DO WELL',run:()=>certaintyLoop('reassure')},
-    {label:'SIMULATE EVERY POSSIBLE FUTURE UNTIL ONE FEELS SAFE',run:fullCrash}
-  ]);}
+  function setPlan(value,lines,sprite='cat-ready.png',alt='Cat ready with a plan for tonight'){
+    hasPlan=true;planHistory.push(value);futurePlan.textContent=value;futurePlan.classList.remove('warning');futurePlan.classList.add('revealed','good');futureStatus.textContent='TONIGHT\'S PLAN: SET · TOMORROW STILL NOT LOADED';setSprite(sprite,alt);setOverload(overload-1,false);setMessage(lines);recomputeReady();setTimeout(()=>{if(!crashed&&!spiral)attack(1);},2500);
+  }
+  function reviewOneTopic(){
+    hasPlan=true;planHistory.push('REVIEW ONE MARKED TOPIC · THEN PACK UP');futurePlan.textContent='REVIEW ONE MARKED TOPIC · THEN PACK UP';futurePlan.classList.remove('warning');futurePlan.classList.add('revealed','good');futureStatus.textContent='ONE TARGETED REVIEW: DONE';setSprite('cat-focused.png','Cat reviewing one marked topic');setOverload(overload-1,false);setMessage(['Cat opens the notes.','Cat finds the one Unit 3 topic marked “??”.','One targeted review: done. The review had a target and an ending.','Tomorrow remains unavailable for preview.']);recomputeReady();setTimeout(()=>{if(!crashed&&!spiral)attack(1);},2500);
+  }
+  function saveQuestion(){setPlan('QUESTION SAVED · ASK TOMORROW IF STILL UNCLEAR',['Cat writes one question for tomorrow.','“If I get stuck on this part, what exactly should I clarify?”','The question is saved. It does not need an answer tonight.'],'cat-focused.png','Cat writing down one useful question');}
+  function defineTonightJob(){setPlan('ONE MARKED TOPIC · PACK BAG · STOP FOR TONIGHT',['TONIGHT\'S JOB defined.','Review one marked topic. Pack what is needed. Then tonight\'s part is over.','This is a plan, not a guarantee about tomorrow.'],'cat-hands-off.png','Cat defining a bounded job for tonight');}
 
-  function enterSpiral(){clearBullets();spiral=true;setSprite('cat-overwhelmed.png','Cat overwhelmed by too many what-ifs');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.innerHTML='TOO MANY FUTURES OPEN<br>100% CPU';checkBtn.disabled=true;actBtn.disabled=true;continueBtn.disabled=true;rebootBtn.disabled=false;setMessage(["Cat has opened enough possible futures to lose access to the present.","None of the extra futures became more knowable.","REBOOT is available when Cat is ready."]);setTimeout(()=>{crashBanner.classList.remove('show');frame.classList.remove('crash-shake','crash-flash');rebootBtn.focus();},1500);}
+  function certaintyStudy(){
+    certaintyLoops++;hasPlan=false;futurePlan.classList.remove('good');futurePlan.classList.add('warning','revealed');const plans=['ONE TOPIC + MAYBE CHAPTER 4','ALL NOTES + PRACTICE + OLD MATERIAL','EVERYTHING SINCE SEPTEMBER · CERTAINTY STILL UNKNOWN'];futurePlan.textContent=plans[Math.min(certaintyLoops-1,plans.length-1)];futureStatus.textContent='SCOPE EXPANDED · FUTURE KNOWLEDGE DID NOT';setSprite('cat-urge.png','Cat urgently expanding the study plan');setOverload(overload+2);if(crashed||spiral)return;setMessage(['Cat keeps studying until Cat feels completely certain.',certaintyLoops===1?'The target quietly expands.':'The target expands again.','CERTAINTY STATUS: still not loaded.']);recomputeReady();setTimeout(()=>attack(Math.min(4,2+certaintyLoops)),1400);
+  }
+  function reassuranceLoop(){
+    reassuranceLoops++;actionBusy=true;recomputeReady();setSprite('cat-urge.png','Cat asking for reassurance about tomorrow');setOverload(overload+1,false);enemyTitle.style.opacity='.28';enemySub.textContent='Temporarily quiet.';futureFilter.textContent='“I THINK YOU\'LL DO FINE.”';futureFilter.classList.add('revealed');setMessage(['Cat asks someone to promise the quiz will go well.','“I think you\'ll do fine.”','For a moment, WHAT IF? goes quiet.']);
+    setTimeout(()=>{actionBusy=false;if(crashed||spiral){recomputeReady();return;}enemyTitle.style.opacity='1';enemySub.textContent='Reassurance subscription expired.';futureFilter.textContent='WHAT IF THEY\'RE JUST SAYING THAT?';futureFilter.classList.add('warning');setOverload(overload+1);if(crashed||spiral){recomputeReady();return;}setMessage(['Reassurance expired.','WHAT IF? has requested renewal.']);recomputeReady();setTimeout(()=>attack(3,["WHAT IF THEY'RE JUST SAYING THAT?",'WHAT IF I STILL BLANK?','WHAT IF MY GRADE DROPS?']),800);},2200);
+  }
+  function fullCrash(){
+    if(crashed)return;clearBullets();actionBusy=false;crashed=true;spiral=false;setOverload(10,false);setSprite('cat-alarm.png','Cat in alarm mode');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.innerHTML='SIMULATING EVERY FUTURE<br>4,096 TABS OPEN';futureStatus.textContent='FUTURE MANAGEMENT MODE: UNSUSTAINABLE';recomputeReady();setMessage(['Cat has chosen to personally manage every possible version of tomorrow.','Tomorrow was not available for consultation.']);setTimeout(()=>{setSprite('cat-crashed.png','Cat completely crashed out');crashBannerText.innerHTML='SYSTEM ERROR<br>NONE OF THESE ARE NOW';},950);setTimeout(()=>{crashBanner.classList.remove('show');frame.classList.remove('crash-shake','crash-flash');setMessage(['TOTAL FUTURE MANAGEMENT has concluded.','No future was successfully controlled.','Cat is temporarily offline. REBOOT is available.']);updateNeed();rebootBtn.focus();},1900);
+  }
+  function openAct(){
+    showChoices('ACT','Cat knows what exists tonight. What does Cat do with that part?',[
+      {label:'REVIEW THE ONE TOPIC MARKED “??”',desc:'Do one targeted piece of preparation.',run:reviewOneTopic},
+      {label:'WRITE ONE QUESTION FOR TOMORROW',desc:'Save a useful question without solving tomorrow tonight.',run:saveQuestion},
+      {label:'DEFINE TONIGHT\'S JOB: ONE TOPIC + PACK UP',desc:'Choose a bounded job for tonight, not a guarantee about tomorrow.',run:defineTonightJob},
+      {label:'KEEP STUDYING UNTIL I FEEL CERTAIN',desc:'Use more preparation to try to eliminate uncertainty.',run:certaintyStudy},
+      {label:'ASK SOMEONE TO PROMISE I\'LL DO WELL',desc:'Try to borrow certainty from another human.',run:reassuranceLoop},
+      {label:'SIMULATE EVERY POSSIBLE FUTURE UNTIL ONE FEELS SAFE',desc:'Open all possible tomorrows at once. Excellent for RAM.',run:fullCrash}
+    ]);
+  }
+
+  function enterSpiral(){
+    clearBullets();actionBusy=false;spiral=true;setSprite('cat-overwhelmed.png','Cat overwhelmed by too many possible futures');frame.classList.add('crash-shake','crash-flash');crashBanner.classList.add('show');crashBannerText.innerHTML='TOO MANY FUTURES OPEN<br>100% CPU';futureStatus.textContent='PRESENT MOMENT: TEMPORARILY OBSCURED';recomputeReady();setMessage(['Cat has opened enough possible futures to lose access to the present.','None of the extra futures became more knowable.','REBOOT is available when Cat is ready.']);setTimeout(()=>{crashBanner.classList.remove('show');frame.classList.remove('crash-shake','crash-flash');updateNeed();rebootBtn.focus();},1500);
+  }
 
   function openReboot(){if(activeAttack)clearBullets();rebootOverlay.classList.add('show');if(crashed)setSprite('cat-booting.png','Cat starting to reboot');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
   function renderRebootMenu(){rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to know the future or force the worry away. The goal is to get enough present-moment space to choose.</p>';rebootActions.innerHTML='';[
@@ -164,14 +310,21 @@ button,a{font:inherit}button{-webkit-tap-highlight-color:transparent}button:focu
     ['RETURN TO NOW','Notice one thing happening now, feel your feet, then name one next action.',startReturnNow],
     ['NOT NOW','Close this. No penalty. If Cat crashed, decision-making stays offline until a reboot happens.',()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png','Cat crashed out');else if(spiral)setSprite('cat-overwhelmed.png','Cat overwhelmed');else setSprite('cat-worried.png','Cat worried but present');}]
   ].forEach(([label,desc,run])=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br><span>'+desc+'</span>';b.addEventListener('click',run);rebootActions.appendChild(b);});}
-  function startHandsOffFuture(){setSprite('cat-hands-off.png','Cat keeping paws off the future');let n=6;rebootStage.innerHTML='<div class="big">HANDS OFF THE FUTURE</div><p>The worry may stay. For six seconds, Cat does not have to solve tomorrow.</p><div class="timer" id="futureTimer">6</div>';rebootActions.innerHTML='<button type="button" id="futureNotNow">NOT NOW</button>';const t=setInterval(()=>{n--;const el=$('#futureTimer');if(el)el.textContent=n;if(n<=0){clearInterval(t);completeReboot(["Six seconds passed.","Tomorrow did not require emergency maintenance.","The urge to predict can exist without being obeyed."]);}},1000);$('#futureNotNow').onclick=()=>{clearInterval(t);rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png','Cat crashed out');else if(spiral)setSprite('cat-overwhelmed.png','Cat overwhelmed');};}
-  function startReturnNow(){setSprite('cat-grounded.png','Cat grounded in the present');rebootStage.innerHTML='<div class="big">RETURN TO NOW</div><p>Do three tiny present-moment steps with Cat.</p>';rebootActions.innerHTML='';const steps=[['NOTICE ONE THING HAPPENING NOW','Look around and name one thing you can actually see right now.'],['FEEL YOUR FEET','Notice the surface holding your feet or body.'],['NAME ONE NEXT ACTION','Name one small thing you can do tonight without knowing tomorrow.']];let done=0;steps.forEach(([label,desc],i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br>'+desc;b.onclick=()=>{if(b.disabled)return;b.disabled=true;b.style.borderColor='var(--green)';b.style.color='var(--green)';done++;if(i===0)setSprite('cat-look-side.png','Cat noticing one real thing');if(i===1)setSprite('cat-grounded.png','Cat feeling grounded');if(i===2)setSprite('cat-ready.png','Cat ready for one next step');if(done===steps.length)completeReboot(["Present moment located.","Feet located.","One next action located."]);};rebootActions.appendChild(b);});const skip=document.createElement('button');skip.type='button';skip.textContent='NOT NOW';skip.onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png','Cat crashed out');else if(spiral)setSprite('cat-overwhelmed.png','Cat overwhelmed');};rebootActions.appendChild(skip);}
-  function completeReboot(lines){rebootComplete=true;crashed=false;spiral=false;setOverload(Math.max(3,overload-5),false);setSprite('cat-rumpled.png','Cat rumpled but functional');checkBtn.disabled=false;recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS RETURNING</div><p>'+lines.join('<br>')+'</p><p>Cat may still be worried. Strategic decision-making is back online.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';$('#rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setSprite('cat-ready.png','Cat ready for one next step');setMessage(["The future is still unknown.","Cat is still allowed to feel worried.","There is enough room to choose what happens next."]);recomputeReady();};}
+  function startHandsOffFuture(){setSprite('cat-hands-off.png','Cat keeping paws off the future');let n=6;rebootStage.innerHTML='<div class="big">HANDS OFF THE FUTURE</div><p>The worry may stay. For six seconds, Cat does not have to solve tomorrow.</p><div class="timer" id="futureTimer">6</div>';rebootActions.innerHTML='<button type="button" id="futureNotNow">NOT NOW</button>';const t=setInterval(()=>{n--;const el=$('#futureTimer');if(el)el.textContent=n;if(n<=0){clearInterval(t);completeReboot(['Six seconds passed.','Tomorrow did not require emergency maintenance.','The urge to predict can exist without being obeyed.']);}},1000);$('#futureNotNow').onclick=()=>{clearInterval(t);rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png','Cat crashed out');else if(spiral)setSprite('cat-overwhelmed.png','Cat overwhelmed');};}
+  function startReturnNow(){setSprite('cat-grounded.png','Cat grounded in the present');rebootStage.innerHTML='<div class="big">RETURN TO NOW</div><p>Do three tiny present-moment steps with Cat.</p>';rebootActions.innerHTML='';const steps=[['NOTICE ONE THING HAPPENING NOW','Look around and name one thing you can actually see right now.'],['FEEL YOUR FEET','Notice the surface holding your feet or body.'],['NAME ONE NEXT ACTION','Name one small thing you can do tonight without knowing tomorrow.']];let done=0;steps.forEach(([label,desc],i)=>{const b=document.createElement('button');b.type='button';b.innerHTML='<strong>'+label+'</strong><br>'+desc;b.onclick=()=>{if(b.disabled)return;b.disabled=true;b.style.borderColor='var(--green)';b.style.color='var(--green)';done++;if(i===0)setSprite('cat-look-side.png','Cat noticing one real thing');if(i===1)setSprite('cat-grounded.png','Cat feeling grounded');if(i===2)setSprite('cat-ready.png','Cat ready for one next step');if(done===steps.length)completeReboot(['Present moment located.','Feet located.','One next action located.']);};rebootActions.appendChild(b);});const skip=document.createElement('button');skip.type='button';skip.textContent='NOT NOW';skip.onclick=()=>{rebootOverlay.classList.remove('show');if(crashed)setSprite('cat-crashed.png','Cat crashed out');else if(spiral)setSprite('cat-overwhelmed.png','Cat overwhelmed');};rebootActions.appendChild(skip);}
+  function completeReboot(lines){rebootComplete=true;actionBusy=false;crashed=false;spiral=false;setOverload(Math.max(3,overload-5),false);setSprite('cat-rumpled.png','Cat rumpled but functional');recomputeReady();rebootStage.innerHTML='<div class="big">SYSTEMS RETURNING</div><p>'+lines.join('<br>')+'</p><p>Cat may still be worried. Strategic decision-making is back online.</p>';rebootActions.innerHTML='<button type="button" id="rebootDone">BACK TO ENCOUNTER</button>';$('#rebootDone').onclick=()=>{rebootOverlay.classList.remove('show');setSprite('cat-ready.png','Cat ready for one next step');setMessage(['The future is still unknown.','Cat is still allowed to feel worried.','There is enough room to choose what happens next.']);recomputeReady();};}
 
-  function doContinue(){if(!(enoughChecked()&&sorted>=4&&usefulAct&&!crashed&&!spiral)){setMessage(["Not yet.","CHECK at least two parts of the future file, sort four thoughts, and choose one useful ACT."]);return;}clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png','Cat ready to continue');setMessage(["Cat still does not know exactly what will happen tomorrow.","That is the normal amount of future knowledge.","Cat knows enough about what to do next."]);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 05 complete');localStorage.setItem('cvc-encounter-05','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});}
+  function doContinue(){
+    if(!(hasPlan&&!crashed&&!spiral)){setMessage(['Not yet.','Cat needs a bounded plan for tonight. Tomorrow does not have to be solved.']);return;}
+    clearBullets();[checkBtn,actBtn,rebootBtn,continueBtn].forEach(b=>b.disabled=true);setSprite('cat-ready.png','Cat ready to continue');futureStatus.textContent='TONIGHT\'S PART: HANDLED';setNeed('TONIGHT\'S PART: HANDLED','Tomorrow remains unopened. Cat has done the part that exists now.','ready');setMessage(['Cat still does not know exactly what will happen tomorrow.','Tomorrow has declined to send spoilers.','Tonight\'s part is handled.']);endScreen.classList.add('show');localStorage.setItem('cvc-last-save','Encounter 05 complete');localStorage.setItem('cvc-encounter-05','complete');endScreen.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'center'});
+  }
 
-  checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});rebootBtn.addEventListener('click',openReboot);continueBtn.addEventListener('click',doContinue);
-  recomputeReady();setOverload(3,false);setTimeout(()=>attack(1),3900);
+  checkBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openCheck();});
+  actBtn.addEventListener('click',()=>{if(activeAttack)clearBullets();openAct();});
+  rebootBtn.addEventListener('click',openReboot);
+  continueBtn.addEventListener('click',doContinue);
+
+  recomputeReady();setOverload(3,false);setTimeout(introAttack,1500);
 })();
 </script>
 </body>
