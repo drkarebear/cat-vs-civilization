@@ -77,6 +77,18 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
 @media(max-width:430px){.shell{width:min(100% - 10px,1120px);padding-top:8px}.story{padding:15px}.battle{padding:12px}.need-bar{margin:0 12px 10px}.controls{padding:0 12px 12px;gap:8px}.cmd{font-size:.6rem;min-height:62px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:9px}.touchpad button{width:72px;height:72px}.choice-box,.reboot-box{padding:15px}.case-row{grid-template-columns:1fr;gap:2px}.case-value{text-align:left}.case-file{font-size:.94rem}}
 @media(max-width:350px){.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+body.reduce-motion .crash-flash,body.reduce-motion .flood-flash,body.reduce-motion .loop-flash,body.reduce-motion .flash{box-shadow:none!important}
+
+
+/* Shared mobile controller standard: protected D-pad, normal page zoom elsewhere. */
+.arena{touch-action:pan-y pinch-zoom}
+.touchpad-shell{width:max-content;max-width:100%;margin:4px auto 0;padding:12px 16px 10px;border:2px dashed #3d3d3d;border-radius:6px;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.touchpad{display:grid;grid-template-columns:repeat(3,76px);grid-template-rows:repeat(3,76px);justify-content:center;gap:12px;padding:0;border:0;touch-action:none;overscroll-behavior:contain;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.touchpad button{width:76px;height:76px;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+@media(max-width:430px){.touchpad-shell{padding:10px 12px 8px}.touchpad{grid-template-columns:repeat(3,72px);grid-template-rows:repeat(3,72px);gap:11px;padding:0}.touchpad button{width:72px;height:72px}}
+@media(max-width:360px){.touchpad-shell{padding-left:9px;padding-right:9px}.touchpad{grid-template-columns:repeat(3,66px);grid-template-rows:repeat(3,66px);gap:9px}.touchpad button{width:66px;height:66px}}
+
 </style>
 </head>
 <body>
@@ -107,7 +119,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
       </section>
 
       <section class="arena-col" aria-label="Battle area">
-        <div class="hud"><span>OVERLOAD</span><div class="meter" aria-label="Overload meter"><div id="meterFill" class="meter-fill"></div></div><span id="meterText">2/10</span></div>
+        <div class="hud"><span>OVERLOAD</span><div class="meter" id="meter" role="progressbar" aria-label="Overload" aria-valuemin="0" aria-valuemax="10" aria-valuenow="2" aria-valuetext="2 of 10"><div id="meterFill" class="meter-fill"></div></div><span id="meterText">2/10</span></div>
 
         <div class="case-file" id="caseFile" aria-live="polite">
           <h3>CASE FILE</h3>
@@ -186,7 +198,11 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   const needBar=document.getElementById('needBar'),needLabel=document.getElementById('needLabel'),needText=document.getElementById('needText');
   const caseHistory=document.getElementById('caseHistory'),casePortal=document.getElementById('casePortal'),caseFileValue=document.getElementById('caseFileValue'),caseNext=document.getElementById('caseNext');
   const checkBtn=document.querySelector('[data-cmd="check"]'),actBtn=document.querySelector('[data-cmd="act"]'),rebootBtn=document.querySelector('[data-cmd="reboot"]'),continueBtn=document.querySelector('[data-cmd="continue"]');
-  const reducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const systemReducedMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let gameReducedMotion=false;
+  try{gameReducedMotion=localStorage.getItem('cvc-reduce-motion')==='true';}catch{}
+  const reducedMotion=systemReducedMotion||gameReducedMotion;
+  document.body.classList.toggle('reduce-motion',reducedMotion);
 
   const spriteAlt={
     'cat.png':'Pixel-art Cat','cat-worried.png':'Cat looking worried','cat-robot.png':'Cat in objective reporting mode','cat-focused.png':'Cat focusing on evidence','cat-connect.png':'Cat reaching out for help','cat-hands-off.png':'Cat sitting on its paws to avoid checking','cat-urge.png':'Cat feeling a strong urge to act','cat-overwhelmed.png':'Cat feeling overwhelmed','cat-embarrassed.png':'Cat feeling self-conscious','cat-alarm.png':'Cat in exaggerated alarm','cat-crashed.png':'Cat dramatically crashed out','cat-booting.png':'Cat rebooting after a crash','cat-grounded.png':'Cat grounded with paws planted','cat-braced.png':'Cat bracing through an urge','cat-ready.png':'Cat ready for one next step','cat-rumpled.png':'Cat tired but functional'};
@@ -212,13 +228,15 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   document.addEventListener('keydown',e=>{if(keys[e.key]&&!overlay.classList.contains('show')&&!rebootOverlay.classList.contains('show')){e.preventDefault();move(...keys[e.key]);}});
 
   const touchpad=document.getElementById('touchpad');
-  ['touchstart','touchmove'].forEach(type=>touchpad.addEventListener(type,e=>e.preventDefault(),{passive:false}));
-  touchpad.addEventListener('dblclick',e=>e.preventDefault());
+  const touchpadShell=document.querySelector('.touchpad-shell');
+  ['touchstart','touchmove'].forEach(type=>touchpadShell.addEventListener(type,e=>e.preventDefault(),{passive:false}));
+  touchpadShell.addEventListener('dblclick',e=>e.preventDefault());
+  touchpadShell.addEventListener('contextmenu',e=>e.preventDefault());
   document.querySelectorAll('[data-dir]').forEach(btn=>{
     const dirs={up:[0,-.07],down:[0,.07],left:[-.07,0],right:[.07,0]};let repeat=null,delay=null;
     const stop=()=>{clearTimeout(delay);clearInterval(repeat);delay=repeat=null;};
-    btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);delay=setTimeout(()=>{repeat=setInterval(()=>move(...dirs[btn.dataset.dir]),105);},260);});
-    ['pointerup','pointercancel','pointerleave','lostpointercapture'].forEach(ev=>btn.addEventListener(ev,stop));
+    btn.addEventListener('pointerdown',e=>{e.preventDefault();btn.setPointerCapture?.(e.pointerId);move(...dirs[btn.dataset.dir]);delay=setTimeout(()=>{repeat=setInterval(()=>move(...dirs[btn.dataset.dir]),100);},260);});
+    ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>btn.addEventListener(ev,stop));
   });
 
   function setMessage(lines){const clean=lines.filter(Boolean);message.innerHTML=clean.map(t=>'* '+t).join('<br>');srStatus.textContent=clean.join(' ');}
@@ -287,8 +305,9 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     updateNeeds();
   }
 
+  function syncMeterAria(value,maxValue){const meterEl=document.getElementById('meter');if(!meterEl)return;meterEl.setAttribute('aria-valuenow',String(value));meterEl.setAttribute('aria-valuetext',value+' of '+maxValue);}
   function setOverload(n){
-    overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';
+    overload=Math.max(0,Math.min(10,n));meterFill.style.width=(overload*10)+'%';meterText.textContent=overload+'/10';syncMeterAria(overload,10);
     if(overload>=8&&!crashed)setSprite('cat-overwhelmed.png');
     recomputeReady();
   }
@@ -312,7 +331,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     requestAnimationFrame(anim);
   }
   function attack(level=1,customThoughts=null){
-    if(activeAttack||crashed||reducedMotion)return;
+    if(activeAttack||crashed||reducedMotion||overlay.classList.contains('show')||rebootOverlay.classList.contains('show'))return;
     activeAttack=true;const pool=customThoughts||currentThoughts();
     const count=Math.min(7,3+level),spacing=historyChecked?1320:1150;
     for(let i=0;i<count;i++){
@@ -355,6 +374,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     setOverload(overload-1);recomputeReady();setTimeout(()=>attack(1),700);
   }
   function openCheck(){
+    if(activeAttack)clearBullets();
     showChoices('CHECK','What does Cat want to find out?',[
       {label:'CHECK SUBMISSION HISTORY — Did anything actually go through?',visited:visitedChecks.has('history'),run:checkHistory},
       {label:'CHECK THE ASSIGNMENT PAGE — Is the portal still open?',visited:visitedChecks.has('portal'),run:checkPortal},
@@ -392,6 +412,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     setTimeout(()=>attack(3),500);
   }
   function openAct(){
+    if(activeAttack)clearBullets();
     const choices=[];
     const rec=recommendedAction();
     if(rec==='SEND RECEIPT + ONE QUESTION')choices.push({label:'SEND THE RECEIPT WITH ONE QUESTION',visited:usefulActUsed,disabled:usefulActUsed,run:sendReceiptMessage});
@@ -412,7 +433,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
     setTimeout(()=>{setSprite('cat-crashed.png');crashBanner.classList.remove('show');frame.classList.remove('crash-flash');setMessage(['Cat has crashed out.','MISSING is still on the screen.','Decision-making systems are temporarily offline.','REBOOT is available when Cat is ready.']);rebootBtn.focus();},1900);
   }
 
-  function openReboot(){if(crashed)setSprite('cat-booting.png');rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
+  function openReboot(){if(activeAttack)clearBullets();if(crashed)setSprite('cat-booting.png');rebootOverlay.classList.add('show');renderRebootMenu();setTimeout(()=>rebootActions.querySelector('button')?.focus(),30);}
   function renderRebootMenu(){
     rebootStage.innerHTML='<div class="big">REBOOT CAT</div><p>The goal is not to solve MISSING inside Cat’s nervous system. The goal is to get enough room to choose.</p>';
     rebootActions.innerHTML='';[
@@ -471,5 +492,189 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--yellow);outline-off
   setTimeout(openingBurst,900);
 })();
 </script>
+
+<script id="cvc-dialog-accessibility">
+(() => {
+  const dialogs = [...document.querySelectorAll('[role="dialog"][aria-modal="true"]')];
+  if (!dialogs.length) return;
+
+  const openerByDialog = new WeakMap();
+  let lastCommand = null;
+
+  const commandSelector = '.cmd, [data-cmd]';
+  const focusableSelector = [
+    'button:not([disabled])',
+    'a[href]',
+    'input:not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    '[tabindex]:not([tabindex="-1"])'
+  ].join(',');
+
+  function isActuallyVisible(el) {
+    return !!(el && el.isConnected && el.getClientRects().length && getComputedStyle(el).visibility !== 'hidden');
+  }
+
+  function shownDialogs() {
+    return dialogs.filter(d => d.classList.contains('show'));
+  }
+
+  function activeDialog() {
+    const shown = shownDialogs();
+    return shown.length ? shown[shown.length - 1] : null;
+  }
+
+  function focusables(dialog) {
+    return [...dialog.querySelectorAll(focusableSelector)].filter(el =>
+      isActuallyVisible(el) && el.getAttribute('aria-hidden') !== 'true'
+    );
+  }
+
+  function fallbackCommand(dialog) {
+    const id = (dialog.id || '').toLowerCase();
+    let kind = '';
+    if (id.includes('reboot')) kind = 'reboot';
+    else if (id.includes('act') || id.includes('field')) kind = 'act';
+    else if (id.includes('check') || id.includes('sort') || id.includes('inspect') || id.includes('rule')) kind = 'check';
+    else if (id.includes('choice')) {
+      const titleId = dialog.getAttribute('aria-labelledby');
+      const title = titleId ? document.getElementById(titleId)?.textContent?.trim().toUpperCase() || '' : '';
+      kind = title.startsWith('ACT') ? 'act' : 'check';
+    }
+    return kind ? document.querySelector(`[data-cmd="${kind}"]`) : null;
+  }
+
+  function rememberCommand(target) {
+    const command = target?.closest?.(commandSelector);
+    if (command) lastCommand = command;
+  }
+
+  document.addEventListener('focusin', e => rememberCommand(e.target), true);
+  document.addEventListener('pointerdown', e => rememberCommand(e.target), true);
+  document.addEventListener('click', e => rememberCommand(e.target), true);
+
+  function ensureDescription(dialog) {
+    if (dialog.hasAttribute('aria-describedby')) return;
+    const id = (dialog.id || '').toLowerCase();
+    let node = null;
+    if (id.includes('reboot')) node = dialog.querySelector('#rebootStage, .reboot-stage');
+    else if (id.includes('choice')) node = dialog.querySelector('#choiceIntro, .choice-intro, p');
+    else if (id.includes('check')) node = dialog.querySelector('#checkIntro, p');
+    else if (id.includes('act')) node = dialog.querySelector('#actIntro, p');
+    else if (id.includes('sort')) node = dialog.querySelector('.sort-help, #sortResult, p');
+    else if (id.includes('rule')) node = dialog.querySelector('#ruleNote, p');
+    else if (id.includes('inspect')) node = dialog.querySelector('#inspectCard, p');
+    else if (id.includes('field')) node = dialog.querySelector('p, #fieldCard');
+    if (!node) node = dialog.querySelector('p, [id]');
+    if (!node) return;
+    if (!node.id) node.id = `${dialog.id || 'dialog'}Description`;
+    dialog.setAttribute('aria-describedby', node.id);
+  }
+
+  function focusInside(dialog) {
+    const items = focusables(dialog);
+    const target = dialog.querySelector('[autofocus]') || items[0] || dialog;
+    if (target === dialog && !dialog.hasAttribute('tabindex')) dialog.setAttribute('tabindex', '-1');
+    setTimeout(() => {
+      if (dialog.classList.contains('show')) target.focus({preventScroll:true});
+    }, 0);
+  }
+
+  function onOpen(dialog) {
+    dialog.setAttribute('aria-hidden', 'false');
+    ensureDescription(dialog);
+    if (!openerByDialog.has(dialog)) {
+      const active = document.activeElement;
+      const activeInHiddenDialog = active?.closest?.('[role="dialog"]') && !active.closest('[role="dialog"]').classList.contains('show');
+      const opener = (!activeInHiddenDialog && active && !dialog.contains(active) && isActuallyVisible(active))
+        ? active
+        : (lastCommand || fallbackCommand(dialog));
+      if (opener) openerByDialog.set(dialog, opener);
+    }
+    focusInside(dialog);
+  }
+
+  function onClose(dialog) {
+    dialog.setAttribute('aria-hidden', 'true');
+    const opener = openerByDialog.get(dialog) || lastCommand || fallbackCommand(dialog);
+    openerByDialog.delete(dialog);
+    // Existing encounter code sometimes schedules its own initial focus 20–30 ms later.
+    // Restore after that window, but never steal focus from another open dialog.
+    setTimeout(() => {
+      if (activeDialog()) return;
+      if (opener && isActuallyVisible(opener) && !opener.disabled) opener.focus({preventScroll:true});
+    }, 60);
+  }
+
+  function requestClose(dialog) {
+    if (!dialog || !dialog.classList.contains('show')) return;
+    const buttons = [...dialog.querySelectorAll('button:not([disabled])')];
+    const semanticClose = buttons.find(b => /^NOT NOW\b/i.test(b.textContent.trim()));
+    const ordinaryClose = dialog.querySelector('.close-row button:not([disabled]), .close-btn:not([disabled]), [id^="close" i]:not([disabled]), [id$="Close"]:not([disabled])');
+    const closer = ordinaryClose || semanticClose;
+    if (closer) closer.click();
+    else dialog.classList.remove('show');
+  }
+
+  dialogs.forEach(dialog => {
+    dialog.setAttribute('aria-hidden', dialog.classList.contains('show') ? 'false' : 'true');
+    ensureDescription(dialog);
+    if (!dialog.hasAttribute('tabindex')) dialog.setAttribute('tabindex', '-1');
+  });
+
+  const openState = new WeakMap(dialogs.map(dialog => [dialog, dialog.classList.contains('show')]));
+  const observer = new MutationObserver(records => {
+    const changed = new Set(records.map(r => r.target).filter(t => dialogs.includes(t)));
+    const closed = [], opened = [];
+    changed.forEach(dialog => {
+      const wasOpen = openState.get(dialog);
+      const isOpen = dialog.classList.contains('show');
+      if (wasOpen === isOpen) return;
+      openState.set(dialog, isOpen);
+      (isOpen ? opened : closed).push(dialog);
+    });
+    closed.forEach(onClose);
+    opened.forEach(onOpen);
+  });
+  dialogs.forEach(dialog => observer.observe(dialog, {attributes:true, attributeFilter:['class']}));
+
+  document.addEventListener('keydown', e => {
+    const dialog = activeDialog();
+    if (!dialog) return;
+
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      requestClose(dialog);
+      return;
+    }
+
+    if (e.key !== 'Tab') return;
+    const items = focusables(dialog);
+    if (!items.length) {
+      e.preventDefault();
+      dialog.focus({preventScroll:true});
+      return;
+    }
+    const first = items[0], last = items[items.length - 1], current = document.activeElement;
+    if (e.shiftKey && (current === first || !dialog.contains(current))) {
+      e.preventDefault();
+      last.focus({preventScroll:true});
+    } else if (!e.shiftKey && (current === last || !dialog.contains(current))) {
+      e.preventDefault();
+      first.focus({preventScroll:true});
+    }
+  }, true);
+
+  document.addEventListener('click', e => {
+    const dialog = activeDialog();
+    if (!dialog || e.target !== dialog) return;
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    requestClose(dialog);
+  }, true);
+})();
+</script>
+
 </body>
 </html>

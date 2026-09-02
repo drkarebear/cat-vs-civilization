@@ -722,6 +722,7 @@
     animation-duration: .001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
   }
 </style>
 </head>
@@ -796,7 +797,7 @@
   </nav>
 </main>
 
-<dialog id="aboutDialog" aria-labelledby="about-title">
+<dialog id="aboutDialog" aria-labelledby="about-title" aria-describedby="about-desc">
   <div class="dialog-inner">
     <div class="dialog-head">
       <div>
@@ -804,14 +805,14 @@
       </div>
       <button class="dialog-close" type="button" data-close="aboutDialog" aria-label="Close About dialog">×</button>
     </div>
-    <p>Middle school has begun. Things have gotten complicated. Cat will handle it.</p>
+    <p id="about-desc">Middle school has begun. Things have gotten complicated. Cat will handle it.</p>
     <p>There is no perfect way to play. Some choices help. Some choices make things louder. Cat can recover and choose again.</p>
     <p><strong>CHECK</strong> finds information. <strong>ACT</strong> makes a move. <strong>REBOOT CAT</strong> creates room to choose. <strong>CONTINUE</strong> means Cat knows enough for now.</p>
     <p>No scores. No streaks. No leaderboard. Civilization has enough problems already.</p>
   </div>
 </dialog>
 
-<dialog id="optionsDialog" aria-labelledby="options-title">
+<dialog id="optionsDialog" aria-labelledby="options-title" aria-describedby="options-desc">
   <div class="dialog-inner">
     <div class="dialog-head">
       <div>
@@ -823,7 +824,7 @@
     <div class="option-row">
       <div>
         <strong>Reduce motion</strong><br>
-        <small>Turns off decorative movement and flashes.</small>
+        <small id="options-desc">Turns off decorative movement and flashes.</small>
       </div>
       <button id="motionToggle" class="toggle" type="button" aria-pressed="false">OFF</button>
     </div>
