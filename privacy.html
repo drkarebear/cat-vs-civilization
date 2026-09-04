@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<link rel="icon" type="image/png" href="favicon3.png">
+<link rel="apple-touch-icon" href="favicon3.png">
+<title>Privacy &amp; Local Data — Cat vs. Civilization</title>
+<style>
+:root{--bg:#000;--text:#f7f7f7;--muted:#b7a5c7;--purple:#b26ad6;--orange:#ff9f2f;--cream:#fff3d6;--border:#f4f4f4;--panel:#090909;--focus:#ffd35a;--green:#75dd88}
+*{box-sizing:border-box}html{background:var(--bg);color-scheme:dark}body{margin:0;min-height:100vh;background:var(--bg);color:var(--text);font-family:"Courier New",Courier,ui-monospace,monospace;line-height:1.65}.skip{position:absolute;left:-9999px}.skip:focus{left:1rem;top:1rem;background:#fff;color:#000;padding:.7rem 1rem;z-index:10}.shell{width:min(850px,calc(100% - 28px));margin:auto;padding:30px 0 48px}.topbar{display:flex;justify-content:space-between;gap:18px;align-items:center;margin-bottom:24px}.brand{color:var(--purple);font-weight:800;letter-spacing:.05em}.home{border:2px solid #fff;padding:.65rem .8rem;text-decoration:none;color:#fff;font-weight:700}.home:hover,.home:focus-visible{border-color:var(--orange);color:var(--orange)}main{border:4px solid var(--border);background:var(--panel);padding:clamp(20px,4vw,38px);box-shadow:8px 8px 0 #202020}h1{margin:.1rem 0 1.2rem;color:var(--orange);font-size:clamp(1.65rem,5vw,2.6rem);line-height:1.2}h2{margin:2rem 0 .6rem;color:var(--purple);font-size:1.25rem}p,li{font-size:1.02rem}a{color:var(--cream);text-underline-offset:.2em}a:hover,a:focus-visible{color:var(--orange);outline:2px solid var(--focus);outline-offset:3px}.note{border:3px solid var(--green);padding:14px 16px;margin:1.5rem 0;background:#020802}.muted{color:var(--muted)}code{color:var(--cream)}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to privacy information</a>
+<div class="shell">
+  <div class="topbar">
+    <div class="brand">CAT VS. CIVILIZATION</div>
+    <a class="home" href="index.html">← HOME</a>
+  </div>
+  <main id="main">
+    <h1>Privacy &amp; Local Data</h1>
+    <p><em>Cat vs. Civilization</em> is designed so you can play without creating an account or telling the site who you are.</p>
+
+    <div class="note">
+      <strong>The game does not ask for your name, email address, student ID, school records, or other personal information.</strong> It does not include advertising, analytics, forms, third-party scripts, or embedded services.
+    </div>
+
+    <h2>What the Game Saves</h2>
+    <p>The game can save a small amount of information in your browser's <code>localStorage</code> so the map can remember completed encounters. The saved information is limited to completion markers, the last completed encounter, and the reduce-motion setting if you change it.</p>
+    <p>Your individual choices inside an encounter, temporary game meters, and moment-to-moment game state are not saved as a history.</p>
+
+    <h2>Where That Information Goes</h2>
+    <p>The locally saved game information stays in your browser. The game's own code does not send it to the site owner, a database, an analytics service, or an advertising service.</p>
+
+    <h2>Erase Local Game Data</h2>
+    <p>On the home screen, choose <strong>Options</strong> and then <strong>Erase</strong> under <strong>Local game data</strong>. That control removes only the game's own <code>cvc-*</code> save entries; it does not clear unrelated browser data.</p>
+    <p>On a shared computer, using this control when you are finished prevents the next person using the same browser profile from seeing which encounters were completed.</p>
+
+    <h2>Hosting Information</h2>
+    <p>The site may be hosted through GitHub Pages. Like other web hosts, the hosting provider may receive ordinary technical request information needed to deliver and protect the site, such as an IP address, browser information, and the pages requested. That provider-side logging is separate from the game's local save system.</p>
+
+    <h2>Third-Party Requests</h2>
+    <p>This version of the game does not load fonts, scripts, analytics, images, or embeds from third-party websites. Game assets are served from the same site as the game.</p>
+
+    <p class="muted">Last updated September 4, 2026.</p>
+  </main>
+</div>
+</body>
+</html>

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="icon" type="image/png" href="favicon3.png">
 <link rel="apple-touch-icon" href="favicon3.png">
 <title>Cat vs. Civilization</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
-  @import url('https://fontlibrary.org//face/pixel-operator');
-  :root {
+:root {
     --bg: #000;
     --text: #f7f7f7;
     --muted: #b7a5c7;
@@ -431,6 +431,25 @@
     border-top: 1px solid #3d3d3d;
   }
 
+  .options-status {
+    min-height: 1.4em;
+    margin: 12px 0 0;
+    color: var(--green);
+  }
+
+  .privacy-inline,
+  .footer-copy a {
+    color: var(--cream);
+    text-underline-offset: .2em;
+  }
+
+  .privacy-inline:hover,
+  .privacy-inline:focus-visible,
+  .footer-copy a:hover,
+  .footer-copy a:focus-visible {
+    color: var(--orange);
+  }
+
   .toggle {
     min-width: 80px;
     min-height: 44px;
@@ -791,6 +810,7 @@
     <div class="footer-copy">
       <p>A game about surviving school, big feelings, and absurdity.</p>
       <p>Made with ♥ for curious humans.</p>
+      <p><a href="privacy.html">Privacy &amp; local data</a></p>
     </div>
 
     <button class="small-button right" id="optionsButton" type="button">⚙ Options</button>
@@ -829,6 +849,16 @@
       <button id="motionToggle" class="toggle" type="button" aria-pressed="false">OFF</button>
     </div>
 
+    <div class="option-row">
+      <div>
+        <strong>Local game data</strong><br>
+        <small>Completed encounters and your motion setting are stored only in this browser.</small>
+      </div>
+      <button id="resetDataButton" class="toggle" type="button">ERASE</button>
+    </div>
+    <p id="resetStatus" class="options-status" role="status" aria-live="polite"></p>
+    <p><a class="privacy-inline" href="privacy.html">Read the privacy notice</a></p>
+
   </div>
 </dialog>
 
@@ -839,9 +869,23 @@
   const aboutDialog = document.getElementById('aboutDialog');
   const optionsDialog = document.getElementById('optionsDialog');
   const motionToggle = document.getElementById('motionToggle');
+  const resetDataButton = document.getElementById('resetDataButton');
+  const resetStatus = document.getElementById('resetStatus');
   const saveText = document.getElementById('saveText');
   const startButton = document.getElementById('startButton');
   const tipText = document.getElementById('tipText');
+
+  const storage = {
+    get(key) {
+      try { return localStorage.getItem(key); } catch { return null; }
+    },
+    set(key, value) {
+      try { localStorage.setItem(key, value); return true; } catch { return false; }
+    },
+    remove(key) {
+      try { localStorage.removeItem(key); return true; } catch { return false; }
+    }
+  };
 
   const encounterNames = {
     'cvc-encounter-01': 'THE GRADE DROP',
@@ -869,14 +913,14 @@
     button.textContent = state ? 'ON' : 'OFF';
   }
 
-  function applyMotion(state) {
+  function applyMotion(state, persist = true) {
     document.body.classList.toggle('reduce-motion', state);
     setToggle(motionToggle, state);
-    localStorage.setItem('cvc-reduce-motion', String(state));
+    if (persist) storage.set('cvc-reduce-motion', String(state));
   }
 
-  const motionPref = localStorage.getItem('cvc-reduce-motion') === 'true';
-  applyMotion(motionPref);
+  const motionPref = storage.get('cvc-reduce-motion') === 'true';
+  applyMotion(motionPref, false);
 
   aboutButton.addEventListener('click', () => aboutDialog.showModal());
   optionsButton.addEventListener('click', () => optionsDialog.showModal());
@@ -903,10 +947,47 @@
     applyMotion(motionToggle.getAttribute('aria-pressed') !== 'true');
   });
 
+  resetDataButton.addEventListener('click', () => {
+    const confirmed = window.confirm(
+      'Erase Cat vs. Civilization progress and settings saved in this browser?'
+    );
+    if (!confirmed) return;
+
+    const localKeys = [
+      'cvc-reduce-motion',
+      'cvc-last-save',
+      'cvc-encounter-01',
+      'cvc-encounter-02',
+      'cvc-encounter-03',
+      'cvc-encounter-04',
+      'cvc-encounter-05',
+      'cvc-encounter-06',
+      'cvc-encounter-07',
+      'cvc-encounter-08',
+      'cvc-encounter-09',
+      'cvc-secret'
+    ];
+    localKeys.forEach(key => storage.remove(key));
+
+    document.body.classList.remove('reduce-motion');
+    setToggle(motionToggle, false);
+    document.querySelectorAll('[data-save-key]').forEach(item => {
+      item.classList.remove('survived');
+      item.querySelector('.status-mark')?.remove();
+    });
+    startButton.textContent = '♥ START ♥';
+    saveText.replaceChildren(
+      document.createTextNode('No saves yet.'),
+      document.createElement('br'),
+      document.createTextNode('Civilization is counting on you.')
+    );
+    resetStatus.textContent = 'Local game data erased from this browser.';
+  });
+
   let survivedCount = 0;
   document.querySelectorAll('[data-save-key]').forEach(item => {
     const key = item.dataset.saveKey;
-    const value = localStorage.getItem(key);
+    const value = storage.get(key);
     const isComplete = value === 'complete' || value === 'completed' || value === 'true';
     if (!isComplete) return;
 
@@ -923,11 +1004,11 @@
   });
 
   if (survivedCount > 0) {
-    startButton.innerHTML = '♥ PLAY ♥';
+    startButton.textContent = '♥ PLAY ♥';
     document.getElementById('start-note').textContent = 'Starts with Encounter 01 · or choose any battle.';
   }
 
-  const lastSave = localStorage.getItem('cvc-last-save');
+  const lastSave = storage.get('cvc-last-save');
   if (lastSave) {
     let friendly = lastSave;
     const match = lastSave.match(/Encounter\s+(0?[1-9])\s+complete/i);
@@ -937,7 +1018,11 @@
     } else if (/secret/i.test(lastSave)) {
       friendly = 'SECRET ENCOUNTER';
     }
-    saveText.innerHTML = `${friendly}.<br>Civilization remembers.`;
+    saveText.replaceChildren(
+      document.createTextNode(`${friendly}.`),
+      document.createElement('br'),
+      document.createTextNode('Civilization remembers.')
+    );
   }
 
   const tipIndex = Math.floor(Math.random() * tips.length);
